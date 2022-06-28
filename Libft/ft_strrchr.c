@@ -2,12 +2,15 @@
 
 char    *strchr(const char *s, int c)
 {
+    char *res;
+
+    res = '\0';
     while (1)
     {
         if (*s == (char)c)
-            return ((char *)s);
+            res = (char *)s;
         if (*s == '\0')
-            return (NULL);
+            return (res);
         s++;
     }
 }
