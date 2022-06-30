@@ -11,38 +11,192 @@ man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습�
 - [Libft](#libft)
   - [Contents](#contents)
   - [Part 1 - Libc functions](#part-1---libc-functions)
-    - [ft_strlen](#ft_strlen)
+    - [ft_isalpha](#ft_isalpha)
+    - [ft_isdigit](#ft_isdigit)
+    - [ft_isalnum](#ft_isalnum)
+    - [ft_isascii](#ft_isascii)
+    - [ft_isprint](#ft_isprint)
+    - [ft_toupper](#ft_toupper)
+    - [ft_tolower](#ft_tolower)
     - [ft_strchr](#ft_strchr)
     - [ft_strrchr](#ft_strrchr)
+    - [ft_strlen](#ft_strlen)
     - [ft_](#ft_)
   - [Question](#question)
 
 ## Part 1 - Libc functions
 
-### ft_strlen
-> 
+### ft_isalpha
+> is alphabetic character 
 
 **PROTOTYPE**
 ```c
-size_t  ft_strlen(const char *s)
+int ft_isalpha(int c)
 ```
 
 **DESCRIPTION**  
-문자열 `s`의 길이를 구한다.
+매개변수 `c`가 문자인지 확인합니다. (`A` == 65, `Z` == 90, `a` == 97, `z` == 122)
 
 **RETURN VALUE**  
-문자열 `s`의 길이
+문자가 아닐 경우, 0을 반환합니다.  
+문자가 맞다면, 0이 아닌 int형을 반환합니다.
 
 **ISSUES**  
-`size_t`형을 반환하므로 count value도 동일한 자료형으로 선언한다.
--   [size_t형에 대하여]()
+문자열을 다루는 함수인데 왜 int형 매개변수로 받나?
+
+- [문자를 다루는 함수의 매개변수가 int형인 이유](#문자를-다루는-함수의-매개변수가-int형인-이유)
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
 </div>
 
----
+---------------------------------------------------
 
+### ft_isdigit
+> is digit character 
+
+**PROTOTYPE**
+```c
+int ft_isdigit(int c)
+```
+
+**DESCRIPTION**  
+매개변수 `c`가 숫자인지 확인합니다. (`0` == 48, `9` == 57)
+
+**RETURN VALUE**  
+숫자가 아닐 경우, 0을 반환합니다.  
+숫자가 맞다면, 0이 아닌 int형을 반환합니다.
+
+**ISSUES**  
+.
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---------------------------------------------------
+
+### ft_isalnum
+> is alphanumeric character 
+
+**PROTOTYPE**
+```c
+int ft_isalnum(int c)
+```
+
+**DESCRIPTION**  
+매개변수 `c`가 알파벳 또는 숫자인지 확인합니다.
+
+**RETURN VALUE**  
+아닐 경우, 0을 반환합니다.  
+맞다면, 0이 아닌 int형을 반환합니다.
+
+**ISSUES**  
+.
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---------------------------------------------------
+
+### ft_isascii
+> is ASCII character 
+
+**PROTOTYPE**
+```c
+int ft_isascii(int c)
+```
+
+**DESCRIPTION**  
+매개변수 `c`가 ASCII 문자인지 확인합니다. 
+확장 아스키가 아닌, 0부터 127까지 문자를 확인한다.
+
+**RETURN VALUE**  
+아닐 경우, 0을 반환합니다.  
+맞다면, 0이 아닌 int형을 반환합니다.
+
+**ISSUES**  
+.
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---------------------------------------------------
+
+### ft_isprint
+> is printable character 
+
+**PROTOTYPE**
+```c
+int ft_isprint(int c)
+```
+
+**DESCRIPTION**  
+매개변수 `c`가 출력 가능한 문자인지 확인합니다. 
+출력 가능한 문자는 `SP`(32)부터 `~`(126)까지 입니다.
+
+**RETURN VALUE**  
+아닐 경우, 0을 반환합니다.  
+맞다면, 0이 아닌 int형을 반환합니다.
+
+**ISSUES**  
+`DEL`(127)은 delete control character로, 명령어에 해당합니다.
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---------------------------------------------------
+
+### ft_toupper
+> to upper case character 
+
+**PROTOTYPE**
+```c
+int ft_toupper(int c)
+```
+
+**DESCRIPTION**  
+매개변수 `c`가 소문자라면 대문자로 바꿔줍니다.  
+대문자와 소문자간의 차이는 `32`입니다
+
+**RETURN VALUE**  
+소문자는 대문자로 바꿔 반환합니다.
+소문자가 아니라면 그대로 반환합니다.
+
+**ISSUES**  
+.
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---------------------------------------------------
+
+### ft_tolower
+> to lower case character 
+
+**PROTOTYPE**
+```c
+int ft_tolower(int c)
+```
+
+**DESCRIPTION**  
+매개변수 `c`가 대문자라면 소문자로 바꿔줍니다.
+
+**RETURN VALUE**  
+대문자는 소문자로 바꿔 반환합니다.
+대문자가 아니라면 그대로 반환합니다.
+
+**ISSUES**  
+.
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---------------------------------------------------
 ### ft_strchr
 > string  character
 
@@ -58,9 +212,6 @@ char    *ft_strchr(const char *s, int c);
 문자 `c`가 처음 발견된 곳의 포인터. 문자열 `s`에 문자 `c`가 없으면 Null 포인터
 
 **ISSUES**  
-문자열을 다루는 함수인데 왜 int형 매개변수로 받나?
-
-- [문자를 다루는 함수의 매개변수가 int형인 이유](#문자를-다루는-함수의-매개변수가-int형인-이유)
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -89,6 +240,31 @@ char    *ft_strrchr(const char *s, int c);
 </div>
 
 ---
+
+### ft_strlen
+> 
+
+**PROTOTYPE**
+```c
+size_t  ft_strlen(const char *s)
+```
+
+**DESCRIPTION**  
+문자열 `s`의 길이를 구한다.
+
+**RETURN VALUE**  
+문자열 `s`의 길이
+
+**ISSUES**  
+`size_t`형을 반환하므로 count value도 동일한 자료형으로 선언한다.
+-   [size_t형에 대하여](#size_t형)
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
 
 ### ft_
 > 
