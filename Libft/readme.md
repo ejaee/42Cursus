@@ -21,6 +21,20 @@ man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습�
     - [ft_strchr](#ft_strchr)
     - [ft_strrchr](#ft_strrchr)
     - [ft_strlen](#ft_strlen)
+    - [ft_strncmp](#ft_strncmp)
+    - [ft_strlcpy](#ft_strlcpy)
+    - [ft_strlcat](#ft_strlcat)
+    - [ft_strnstr](#ft_strnstr)
+    - [ft_atoi](#ft_atoi)
+    - [ft_memset](#ft_memset)
+    - [ft_bzero](#ft_bzero)
+    - [ft_memchr](#ft_memchr)
+    - [ft_memcpy](#ft_memcpy)
+    - [ft_memcmp](#ft_memcmp)
+    - [ft_memmove](#ft_memmove)
+    - [ft_calloc](#ft_calloc)
+    - [ft_strdup](#ft_strdup)
+  - [Part 2 - Additional functions](#part-2---additional-functions)
     - [ft_](#ft_)
   - [Question](#question)
 
@@ -265,6 +279,293 @@ size_t  ft_strlen(const char *s)
 
 ---
 
+### ft_strncmp
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strlcpy
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strlcat
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strnstr
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_atoi
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memset
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_bzero
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memchr
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memcpy
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memcmp
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memmove
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_calloc
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strdup
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+## Part 2 - Additional functions
 
 ### ft_
 > 
