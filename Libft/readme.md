@@ -220,10 +220,10 @@ char    *ft_strchr(const char *s, int c);
 ```
 
 **DESCRIPTION**  
-문자열 `s`에서 문자 `c`가 처음 발견된 곳의 포인터를 반환한다. c가 '\0'일 경우 종료 Null 문자를 찾는다.
+문자열 `s`에서 문자 `c`가 처음 발견된 곳의 포인터를 반환한다. c가 '\0'일 경우 종료 Null 문자를 찾습니다.
 
 **RETURN VALUE**  
-문자 `c`가 처음 발견된 곳의 포인터. 문자열 `s`에 문자 `c`가 없으면 Null 포인터
+문자 `c`가 처음 발견된 곳의 포인터. 문자열 `s`에 문자 `c`가 없으면 Null 포인터를 반환합니다.
 
 **ISSUES**  
 
@@ -256,7 +256,7 @@ char    *ft_strrchr(const char *s, int c);
 ---
 
 ### ft_strlen
-> 
+> string length
 
 **PROTOTYPE**
 ```c
@@ -280,20 +280,29 @@ size_t  ft_strlen(const char *s)
 ---
 
 ### ft_strncmp
-> 
+> string n compare
 
 **PROTOTYPE**
 ```c
-
+int ft_strncmp(const char *s1, const char *s2, size_t n)
 ```
 
 **DESCRIPTION**  
+문자열 s1과 s2를 n만큼 비교합니다.
 
+```.vim
+"The comparison is done using unsigned characters, so that ‘\200’ is greater than ‘\0’."
+```
+8진수 '\200', 즉 10진수 128의 수가 '\0'보다 커야 한다는 말은 char가 아닌 unsigned char형으로 비교해야 한다는 말로 해석하였습니다. (char형 비교 시 128은 오버플로우 발생)
 
 **RETURN VALUE**  
-
+s1가 크면 양수를, s2가 크면 음수를, 같다면 0을 반환합니다.
 
 **ISSUES**  
+`const char`형으로 매개변수를 받는 이유
+>   ft_strncmp 함수는 비교의 목적으로 쓰이므로 매개변수로 받는 문자열 s1, s2 값이 조작되면 안된다. 따라서 해당 매개변수들의 자료형을 const char형으로 받는다. 
+
+그렇다면 비교를 위해 `unsigned char`형으로 casting 할 때, const unsigned char형이 되어야 할 것 같아 상수화를 유지시켰다.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -302,20 +311,22 @@ size_t  ft_strlen(const char *s)
 ---
 
 ### ft_strlcpy
-> 
+> string length(?) copy
 
 **PROTOTYPE**
 ```c
-
+size_t  strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
 ```
+> 해당 `restrict qualifier`는 `c99 standard` 키워드로, 해당 과제에서는 다루지 않습니다.
 
 **DESCRIPTION**  
-
+문자열 src에서 dst로 dstsize bytes 만큼 복사합니다. strncpy 함수에서는 n의 size가 src length보다 작을 경우 NULL이 보장되지 못한다는 단점이 있었습니다. 이를 보완한 함수로, 복사가 끝나면 문자열 끝에 NULL문자(\0)가 보장됩니다.
 
 **RETURN VALUE**  
-
+복사를 시도하려고 하는 길이인, src의 길이를 반환합니다.
 
 **ISSUES**  
+
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
