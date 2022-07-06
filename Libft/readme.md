@@ -35,6 +35,18 @@ man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습�
     - [ft_calloc](#ft_calloc)
     - [ft_strdup](#ft_strdup)
   - [Part 2 - Additional functions](#part-2---additional-functions)
+    - [ft_substr](#ft_substr)
+    - [ft_strjoin](#ft_strjoin)
+    - [ft_strtrim](#ft_strtrim)
+    - [ft_split](#ft_split)
+    - [ft_itoa](#ft_itoa)
+    - [ft_strmapi](#ft_strmapi)
+    - [ft_striteri](#ft_striteri)
+    - [ft_putchar_fd](#ft_putchar_fd)
+    - [ft_putstr_fd](#ft_putstr_fd)
+    - [ft_putendl_fd](#ft_putendl_fd)
+    - [ft_putnbr_fd](#ft_putnbr_fd)
+  - [Bouns](#bouns)
     - [ft_](#ft_)
   - [Question](#question)
 
@@ -414,7 +426,7 @@ len만큼 찾기 때문에 needle을 찾는 과정에서도 len길이를 확인�
 ---
 
 ### ft_atoi
-> 
+> ascii to integer
 
 **PROTOTYPE**
 ```c
@@ -422,12 +434,13 @@ int atoi(const char *str)
 ```
 
 **DESCRIPTION**  
-
+문자열 str을 int로 변환합니다.
 
 **RETURN VALUE**  
-
+변환된 정수를 반환합니다
 
 **ISSUES**  
+문자열 내용이 바뀌면 안되므로 const로 매개변수를 받으며, '++'나 '--'가 sign으로 올 경우 정상적인 int로 변환하지 않고, 0을 반환합니다.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -436,20 +449,26 @@ int atoi(const char *str)
 ---
 
 ### ft_memset
-> 
+> memory set
 
 **PROTOTYPE**
 ```c
-
+void    *memset(void *b, int c, size_t len);
 ```
 
 **DESCRIPTION**  
-
+메모리 b를 len 길이만큼 c로 초기화 합니다. bzero 대신, memset으로 대체된 함수로 0으로 초기화 하는데 쓰여집니다.
 
 **RETURN VALUE**  
-
+초기화 된 메모리 b의 주소를 반환합니다.
 
 **ISSUES**  
+[void* 형에 대하여](#void*-형에-대하여)     
+int형 배열 주소를 전달하고 1으로 바꾸고 싶을 때 이상한 결과가 나오는 이유는?
+```.vim
+1 대신, 16843009 가 나온다.
+```
+memset 함수는 1바이트 단위로 값을 초기화 합니다. 컴퓨터는 값을 1바이트 단위로 저장하기 때문에 memset 함수도 1바이트 단위로 읽습니다. 두번째 매개변수에 1 값을 전달하면 1바이트 단위로 1을 만들기 때문에 0000 0001이 네개 이어진 0000 0001 0000 0001 0000 0001 0000 0001 가 됩니다. 이를 십진수로 계산하면 16843009가 나옵니다. 따라서 memset 함수는 동적할당을 받을 경우 메모리의 값에 쓰레기가 들어있기 때문에 memset 함수를 사용해 0으로 초기화할 때 많이 쓰는 것 같습니다.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -458,20 +477,25 @@ int atoi(const char *str)
 ---
 
 ### ft_bzero
-> 
+> byte zero
 
 **PROTOTYPE**
 ```c
-
+void    ft_bzero(void *s, size_t n);
 ```
 
 **DESCRIPTION**  
-
+메모리 s의 n byte까지를 0으로 초기화 합니다. memset으로 대체된 함수로 현재는 사용되지 않습니다.
 
 **RETURN VALUE**  
-
+.
 
 **ISSUES**  
+memset과는 다르게 bzero는 왜 void형 인가?       
+
+:question:
+
+명확한 느낌이 안드는데 bzeor가 사라진 이유를 확인한다면 더 이해할 수 있지 않을까...
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -480,20 +504,21 @@ int atoi(const char *str)
 ---
 
 ### ft_memchr
-> 
+> memory char
 
 **PROTOTYPE**
 ```c
-
+void *memchr(const void *s, int c, size_t n)
 ```
 
 **DESCRIPTION**  
-
+메모리 영역 s에서 n bytes 까지 확인하여 문자 c가 처음 발견된 곳의 포인터를 반환합니다.
 
 **RETURN VALUE**  
-
+처음으로 값 c가 나타나는 문자열의 주소를 반환합니다.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -502,20 +527,31 @@ int atoi(const char *str)
 ---
 
 ### ft_memcpy
-> 
+> memory copy
 
 **PROTOTYPE**
 ```c
-
+void    *ft_memcpy(void *dst, const void *src, size_t n);
 ```
 
 **DESCRIPTION**  
-
+메모리 영역 src의 n bytes만큼을 dst로 복사합니다. 이때 src와 dst의 메모리 영역이 겹쳐서는 안됩니다. 
+```.vim
+If dst and src overlap, behavior is undefined.
+```
+메모리 영역이 겹친디면, memcpy 대신 memmove를 사용 합니다.
 
 **RETURN VALUE**  
-
+복사된 메모리 dst 주소를 반환합니다.
 
 **ISSUES**  
+strcpy() vs memcpy()
+> 가장 큰 특징은 memcpy는 형에 관계없이 임의의 영역을 지정한 byte 수만큼 복사하는 기능을 수행합니다. 'strcpy()'는 매번 '문자 하나씩 읽어서' 그것이 널문자인지 아닌지 확인한 뒤 하나씩 복사해야 하고, 'memcpy()'는 '메모리 관점의 복사'라 꽤 큰 블럭 단위로 복사가 가능하다고 합니다.
+
+strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 전달받은 문자열이 끝에 NULL이 없는 char 배열인 경우 문제가 되기에 안정성 측면에서 memcpy를 선호하는 의견이 많았습니다.     
+[출처 사이트](http://blog.naver.com/kihoyaa/10000790352)
+
+[memcpy() vs memmove()](#memcpy()-vs-memmove())
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -524,20 +560,22 @@ int atoi(const char *str)
 ---
 
 ### ft_memcmp
-> 
+> memory compare
 
 **PROTOTYPE**
 ```c
-
+int ft_memcmp(const void *s1, const void *s2, size_t n);
 ```
 
 **DESCRIPTION**  
-
+메모리 s1과 s2를 n byte까지 비교합니다.
 
 **RETURN VALUE**  
-
+strcmp와 동일합니다.
 
 **ISSUES**  
+strcmp() vs memcmp()
+-   strcmp에서 "strcmp\0abc" , "strcmp\0123" 는 NULL을 만나면 종료하기 때문에 0을 반환합니다. 그러나 memcmp 로 위의 10 바이트를 검사하면 틀리다고 인식하여 int 값이 나옵니다. `문자열간의 문자상수 int형을 계산`하는 것과 `문자열간의 메모리영역을 비교`한다는 차이가 있습니다.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -546,20 +584,23 @@ int atoi(const char *str)
 ---
 
 ### ft_memmove
-> 
+> memory move
 
 **PROTOTYPE**
 ```c
-
+void    *ft_memmove(void *dst, const void *src, size_t len);
 ```
 
 **DESCRIPTION**  
-
+memcpy와 쓰임을 동일하나, src와 dst의 메모리 영역이 겹칠 때 사용합니다. 해당 함수를 사용하지 않고 복사하기 위해서는 반복문을 사용해야 한다는 소요를 줄일 수 있습니다.
 
 **RETURN VALUE**  
-
+복사된 메모리 dst
 
 **ISSUES**  
+memcpy() vs memmove()
+> 두 함수 모두 특정 메모리 주소에서 원하는 크기 만큼을 다른 곳으로 복사합니다. 다른 점은 이름 뿐으로, 매개변수도 동일합니다. 메뉴얼에서 메모리 영역이 곂칠 때(overlap) memmove를 사용한다고 명시되어 있습니다.
+
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -613,7 +654,7 @@ int atoi(const char *str)
 
 ## Part 2 - Additional functions
 
-### ft_
+### ft_substr
 > 
 
 **PROTOTYPE**
@@ -635,6 +676,249 @@ int atoi(const char *str)
 
 ---
 
+### ft_strjoin
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strtrim
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_split
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_itoa
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strmapi
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_striteri
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_putchar_fd
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_putstr_fd
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_putendl_fd
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_putnbr_fd
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+## Bouns
+
+### ft_
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
 ## Question
 
 
@@ -671,3 +955,16 @@ warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', poss
 메모리 엑세스 단위가 int형으로, 실제로 사용자가 char형을 사용한다 해도 int로 메모리를 받습니다.(char형이 int형 안에 속해 있습니다.)
 
 ---
+
+- void* 형에 대하여
+
+보통 동적메모리할당을 해주는 함수(malloc, realloc, calloc ...)들의 자료형은 void* 형을 사용합니다. void *형도 포인터이기 때문에 주소값을 담습니다. void 포인터형은 casting을 통해서 그 어떤 포인터든 될 수 있습니다.
+```.vim
+int a = 10;
+void *p = &a;
+```
+void *형인 p에 a의 주소를 저장했으므로 p가 int *형이 되는것은 아닙니다. p는 메모리주소 값을 가질 수 있기에 어떠한 변수의 주소를 가질 수 있을 뿐입니다. 주소를 통해 값에 접근하려면 컴퓨터에게 얼마만큼 읽어야하는지(자료형이 무엇인지) 알려줘야하기 때문에 casting을 해야 값에 접근할 수 있습니다.
+
+memset 함수의 경우 특정 값으로 초기화된 메모리의 주소값을 반환하므로 void* 형을 사용하는 것 입니다.
+
+---------------------------------
