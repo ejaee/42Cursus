@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 21:46:36 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/07 23:38:57 by choiejae         ###   ########.fr       */
+/*   Created: 2022/07/07 23:30:38 by choiejae          #+#    #+#             */
+/*   Updated: 2022/07/07 23:38:21 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (fd < 0 || !s)
-		return ;
-	while (*s)
-		ft_putchar_fd(*s++, fd);
+    t_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

@@ -30,6 +30,7 @@ man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습�
     - [ft_bzero](#ft_bzero)
     - [ft_memchr](#ft_memchr)
     - [ft_memcpy](#ft_memcpy)
+    - [ft_memccpy.c](#ft_memccpyc)
     - [ft_memcmp](#ft_memcmp)
     - [ft_memmove](#ft_memmove)
     - [ft_calloc](#ft_calloc)
@@ -47,7 +48,15 @@ man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습�
     - [ft_putendl_fd](#ft_putendl_fd)
     - [ft_putnbr_fd](#ft_putnbr_fd)
   - [Bouns](#bouns)
-    - [ft_](#ft_)
+    - [ft_lstnew](#ft_lstnew)
+    - [ft_lstadd_front](#ft_lstadd_front)
+    - [ft_lstsize](#ft_lstsize)
+    - [ft_lstlast](#ft_lstlast)
+    - [ft_lstadd_back](#ft_lstadd_back)
+    - [ft_lstdelone](#ft_lstdelone)
+    - [ft_lstclear](#ft_lstclear)
+    - [ft_lstiter](#ft_lstiter)
+    - [ft_lstmap](#ft_lstmap)
   - [Question](#question)
 
 ## Part 1 - Libc functions
@@ -815,20 +824,24 @@ char    *ft_itoa(int n);
 ---
 
 ### ft_strmapi
-> 
+> string mapping iterate
 
 **PROTOTYPE**
 ```c
-
+char    *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 ```
 
 **DESCRIPTION**  
-
+문자열 s 각각의 문자에 두번째 매개변수 f함수를 적용(mapping)합니다. 이때 원본 문자열은 건들지 않고 새로운 문자열을 동적할당하여 반환합니다.     
+함수포인터의 매개변수에서 unsigned int는 index를, char는 index에 해당하는 문자를 의미합니다.        
+특정 index에 해당하는 값에 매핑하고 싶을 때 사용되는 함수입니다.
 
 **RETURN VALUE**  
-
+mapping되어 만들어진 새로운 문자열을 반환합니다.
 
 **ISSUES**  
+.
+
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -841,11 +854,11 @@ char    *ft_itoa(int n);
 
 **PROTOTYPE**
 ```c
-
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 ```
 
 **DESCRIPTION**  
-
+문자열을 순회하며 함수 f를 적용시킵니다.
 
 **RETURN VALUE**  
 
@@ -873,7 +886,18 @@ fd == 1 이라면 문자 c를 출력해줍니다.
 .
 
 **ISSUES**  
-.
+fd가 음수일 경우에 예외처리?
+> fd에 음수를 넣는 경우는 사용자의 책임이라는 생각이 강하게 들지만 디펜스를 해야하는 입장에서 넣어서 나쁠건 없다고 생각하여 이를 예외처리 하였습니다.
+
+널가드 문제?    
+할당되지 않는 문자열주소가 전달된다면 널가드 체크를 해야한다?
+
+-   개인 의견
+>   동적할당이 되는 시점에서 널가드를 잡았을 테니 할당되지 않은채로 전달될 일은 없다고 판단되며 널가드를 해당 함수에 넣을 경우 필요하지 않는 널가드를 이중으로 체크한다는 느낌이 듭니다. 해당 널가드를 써야하는 경우는 매개변수에 문자열 주소를 받는 모든 함수가 시작되기 전에 일괄적인 널가드 체크가 있었어야 한다고 생각합니다.
+
+-   결론...
+>   널 포인터를 가리킬 경우 ft_strlen()함수가 터진다는 것을 알게 되었습니다. 사용자가 널 포인터를 가리키게 하는 것 자체가 문제가 있다고 생각하지만 그럴 가능성도 알았으니까 이를 방어하기 위해서는 1. 널가드를 통해 return(NULL) 종료 합니다. 또한 strlen()함수를 터트리는 방법을 쓰는 분들이 계신다 하여... 해당 함수를 쓰지 않도록 했습니다. putchar_fd() 호출해 반복문을 돌려 방어했습니다.
+
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -896,14 +920,7 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 .
 
 **ISSUES**  
-널가드 문제
--   할당되지 않는 문자열주소가 전달된다면 널가드 체크를 해야한다?
-
--   개인 의견
->   동적할당이 되는 시점에서 널가드를 잡았을 테니 할당되지 않은채로 전달될 일은 없다고 판단되며 널가드를 해당 함수에 넣을 경우 필요하지 않는 널가드를 이중으로 체크한다는 느낌이 듭니다. 해당 널가드를 써야하는 경우는 매개변수에 문자열 주소를 받는 모든 함수가 시작되기 전에 일괄적인 널가드 체크가 있었어야 한다고 생각합니다.
-
--   결론...
->   널 포인터를 가리킬 경우 ft_strlen()함수가 터진다는 것을 알게 되었습니다. 사용자가 널 포인터를 가리키게 하는 것 자체가 문제가 있다고 생각하지만 그럴 가능성도 알았으니까 이를 방어하기 위해서는 1. 널가드를 통해 return(NULL) 종료 합니다. 또한 strlen()함수를 터트리는 방법을 쓰는 분들이 계신다 하여... 해당 함수를 쓰지 않도록 했습니다. putchar_fd() 호출해 반복문을 돌려 방어했습니다.
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -912,20 +929,21 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 ---
 
 ### ft_putendl_fd
-> 
+> put string end line
 
 **PROTOTYPE**
 ```c
-
+void    ft_putendl_fd(char *s, int fd);
 ```
 
 **DESCRIPTION**  
-
-
+putstr_fd() 이후 개행(\n)을 붙여줍니다.     
+putstr_fd()를 호출한 후  putchar_fd()를 통해 개행을 출력합니다.
 **RETURN VALUE**  
-
+.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -934,20 +952,21 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 ---
 
 ### ft_putnbr_fd
-> 
+> put number
 
 **PROTOTYPE**
 ```c
-
+void    ft_putnbr_fd(int n, int fd);
 ```
 
 **DESCRIPTION**  
-
+숫자 n을 write함수(fd)를 통해 출력합니다.
 
 **RETURN VALUE**  
-
+.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -957,7 +976,7 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 
 ## Bouns
 
-### ft_
+### ft_lstnew
 > 
 
 **PROTOTYPE**
@@ -978,6 +997,185 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 </div>
 
 ---
+
+
+### ft_lstadd_front
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstsize
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstlast
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstadd_back
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstdelone
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstclear
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+
+### ft_lstiter
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstmap
+> 
+
+**PROTOTYPE**
+```c
+
+```
+
+**DESCRIPTION**  
+
+
+**RETURN VALUE**  
+
+
+**ISSUES**  
+
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
 
 ## Question
 
