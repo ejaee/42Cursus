@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 14:56:58 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/07 15:15:11 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/07/07 18:53:43 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/07/07 18:54:41 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c,
-					size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	const void	*p;
-    
-    p = ft_memchr(src, c, n);
-	if (!p)
+	size_t	i;
+
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	if (dst > src)
 	{
-		n = p - src + 1;
-		return (ft_memcpy(dst, src, n) + n);
+		while (len-- > 0)
+			((unsigned char *) dst)[len] = ((unsigned char *) src)[len];
 	}
-	ft_memcpy(dst, src, n);
-	return (NULL);
+	else
+	{
+		while (i < len)
+		{
+			((unsigned char *) dst)[i] = ((unsigned char *) src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }

@@ -283,7 +283,7 @@ size_t  ft_strlen(const char *s)
 
 **ISSUES**  
 `size_t`형을 반환하므로 count value도 동일한 자료형으로 선언한다.
--   [size_t형에 대하여](#size_t형)
+-   [size_t형에 대하여](#size_t형에-대하여)
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -403,7 +403,7 @@ size_t  strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 ---
 
 ### ft_strnstr
-> 
+> string n string
 
 **PROTOTYPE**
 ```c
@@ -559,6 +559,36 @@ strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 �
 
 ---
 
+### ft_memccpy.c
+> memory copy until c found
+
+**PROTOTYPE**
+```c
+void    *ft_memccpy(void *dst, 
+                    const void *src, 
+                    int c,
+                    size_t n);
+```
+
+**DESCRIPTION**  
+메모리 src를 n bytes만큼 dst로 복사합니다. 이때 src에서 c가 나타날 때까지만 복사합니다(첫번째 c까지 복사합니다). src와 dst의 메모리 영역이 겹쳐서는 안됩니다.
+
+먼저 memchr을 통해서 c를 찾습니다. 다음 c가 위치한 인덱스 + 1만큼 memcpy을 통해 복사하는 방식으로 구현했습니다.
+
+**RETURN VALUE**  
+src안에서 c를 찾는다면 그 다음 포인터를 리턴하고 그게 아니라면 NULL을 리턴합니다.
+
+**ISSUES**  
+`memcpy` vs `memmcpy`   
+`strcpy` vs `memcpy`    
+`memcpy` vs `memmove`      
+[const에 대하여](#const에-대하여) 
+<div align = "right">
+    <b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
 ### ft_memcmp
 > memory compare
 
@@ -594,13 +624,20 @@ void    *ft_memmove(void *dst, const void *src, size_t len);
 **DESCRIPTION**  
 memcpy와 쓰임을 동일하나, src와 dst의 메모리 영역이 겹칠 때 사용합니다. 해당 함수를 사용하지 않고 복사하기 위해서는 반복문을 사용해야 한다는 소요를 줄일 수 있습니다.
 
+src의 주소가 dst보다 클 경우 *dst++ = *src++를 통해 복사하고, 작을 경우 끝에서 거꾸로 복사를 합니다.
+> index 0, 1, 2, 3을 1, 2, 3, 4에 복사한다면 0이 1에 저장됨으로써 기존에 있던 인덱스 1의 값을 인덱스 2에 저장할 수 없는 경우가 작을 경우(src < dst)에 해당합니다. 0, 1, 2, 3 인덱스 값을 1, 2, 3, 4에 저장하는 상황이 man에서 언급하는 overlap에 해당됩니다. src의 주소가 dst 보다 작을 경우 거꾸로 저장하므로써 overlap의 문제를 해결할 수 있습니다.
+
+
+
 **RETURN VALUE**  
 복사된 메모리 dst
 
 **ISSUES**  
 memcpy() vs memmove()
 > 두 함수 모두 특정 메모리 주소에서 원하는 크기 만큼을 다른 곳으로 복사합니다. 다른 점은 이름 뿐으로, 매개변수도 동일합니다. 메뉴얼에서 메모리 영역이 곂칠 때(overlap) memmove를 사용한다고 명시되어 있습니다.
-
+```.vim
+The two strings may overlap;
+```
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -609,20 +646,21 @@ memcpy() vs memmove()
 ---
 
 ### ft_calloc
-> 
+> contiguous allocation
 
 **PROTOTYPE**
 ```c
-
+void    *ft_calloc(size_t count, size_t size);
 ```
 
 **DESCRIPTION**  
-
+메모리공간(count x size)을 0으로 초기화하여 할당해줍니다.
 
 **RETURN VALUE**  
-
+할당 성공시 할당된 공간의 포인터를, 할당 실패시 NULL 포인터를 반환합니다.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -631,20 +669,21 @@ memcpy() vs memmove()
 ---
 
 ### ft_strdup
-> 
+> string duplicate
 
 **PROTOTYPE**
 ```c
-
+char    *strdup(const char *s1);
 ```
 
 **DESCRIPTION**  
-
+동적할당 후 문자열 s1을 복제합니다.
 
 **RETURN VALUE**  
-
+복제한 문자열의 포인터를 반환합니다.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -655,20 +694,21 @@ memcpy() vs memmove()
 ## Part 2 - Additional functions
 
 ### ft_substr
-> 
+> subpart of string
 
 **PROTOTYPE**
 ```c
-
+char    *ft_substr(char const *s, unsigned int start, size_t len);
 ```
 
 **DESCRIPTION**  
-
+문자열 s에서 두번째 매개변수 start index부터 len개 만큼의 부분 문자열을 새로 만듭니다.
 
 **RETURN VALUE**  
-
+만들어진 부분 문자열의 포인터를 반환합니다.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -677,20 +717,21 @@ memcpy() vs memmove()
 ---
 
 ### ft_strjoin
-> 
+> string join
 
 **PROTOTYPE**
 ```c
-
+char    *ft_strjoin(char const *s1, char const *s2);
 ```
 
 **DESCRIPTION**  
-
+문자열 s1에 문자열 s2를 이어 붙여서 새로운 문자열을 만듭니다.
 
 **RETURN VALUE**  
-
+s1에 s2가 이어 붙여진 새로운 문자열 포인터를 반환합니다
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -699,20 +740,25 @@ memcpy() vs memmove()
 ---
 
 ### ft_strtrim
-> 
+> string trim
 
 **PROTOTYPE**
 ```c
-
+char    *ft_strtrim(char const *s1, char const *set);
 ```
 
 **DESCRIPTION**  
-
+문자열 s1의 맨 앞, 뒤로 set에 들어 있는 문자들을 제거하고 새로운 메모리를 할당해 새 문자열을 만들어줍니다.  
+`strchr()` 함수를 통해 set을 확인할 수 있습니다.
 
 **RETURN VALUE**  
+문자열 s1 맨 앞 뒤로 set에 들어 있는 문자들이 제거된 새로운 문자열을 반환합니다.
 
+예를들어, ft_strtrim("123abc123def312", "123") 이라면   
+> return (abc123def);   // 가운데 123은 제거하지 않습니다.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -721,20 +767,23 @@ memcpy() vs memmove()
 ---
 
 ### ft_split
-> 
+> string split
 
 **PROTOTYPE**
 ```c
-
+char    **ft_split(char const *s, char c);
 ```
 
 **DESCRIPTION**  
+문자열 s1을 구분자 c 기준으로 나누어 2차원 배열로 만듭니다.
 
+2차원 배열에 단어를 넣을 때마다 ft_substr()를 활용할 수 있습니다. ft_substr(s, (i + 1 - len[n]), len[n])을 통해 다음 넣을 단어의 시작 주소값에 접근할 수 있습니다.
 
 **RETURN VALUE**  
-
+나누어진 2차원 배열을 반환합니다.
 
 **ISSUES**  
+기존에 만들었던 split과 다르게 free를 구현합니다.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -743,20 +792,21 @@ memcpy() vs memmove()
 ---
 
 ### ft_itoa
-> 
+> integer to ascii character
 
 **PROTOTYPE**
 ```c
-
+char    *ft_itoa(int n);
 ```
 
 **DESCRIPTION**  
-
+정수 n을 문자열로 반환해줍니다.
 
 **RETURN VALUE**  
-
+정수 n에서 ascii character로 변환된 문자열을 반환합니다.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -809,20 +859,21 @@ memcpy() vs memmove()
 ---
 
 ### ft_putchar_fd
-> 
+> put character fd
 
 **PROTOTYPE**
 ```c
-
+void    ft_putchar_fd(char c, int fd);
 ```
 
 **DESCRIPTION**  
-
+fd == 1 이라면 문자 c를 출력해줍니다.
 
 **RETURN VALUE**  
-
+.
 
 **ISSUES**  
+.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -831,20 +882,28 @@ memcpy() vs memmove()
 ---
 
 ### ft_putstr_fd
-> 
+> put string fd
 
 **PROTOTYPE**
 ```c
-
+void ft_putstr_fd(char *s, int fd);
 ```
 
 **DESCRIPTION**  
-
+fd == 1 이라면 문자열 s를 출력해줍니다.
 
 **RETURN VALUE**  
-
+.
 
 **ISSUES**  
+널가드 문제
+-   할당되지 않는 문자열주소가 전달된다면 널가드 체크를 해야한다?
+
+-   개인 의견
+>   동적할당이 되는 시점에서 널가드를 잡았을 테니 할당되지 않은채로 전달될 일은 없다고 판단되며 널가드를 해당 함수에 넣을 경우 필요하지 않는 널가드를 이중으로 체크한다는 느낌이 듭니다. 해당 널가드를 써야하는 경우는 매개변수에 문자열 주소를 받는 모든 함수가 시작되기 전에 일괄적인 널가드 체크가 있었어야 한다고 생각합니다.
+
+-   결론...
+>   널 포인터를 가리킬 경우 ft_strlen()함수가 터진다는 것을 알게 되었습니다. 사용자가 널 포인터를 가리키게 하는 것 자체가 문제가 있다고 생각하지만 그럴 가능성도 알았으니까 이를 방어하기 위해서는 1. 널가드를 통해 return(NULL) 종료 합니다. 또한 strlen()함수를 터트리는 방법을 쓰는 분들이 계신다 하여... 해당 함수를 쓰지 않도록 했습니다. putchar_fd() 호출해 반복문을 돌려 방어했습니다.
 
 <div align = "right">
     <b><a href = "#Contents">↥ top</a></b>
@@ -919,10 +978,11 @@ memcpy() vs memmove()
 </div>
 
 ---
+
 ## Question
 
 
--   size_t형
+-   size_t형에 대하여
 
 size_t형은 부호 없는 정수형(`unsigned integer`)으로, `sizeof`, `offsetof`의 반환값이다. 일반적으로, 문자열이나 메모리의 사이즈를 나타낼 때 사용합니다.
 
@@ -968,3 +1028,53 @@ void *형인 p에 a의 주소를 저장했으므로 p가 int *형이 되는것�
 memset 함수의 경우 특정 값으로 초기화된 메모리의 주소값을 반환하므로 void* 형을 사용하는 것 입니다.
 
 ---------------------------------
+
+- const에 대하여
+
+const의 사용은 다음과 같은 경우의 수가 있다.
+
+1. const 키워드가 자료형 앞에 있을 때
+
+포인터가 가리키는 변수의 값(data)을 변경 X
+
+포인터 변수 자신의 값(주소) 변경 O
+
+```.c
+char str1[20] = "Hello World";
+char str2[20] = "Good Bye";
+const char*p1 = str1;
+p1[0] = 'A';           -> 컴파일에러
+p1 = str2; 
+```
+
+하지만 위치에 따라 의미가 달라지므로 주의하자!
+
+2. const 키워드가 포인터 변수명 앞에 있을 때
+
+포인터 변수 자신의 값(주소)를 변경 X 
+
+포인터가 가리키는 변수의 값 변경 O
+
+```.c
+char str1[20] = "Hello World";
+char str2[20] = "Good Bye";
+char *const p2 = str1;
+p2[0] = 'A'; 
+p2 = str2;         -> 컴파일 에러
+```
+
+3. const 키워드가 1, 2 둘 다 있을 때
+
+포인터가 가리키는 변수의 값 변경 X
+
+포인터 변수 자신의 값(주소) 변경 X
+
+```.c
+char str1[20] = "Hello World";
+char str2[20] = "Good Bye";
+const char * const p3 = str1;
+p3[0] = 'A';         -> 컴파일 에러
+p3 = str2;           -> 컴파일 에러
+```
+
+[출처 사이트](https://blog.naver.com/oddish0513/222632469583)
