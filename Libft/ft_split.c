@@ -6,104 +6,116 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 22:09:07 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/07 22:15:31 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/08 16:14:40 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_len(char const *s, char c)
+int	count_word(char const *str, char c)
 {
-	int	i;
-	int	count;
+	int	cnt;
 
-	i = 0;
-	count = 0;
-	while (s[i])
+	cnt = 0;
+	while (*str)
 	{
-		if (s[i] != c)
+		while (*str && *str == c)
+			++str;
+		if (*str && *str != c)
 		{
-			count++;
-			while (s[i] && s[i] != c)
-				i++;
+			++cnt;
+			while (*str && *str != c)
+				++str;
 		}
-		else
-			i++;
 	}
-	return (count);
+	return (cnt);
 }
 
-static int	ft_word(char const *s, char c, int *j)
+char	*ft_strlen_dup(char const **str, char c)
 {
-	int	i;
-	int	word_len;
-
-	i = *j;
-	while (s[i] && s[i] == c)
-		i++;
-	*j = i;
-	word_len = 0;
-	while (s[i] && s[i] != c)
-	{
-		word_len++;
-		i++;
-	}
-	return (word_len);
-}
-
-static char	*ft_sep(char const *s, char c, int *j)
-{
-	int		i;
-	int		k;
 	int		word_len;
-	char	*sep;
+	int		cnt;
+	char	*copy;
 
-	word_len = ft_word(s, c, j);
-	sep = (char *)malloc(sizeof(char) * (word_len + 1));
-	if (!sep)
-		return (NULL);
-	i = *j;
-	k = 0;
-	while (s[i] && s[i] != c)
-		sep[k++] = s[i++];
-	sep[word_len] = 0;
-	*j = i;
-	return (sep);
+	word_len = 0;
+	while (*(*str) && *(*str) != c)
+	{
+		++word_len;
+		++*str;
+	}
+	*str -= word_len;
+	copy = malloc(sizeof(char) * (word_len + 1));
+	if (!copy)
+		return (0);
+	cnt = 0;
+	while (*(*str) && ++cnt <= word_len)
+		*copy++ = *(*str)++;
+	*copy = '\0';
+	copy -= word_len;
+	return (copy);
 }
 
-static void	ft_free(char **tab, int index)
+char	**free_copy(char **str, int size)
 {
-	int	i;
+	int	index;
 
-	i = 0;
-	while (i < index)
-		free(tab[i++]);
-	free(tab);
+	index = -1;
+	while (++index < size)
+		free(str[index]);
+	free(str);
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**tab;
-	int		len;
-	int		i;
-	int		j;
+	char	**copy;
+	int		words;
+	int		index;
 
-	i = 0;
-	j = 0;
-	len = ft_len(s, c);
-	tab = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!tab)
-		return (NULL);
-	while (i < len)
+	if (!s)
+		return (0);
+	words = count_word(s, c);
+	copy = malloc(sizeof(char *) * (words + 1));
+	if (!copy)
+		return (0);
+	index = -1;
+	while (++index < words)
 	{
-		tab[i] = ft_sep(s, c, &j);
-		if (!tab[i])
-		{
-			ft_free(tab, i);
-			return (NULL);
-		}
-		i++;
+		while (*s && *s == c)
+			++s;
+		copy[index] = ft_strlen_dup(&s, c);
+		if (!copy[index])
+			return (free_copy(copy, index));
 	}
-	tab[len] = 0;
-	return (tab);
+	copy[index] = 0;
+	return (copy);
 }
+//
+//#include <stdio.h>
+//int main(void)
+//{
+// char **arr;
+// char *str = "hello, ejae, nice to meet you";
+// char *str2 = "hello, ejae, nice to meet you";
+// char *str3 = "hello";
+// char charset = ' ';
+// char charset2 = '\0';
+// char charset3 = 'h';
+//
+// arr = ft_split(str, charset);
+// int index;
+// index = -1;
+// while (++index < 6)
+// printf("%s\n", arr[index]);
+// free(arr);
+// arr = ft_split(str2, charset2);
+// index = -1;
+// while (++index < 1)
+// printf("%s\n", arr[index]);
+// free(arr);
+// arr = ft_split(str3, charset3);
+// if (arr[0] == NULL)
+// printf("hello NULL~!\n");
+// free(arr);
+// return (0);
+//}

@@ -2,61 +2,59 @@
 
 > 42에서 필요한 라이브러리를 직접 구현하는 프로젝트입니다.
 
-[라이브러리 만들기]()
-
-man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습니다.
+`표준 C 라이브러리`내에 있는 함수들을 직접 구현합니다. 흔히 표준 C 라이브러리의 줄임말로 `libc`라는 용어를 씁니다. 표준 C 라이브러리는 모든 C 프로그램에서 (또 때로는 다른 언어로 된 프로그램에서) 사용할 수 있는 표준 함수들의 라이브러리입니다. man에 기반하여 각 함수들이 어떤 역할을 하는지 정리하였습니다.
 
 ## Contents
 
 - [Libft](#libft)
   - [Contents](#contents)
   - [Part 1 - Libc functions](#part-1---libc-functions)
-    - [ft_isalpha](#ft_isalpha)
-    - [ft_isdigit](#ft_isdigit)
-    - [ft_isalnum](#ft_isalnum)
-    - [ft_isascii](#ft_isascii)
-    - [ft_isprint](#ft_isprint)
-    - [ft_toupper](#ft_toupper)
-    - [ft_tolower](#ft_tolower)
-    - [ft_strchr](#ft_strchr)
-    - [ft_strrchr](#ft_strrchr)
-    - [ft_strlen](#ft_strlen)
-    - [ft_strncmp](#ft_strncmp)
-    - [ft_strlcpy](#ft_strlcpy)
-    - [ft_strlcat](#ft_strlcat)
-    - [ft_strnstr](#ft_strnstr)
-    - [ft_atoi](#ft_atoi)
-    - [ft_memset](#ft_memset)
-    - [ft_bzero](#ft_bzero)
-    - [ft_memchr](#ft_memchr)
-    - [ft_memcpy](#ft_memcpy)
-    - [ft_memccpy.c](#ft_memccpyc)
-    - [ft_memcmp](#ft_memcmp)
-    - [ft_memmove](#ft_memmove)
-    - [ft_calloc](#ft_calloc)
-    - [ft_strdup](#ft_strdup)
+	- [ft_isalpha](#ft_isalpha)
+	- [ft_isdigit](#ft_isdigit)
+	- [ft_isalnum](#ft_isalnum)
+	- [ft_isascii](#ft_isascii)
+	- [ft_isprint](#ft_isprint)
+	- [ft_toupper](#ft_toupper)
+	- [ft_tolower](#ft_tolower)
+	- [ft_strchr](#ft_strchr)
+	- [ft_strrchr](#ft_strrchr)
+	- [ft_strlen](#ft_strlen)
+	- [ft_strncmp](#ft_strncmp)
+	- [ft_strlcpy](#ft_strlcpy)
+	- [ft_strlcat](#ft_strlcat)
+	- [ft_strnstr](#ft_strnstr)
+	- [ft_atoi](#ft_atoi)
+	- [ft_memset](#ft_memset)
+	- [ft_bzero](#ft_bzero)
+	- [ft_memchr](#ft_memchr)
+	- [ft_memcpy](#ft_memcpy)
+	- [ft_memccpy.c](#ft_memccpyc)
+	- [ft_memcmp](#ft_memcmp)
+	- [ft_memmove](#ft_memmove)
+	- [ft_calloc](#ft_calloc)
+	- [ft_strdup](#ft_strdup)
   - [Part 2 - Additional functions](#part-2---additional-functions)
-    - [ft_substr](#ft_substr)
-    - [ft_strjoin](#ft_strjoin)
-    - [ft_strtrim](#ft_strtrim)
-    - [ft_split](#ft_split)
-    - [ft_itoa](#ft_itoa)
-    - [ft_strmapi](#ft_strmapi)
-    - [ft_striteri](#ft_striteri)
-    - [ft_putchar_fd](#ft_putchar_fd)
-    - [ft_putstr_fd](#ft_putstr_fd)
-    - [ft_putendl_fd](#ft_putendl_fd)
-    - [ft_putnbr_fd](#ft_putnbr_fd)
+	- [ft_substr](#ft_substr)
+	- [ft_strjoin](#ft_strjoin)
+	- [ft_strtrim](#ft_strtrim)
+	- [ft_split](#ft_split)
+	- [ft_itoa](#ft_itoa)
+	- [ft_strmapi](#ft_strmapi)
+	- [ft_striteri](#ft_striteri)
+	- [ft_putchar_fd](#ft_putchar_fd)
+	- [ft_putstr_fd](#ft_putstr_fd)
+	- [ft_putendl_fd](#ft_putendl_fd)
+	- [ft_putnbr_fd](#ft_putnbr_fd)
   - [Bouns](#bouns)
-    - [ft_lstnew](#ft_lstnew)
-    - [ft_lstadd_front](#ft_lstadd_front)
-    - [ft_lstsize](#ft_lstsize)
-    - [ft_lstlast](#ft_lstlast)
-    - [ft_lstadd_back](#ft_lstadd_back)
-    - [ft_lstdelone](#ft_lstdelone)
-    - [ft_lstclear](#ft_lstclear)
-    - [ft_lstiter](#ft_lstiter)
-    - [ft_lstmap](#ft_lstmap)
+	- [ft_lstnew](#ft_lstnew)
+	- [ft_lstadd_front](#ft_lstadd_front)
+	- [ft_lstsize](#ft_lstsize)
+	- [ft_lstlast](#ft_lstlast)
+	- [ft_lstadd_back](#ft_lstadd_back)
+	- [ft_lstdelone](#ft_lstdelone)
+	- [ft_lstclear](#ft_lstclear)
+	- [ft_lstiter](#ft_lstiter)
+	- [ft_lstmap](#ft_lstmap)
   - [Question](#question)
 
 ## Part 1 - Libc functions
@@ -82,7 +80,7 @@ int ft_isalpha(int c)
 - [문자를 다루는 함수의 매개변수가 int형인 이유](#문자를-다루는-함수의-매개변수가-int형인-이유)
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -105,7 +103,7 @@ int ft_isdigit(int c)
 **ISSUES**
 .
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -129,7 +127,7 @@ int ft_isalnum(int c)
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -154,7 +152,7 @@ int ft_isascii(int c)
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -179,7 +177,7 @@ int ft_isprint(int c)
 `DEL`(127)은 delete control character로, 명령어에 해당합니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -204,7 +202,7 @@ int ft_toupper(int c)
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -228,7 +226,7 @@ int ft_tolower(int c)
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---------------------------------------------------
@@ -249,7 +247,7 @@ char    *ft_strchr(const char *s, int c);
 **ISSUES**
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -271,7 +269,7 @@ char    *ft_strrchr(const char *s, int c);
 **ISSUES**
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -295,7 +293,7 @@ size_t  ft_strlen(const char *s)
 -   [size_t형에 대하여](#size_t형에-대하여)
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -326,7 +324,7 @@ s1가 크면 양수를, s2가 크면 음수를, 같다면 0을 반환합니다.
 그렇다면 비교를 위해 `unsigned char`형으로 casting 할 때, const unsigned char형이 되어야 할 것 같아 상수화를 유지시켰다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -355,7 +353,7 @@ src는 원본으로, 읽어들이기만 해야하므로(변경되면 안되므�
 
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -377,36 +375,36 @@ size_t  strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 
 **RETURN VALUE**
 -   dest_len보다 dstsize가 클 경우
-    -   dest_len + src_len을 dstsize - 1만큼 이어 붙인다
-    -   그리고 dstsize 번째에 NULL을 저장(dstsize는 NULL의 index)
-    -   NULL을 제외한 문자열 길이를 반환
-    ```.c
-    return (dest_len + src_len);
-    ```
+	-   dest_len + src_len을 dstsize - 1만큼 이어 붙인다
+	-   그리고 dstsize 번째에 NULL을 저장(dstsize는 NULL의 index)
+	-   NULL을 제외한 문자열 길이를 반환
+	```.c
+	return (dest_len + src_len);
+	```
 
 -   dst_len보다 dstsize가 작거나 같을 경우
-    -   dstsize를 통해 dst의 NULL에 접근할 수 없다
-    -   이럴 경우 strlcat은 NULL을 보장할 수 없으므로 실행되지 않는다
-    -   src의 길이와 dstsize를 더한 값을 반환한다
-    ```.c
-    return (src_len + dstsize);
-    ```
+	-   dstsize를 통해 dst의 NULL에 접근할 수 없다
+	-   이럴 경우 strlcat은 NULL을 보장할 수 없으므로 실행되지 않는다
+	-   src의 길이와 dstsize를 더한 값을 반환한다
+	```.c
+	return (src_len + dstsize);
+	```
 
 **ISSUES**
 리턴 값의 의미에 대해 생각해 보았습니다.
 -   dest_len보다 dstsize가 클 경우 (cat 실행이 가능)
-    > src를 모두 붙여넣지 못하더라도 src의 전체 길이를 더해서 리턴합니다. man에서는 이것을 잘라내기 감지(모두 붙였을 경우 dst_len + src_len에 반해, dstsize가 이보다 작을 경우 src가 잘리게 된다)를 간단히 하기위해 dst와 src의 초기 길이를 더한 값을 리턴한다고 명시되어 있습니다.
+	> src를 모두 붙여넣지 못하더라도 src의 전체 길이를 더해서 리턴합니다. man에서는 이것을 잘라내기 감지(모두 붙였을 경우 dst_len + src_len에 반해, dstsize가 이보다 작을 경우 src가 잘리게 된다)를 간단히 하기위해 dst와 src의 초기 길이를 더한 값을 리턴한다고 명시되어 있습니다.
 
-    ```.vim
-    For strlcat() that means the initial length of dst plus the length of src. While this may seem somewhat confusing, it was done to make truncation detection simple.
-    ```
+	```.vim
+	For strlcat() that means the initial length of dst plus the length of src. While this may seem somewhat confusing, it was done to make truncation detection simple.
+	```
 -   dst_len보다 dstsize가 작거나 같을 경우 (cat 실행이 불가)
-    > 리턴 값을 받아보면 cat이 안되었기 때문에 dstsize를 수정해야겠다고 생각할 것이고, 이때 src_len + dstsize의 리턴 값은 안전하게 src를 끝까지 cat하도록 하는 값이 됩니다. 즉, src_len + dstsize의 값이 dst_len보다 커진다면 cat이 정상 실행되므로 해당 리턴 값은 의미를 가집니다.
+	> 리턴 값을 받아보면 cat이 안되었기 때문에 dstsize를 수정해야겠다고 생각할 것이고, 이때 src_len + dstsize의 리턴 값은 안전하게 src를 끝까지 cat하도록 하는 값이 됩니다. 즉, src_len + dstsize의 값이 dst_len보다 커진다면 cat이 정상 실행되므로 해당 리턴 값은 의미를 가집니다.
 
 [참조 페이지](https://gawoori.net/strlcat-3-%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%A7%A4%EB%89%B4%EC%96%BC-%ED%8E%98%EC%9D%B4%EC%A7%80/)
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -429,7 +427,7 @@ char    *strnstr(const char *haystack, const char *needle, size_t len)
 len만큼 찾기 때문에 needle을 찾는 과정에서도 len길이를 확인하면서 찾아야 합니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -451,8 +449,20 @@ int atoi(const char *str)
 **ISSUES**
 문자열 내용이 바뀌면 안되므로 const로 매개변수를 받으며, '++'나 '--'가 sign으로 올 경우 정상적인 int로 변환하지 않고, 0을 반환합니다.
 
+
+업데이트 중에 숫자가 int 타입의 범위를 넘어버리는 경우는 따로 처리를 해줘야 합니다.
+```.c
+if (sign * res > 2147483647)
+	return (-1);
+else if (sign * res < -2147483648)
+	return (0);
+```
+int 반환형 범위까지만 처리 하고 싶다면 두가지 이유로  디펜스가 가능할 것  같습니다.
+1. 예외처리 값 까지 다 처리해야 한다면 다른 함수를 사용하는 것 이 더 효율적일 것이다.
+2. 명시된 스펙 보다 더 나은 성능을 가지더라도 그것을 표준으로 지켜야 하는 값 이라 말하기는 어려울 수 있다.
+
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -480,7 +490,7 @@ int형 배열 주소를 전달하고 1으로 바꾸고 싶을 때 이상한 결�
 memset 함수는 1바이트 단위로 값을 초기화 합니다. 컴퓨터는 값을 1바이트 단위로 저장하기 때문에 memset 함수도 1바이트 단위로 읽습니다. 두번째 매개변수에 1 값을 전달하면 1바이트 단위로 1을 만들기 때문에 0000 0001이 네개 이어진 0000 0001 0000 0001 0000 0001 0000 0001 가 됩니다. 이를 십진수로 계산하면 16843009가 나옵니다. 따라서 memset 함수는 동적할당을 받을 경우 메모리의 값에 쓰레기가 들어있기 때문에 memset 함수를 사용해 0으로 초기화할 때 많이 쓰는 것 같습니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -507,7 +517,7 @@ memset과는 다르게 bzero는 왜 void형 인가?
 명확한 느낌이 안드는데 bzeor가 사라진 이유를 확인한다면 더 이해할 수 있지 않을까...
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -530,7 +540,7 @@ void *memchr(const void *s, int c, size_t n)
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -563,7 +573,7 @@ strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 �
 [memcpy() vs memmove()](#memcpy()-vs-memmove())
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -574,9 +584,9 @@ strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 �
 **PROTOTYPE**
 ```c
 void    *ft_memccpy(void *dst,
-                    const void *src,
-                    int c,
-                    size_t n);
+					const void *src,
+					int c,
+					size_t n);
 ```
 
 **DESCRIPTION**
@@ -593,7 +603,7 @@ src안에서 c를 찾는다면 그 다음 포인터를 리턴하고 그게 아�
 `memcpy` vs `memmove`
 [const에 대하여](#const에-대하여)
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -617,7 +627,7 @@ strcmp() vs memcmp()
 -   strcmp에서 "strcmp\0abc" , "strcmp\0123" 는 NULL을 만나면 종료하기 때문에 0을 반환합니다. 그러나 memcmp 로 위의 10 바이트를 검사하면 틀리다고 인식하여 int 값이 나옵니다. `문자열간의 문자상수 int형을 계산`하는 것과 `문자열간의 메모리영역을 비교`한다는 차이가 있습니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -649,7 +659,7 @@ The two strings may overlap;
 ```
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -669,10 +679,10 @@ void    *ft_calloc(size_t count, size_t size);
 할당 성공시 할당된 공간의 포인터를, 할당 실패시 NULL 포인터를 반환합니다.
 
 **ISSUES**
-.
+malloc이 SIZE_MAX 값을 넘길 경우 동적할당이 되지 않는다는 것을 알게 되었습니다. 따라서 size * count 값이 SIZE_MAX 값을 넘기는 경우 할당하지 않고 NULL을 리턴하도록 예외처리 하였습니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -695,7 +705,7 @@ char    *strdup(const char *s1);
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -713,14 +723,15 @@ char    *ft_substr(char const *s, unsigned int start, size_t len);
 **DESCRIPTION**
 문자열 s에서 두번째 매개변수 start index부터 len개 만큼의 부분 문자열을 새로 만듭니다.
 
+
 **RETURN VALUE**
 만들어진 부분 문자열의 포인터를 반환합니다.
 
 **ISSUES**
-.
+start가 문자열 길이보다 클 경우에는 예외처리가 필요합니다. NULL이 들어간 1칸의 동적할당을 해주고 리턴해야 합니다. 또한 start에서 시작하여 len까지 이동했을 때, 문자열의 길이를 넘어서는 경우가 있습니다. 이 또한 예외처리로 len값을 수정해야 합니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -743,7 +754,7 @@ s1에 s2가 이어 붙여진 새로운 문자열 포인터를 반환합니다
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -770,7 +781,7 @@ char    *ft_strtrim(char const *s1, char const *set);
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -793,9 +804,11 @@ char    **ft_split(char const *s, char c);
 
 **ISSUES**
 기존에 만들었던 split과 다르게 free를 구현합니다.
+프로토타입이 변경되었습니다. (const char *str -> char const *str)
+-	[const char * vs char const *](#const-char-*-vs-char-const-*)
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -818,7 +831,7 @@ char    *ft_itoa(int n);
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -835,16 +848,17 @@ char    *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 문자열 s 각각의 문자에 두번째 매개변수 f함수를 적용(mapping)합니다. 이때 원본 문자열은 건들지 않고 새로운 문자열을 동적할당하여 반환합니다.
 함수포인터의 매개변수에서 unsigned int는 index를, char는 index에 해당하는 문자를 의미합니다.
 특정 index에 해당하는 값에 매핑하고 싶을 때 사용되는 함수입니다.
+striteri()가 단순 순회 후 적용이라면, 해당 함수는 새로운 메모리 동적할당 후 함수 첫번째 매개변수로 받은 문자열 내용을 저장하여 반환합니다.
 
 **RETURN VALUE**
 mapping되어 만들어진 새로운 문자열을 반환합니다.
 
 **ISSUES**
-.
+[mapping에 대하여](#mapping에-대하여)
 
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -859,16 +873,15 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 **DESCRIPTION**
 문자열을 순회하며 함수 f를 적용시킵니다.
-
-널  포인터를 가리키는 문자열이 들어올 수  있으므로
+문자열 각각의 문자들을 하나씩 순회하며 f함수를 적용시키는 예로 putchar가 있습니다.
 
 **RETURN VALUE**
-
+널 포인터를 가리키는 문자열이 들어올 수 있으므로 널가드 체크가 필요합니다. 사용자의 책임이므로 없어도 된다는 것이 개인적인 의견이긴 합니다.
 
 **ISSUES**
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -902,7 +915,7 @@ fd가 음수일 경우에 예외처리?
 
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -925,7 +938,7 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -948,7 +961,7 @@ putstr_fd()를 호출한 후  putchar_fd()를 통해 개행을 출력합니다.
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -971,7 +984,7 @@ void    ft_putnbr_fd(int n, int fd);
 .
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -979,201 +992,211 @@ void    ft_putnbr_fd(int n, int fd);
 ## Bouns
 
 ### ft_lstnew
->
+> list new
 
 **PROTOTYPE**
 ```c
-
+t_list	*ft_lstnew(void *content);
 ```
 
 **DESCRIPTION**
-
-
-**RETURN VALUE**
-
-
-**ISSUES**
-
-<div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-
-### ft_lstadd_front
->
-
-**PROTOTYPE**
-```c
-
-```
-
-**DESCRIPTION**
-
+새로운 노드를 만들고 매개변수 content를 내용으로 넣어줍니다.
+이떄 content가 NULL일 때도 content가 NULL인 요소가 만들어져야 합니다.
 
 **RETURN VALUE**
-
+새로운 노드를 반환합니다.
 
 **ISSUES**
+.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 ### ft_lstsize
->
+>	list size
 
 **PROTOTYPE**
 ```c
-
+int    ft_lstsize(t_list *lst);
 ```
 
 **DESCRIPTION**
-
+list의 길이를 구합니다.
 
 **RETURN VALUE**
-
+길이를 반환합니다.
 
 **ISSUES**
+.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 ### ft_lstlast
->
+> list last
 
 **PROTOTYPE**
 ```c
-
+t_list    *ft_lstlast(t_list *lst);
 ```
 
 **DESCRIPTION**
-
+lst의 마지막 노드를 찾아줍니다.
 
 **RETURN VALUE**
-
+lst의 마지막 노드를 반환합니다.
 
 **ISSUES**
+.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_lstadd_front
+> list add front
+
+**PROTOTYPE**
+```c
+void    ft_lstadd_front(t_list **lst, t_list *new);
+```
+
+**DESCRIPTION**
+list의 head 앞에 새로만든 new_node를 연결합니다.
+
+**RETURN VALUE**
+.
+
+**ISSUES**
+new_node의 next가 lst시작 노드를 가리키면 맨 앞에 연결됩니다.
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 ### ft_lstadd_back
->
+> list add back
 
 **PROTOTYPE**
 ```c
-
+void    ft_lstadd_back(t_list **lst, t_list *new);
 ```
 
 **DESCRIPTION**
-
+list의 tail 뒤에 새로만든 new_node를 연결합니다.
 
 **RETURN VALUE**
-
+.
 
 **ISSUES**
+head부터 시작하여 tail까지 연결된 노드를 반복문을 통해 이동한 후 마지막 노드가 가리키는 next가 new_node를 가리키면 맨 뒤에 연결됩니다.
+lstlast()를 통해 마지막 노드를 찾을 수 있습니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 ### ft_lstdelone
->
+>	list delete one
 
 **PROTOTYPE**
 ```c
-
+void    ft_lstdelone(t_list *lst, void (*del)(void*));
 ```
 
 **DESCRIPTION**
-
+lst의 특정 노드를 삭제합니다. lst->content에 del을 적용해주고 lst를 free합니다.
 
 **RETURN VALUE**
-
+.
 
 **ISSUES**
+lst->next는 free하지 않습니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 ### ft_lstclear
->
+>	list clear
 
 **PROTOTYPE**
 ```c
-
+void    ft_lstclear(t_list **lst, void (*del)(void*));
 ```
 
 **DESCRIPTION**
-
+lst의 content를 지우고 리스트 전체를 초기화 합니다.
 
 **RETURN VALUE**
-
+.
 
 **ISSUES**
+연결 후 초기화 되어야 합니다. 따라서 초기화 대상 노드를 curr로 전달(curr = *lst)한 후 해당 노드 전 후의 노드를 연결합니다.(`*lst = (*lst) ->next)`) 연결되었기 때문에 temp 역할을 하는 curr을 통해 해당 노드를 초기화 합니다. 이때도 마찬가지로 curr->next를 free하지 않습니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 
 ### ft_lstiter
->
+>	list iteration
 
 **PROTOTYPE**
 ```c
-
+void    ft_lstiter(t_list *lst, void (*f)(void *));
 ```
 
 **DESCRIPTION**
-
+리스트를 순회하면서 각 노드마다 f를 적용합니다.
 
 **RETURN VALUE**
-
+.
 
 **ISSUES**
+.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
 
 ### ft_lstmap
->
+> list mapping
 
 **PROTOTYPE**
 ```c
-
+t_list    *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 ```
 
 **DESCRIPTION**
-
+lst의 노드들을 지정한 함수 f를 적용하여 새로운 리스트와 노드에 복사하는 함수입니다.
 
 **RETURN VALUE**
 
 
 **ISSUES**
+노드가 생성되지 않았다면 lstclear()를 통해 전체 리스트를 초기화하고 null을 리턴해야 합니다. 노드가 성공적으로 만들어졌다면, lstadd_back()을 통해 새로운 노드를 달아주며 새 리스트를 만들어 나갑니다.
 
 <div align = "right">
-    <b><a href = "#Contents">↥ top</a></b>
+	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
 ---
@@ -1278,3 +1301,17 @@ p3 = str2;           -> 컴파일 에러
 ```
 
 [출처 사이트](https://blog.naver.com/oddish0513/222632469583)
+
+--------
+
+- mapping에 대하여
+
+매핑(mapping)이란 하나의 값을 다른 값으로 대응시키는 것을 말합니다. '맵핑'이 아닌 '매핑'이 올바른 표기법입니다. 매핑은 지도를 뜻하는 맵(map)에서 나온 말인데, 지도에 표시한 정보가 현실 세계와 1:1로 대응하듯이, 매핑을 통해 하나의 값을 다른 값으로 1:1 대응시키는 것을 말합니다. 네임서버는 도메인 이름을 IP 주소로 매핑시키는 역할을 합니다. 컴퓨터의 기억장치를 각각의 루틴이나 데이터 영역에 할당하는 것도 매핑의 일종입니다.
+
+[출처 사이트](http://wiki.hash.kr/index.php/매핑)
+
+--------
+
+- const char * vs char const *
+
+const char *

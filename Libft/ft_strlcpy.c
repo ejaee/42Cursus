@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:37:04 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 11:06:51 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/08 14:36:18 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 
 	idx = 0;
 	src_len = ft_strlen(src);
+	if (!dst || !src)
+		return (0);
 	if (!dstsize)
 		return (src_len);
 	while (src[idx] && idx < (dstsize - 1))
