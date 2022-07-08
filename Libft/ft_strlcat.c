@@ -6,30 +6,29 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:37:01 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/07 13:38:18 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/08 11:19:08 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	strlcat(char *dst, const char *src, size_t dstsize)
-{
-	size_t	dst_len;
-	size_t	src_len;
-	size_t	cnt;
+#include "libft.h"
 
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	if (dstsize <= dst_len)
-		return (src_len + dstsize);
-	while (*dst)
-		dst++;
-	cnt = 0;
-	while (*src && dst_len + cnt < dstsize - 1)
-	{
-		dst[dst_len + cnt] = src[cnt];
-		cnt++;
-	}
-	dst[dst_len + cnt] = '\0';
-	return (dst_len + src_len);
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
+{
+	size_t	idx_d;
+	size_t	idx_s;
+	size_t	len_d;
+	size_t	len_s;
+
+	len_d = ft_strlen(dest);
+	len_s = ft_strlen(src);
+	idx_d = len_d;
+	idx_s = 0;
+	if (size <= len_d)
+		return (len_s + size);
+	while (src[idx_s] && idx_d < size - 1)
+		dest[idx_d++] = src[idx_s++];
+	dest[idx_d] = '\0';
+	return (len_d + len_s);
 }

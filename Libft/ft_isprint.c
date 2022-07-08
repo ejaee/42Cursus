@@ -6,13 +6,13 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:36:40 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/07 13:42:54 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/08 11:04:41 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int	ft_isprint(int c)
 {
 	if (' ' <= c && c <= '~')
 		return (1);

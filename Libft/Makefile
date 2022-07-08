@@ -2,6 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 NAME = libft.a
+HEADER = libft.h
 
 SRCS = \
 ft_atoi.c ft_bzero.c ft_calloc.c ft_itoa.c ft_split.c ft_tolower.c ft_toupper.c \
@@ -25,7 +26,7 @@ else
 endif
 
 %o : %c
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
 $(NAME) : $(OBJECTS)
 		ar rcs $(NAME) $(OBJECTS)

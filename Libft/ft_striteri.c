@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:43:27 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 09:43:59 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/08 11:24:33 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int	idx;
+	unsigned int	idx;
 
 	idx = 0;
 	if (!s)
