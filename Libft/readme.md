@@ -59,6 +59,201 @@
 
 ## Part 1 - Libc functions
 
+📌 Libc functions # 1
+
+### ft_strlen
+> string length
+
+**PROTOTYPE**
+```c
+size_t  ft_strlen(const char *s)
+```
+
+**DESCRIPTION**
+문자열 `s`의 길이를 구한다.
+
+**RETURN VALUE**
+문자열 `s`의 길이
+
+**ISSUES**
+`size_t`형을 반환하므로 count value도 동일한 자료형으로 선언한다.
+-   [size_t형에 대하여](#size_t형에-대하여)
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memset
+> memory set
+
+**PROTOTYPE**
+```c
+void    *memset(void *b, int c, size_t len);
+```
+
+**DESCRIPTION**
+메모리 b를 len 길이만큼 c로 초기화 합니다. bzero 대신, memset으로 대체된 함수로 0으로 초기화 하는데 쓰여집니다.
+
+**RETURN VALUE**
+초기화 된 메모리 b의 주소를 반환합니다.
+
+**ISSUES**
+[void* 형에 대하여](#void*-형에-대하여)
+int형 배열 주소를 전달하고 1으로 바꾸고 싶을 때 이상한 결과가 나오는 이유는?
+```.vim
+1 대신, 16843009 가 나온다.
+```
+memset 함수는 1바이트 단위로 값을 초기화 합니다. 컴퓨터는 값을 1바이트 단위로 저장하기 때문에 memset 함수도 1바이트 단위로 읽습니다. 두번째 매개변수에 1 값을 전달하면 1바이트 단위로 1을 만들기 때문에 0000 0001이 네개 이어진 0000 0001 0000 0001 0000 0001 0000 0001 가 됩니다. 이를 십진수로 계산하면 16843009가 나옵니다. 따라서 memset 함수는 동적할당을 받을 경우 메모리의 값에 쓰레기가 들어있기 때문에 memset 함수를 사용해 0으로 초기화할 때 많이 쓰는 것 같습니다.
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_bzero
+> byte zero
+
+**PROTOTYPE**
+```c
+void    ft_bzero(void *s, size_t n);
+```
+
+**DESCRIPTION**
+메모리 s의 n byte까지를 0으로 초기화 합니다. memset으로 대체된 함수로 현재는 사용되지 않습니다.
+
+**RETURN VALUE**
+.
+
+**ISSUES**
+memset과는 다르게 bzero는 왜 void형 인가?
+
+:question:
+
+명확한 느낌이 안드는데 bzeor가 사라진 이유를 확인한다면 더 이해할 수 있지 않을까...
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memmove
+> memory move
+
+**PROTOTYPE**
+```c
+void    *ft_memmove(void *dst, const void *src, size_t len);
+```
+
+**DESCRIPTION**
+memcpy와 쓰임을 동일하나, src와 dst의 메모리 영역이 겹칠 때 사용합니다. 해당 함수를 사용하지 않고 복사하기 위해서는 반복문을 사용해야 한다는 소요를 줄일 수 있습니다.
+
+src의 주소가 dst보다 클 경우 *dst++ = *src++를 통해 복사하고, 작을 경우 끝에서 거꾸로 복사를 합니다.
+> index 0, 1, 2, 3을 1, 2, 3, 4에 복사한다면 0이 1에 저장됨으로써 기존에 있던 인덱스 1의 값을 인덱스 2에 저장할 수 없는 경우가 작을 경우(src < dst)에 해당합니다. 0, 1, 2, 3 인덱스 값을 1, 2, 3, 4에 저장하는 상황이 man에서 언급하는 overlap에 해당됩니다. src의 주소가 dst 보다 작을 경우 거꾸로 저장하므로써 overlap의 문제를 해결할 수 있습니다.
+
+
+
+**RETURN VALUE**
+복사된 메모리 dst
+
+**ISSUES**
+memcpy() vs memmove()
+> 두 함수 모두 특정 메모리 주소에서 원하는 크기 만큼을 다른 곳으로 복사합니다. 다른 점은 이름 뿐으로, 매개변수도 동일합니다. 메뉴얼에서 메모리 영역이 곂칠 때(overlap) memmove를 사용한다고 명시되어 있습니다.
+```.vim
+The two strings may overlap;
+```
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memcmp
+> memory compare
+
+**PROTOTYPE**
+```c
+int ft_memcmp(const void *s1, const void *s2, size_t n);
+```
+
+**DESCRIPTION**
+메모리 s1과 s2를 n byte까지 비교합니다.
+
+**RETURN VALUE**
+strcmp와 동일합니다.
+
+**ISSUES**
+strcmp() vs memcmp()
+-   strcmp에서 "strcmp\0abc" , "strcmp\0123" 는 NULL을 만나면 종료하기 때문에 0을 반환합니다. 그러나 memcmp 로 위의 10 바이트를 검사하면 틀리다고 인식하여 int 값이 나옵니다. `문자열간의 문자상수 int형을 계산`하는 것과 `문자열간의 메모리영역을 비교`한다는 차이가 있습니다.
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memchr
+> memory char
+
+**PROTOTYPE**
+```c
+void *memchr(const void *s, int c, size_t n)
+```
+
+**DESCRIPTION**
+메모리 영역 s에서 n bytes 까지 확인하여 문자 c가 처음 발견된 곳의 포인터를 반환합니다.
+
+**RETURN VALUE**
+처음으로 값 c가 나타나는 문자열의 주소를 반환합니다.
+
+**ISSUES**
+.
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_memcpy
+> memory copy
+
+**PROTOTYPE**
+```c
+void    *ft_memcpy(void *dst, const void *src, size_t n);
+```
+
+**DESCRIPTION**
+메모리 영역 src의 n bytes만큼을 dst로 복사합니다. 이때 src와 dst의 메모리 영역이 겹쳐서는 안됩니다.
+```.vim
+If dst and src overlap, behavior is undefined.
+```
+메모리 영역이 겹친디면, memcpy 대신 memmove를 사용 합니다.
+
+**RETURN VALUE**
+복사된 메모리 dst 주소를 반환합니다.
+
+**ISSUES**
+strcpy() vs memcpy()
+> 가장 큰 특징은 memcpy는 형에 관계없이 임의의 영역을 지정한 byte 수만큼 복사하는 기능을 수행합니다. 'strcpy()'는 매번 '문자 하나씩 읽어서' 그것이 널문자인지 아닌지 확인한 뒤 하나씩 복사해야 하고, 'memcpy()'는 '메모리 관점의 복사'라 꽤 큰 블럭 단위로 복사가 가능하다고 합니다.
+
+strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 전달받은 문자열이 끝에 NULL이 없는 char 배열인 경우 문제가 되기에 안정성 측면에서 memcpy를 선호하는 의견이 많았습니다.
+[출처 사이트](http://blog.naver.com/kihoyaa/10000790352)
+
+[memcpy() vs memmove()](#memcpy()-vs-memmove())
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+📌 Libc functions # 2
+
 ### ft_isalpha
 > is alphabetic character
 
@@ -182,6 +377,8 @@ int ft_isprint(int c)
 
 ---------------------------------------------------
 
+📌 Libc functions # 3
+
 ### ft_toupper
 > to upper case character
 
@@ -274,89 +471,7 @@ char    *ft_strrchr(const char *s, int c);
 
 ---
 
-### ft_strlen
-> string length
-
-**PROTOTYPE**
-```c
-size_t  ft_strlen(const char *s)
-```
-
-**DESCRIPTION**
-문자열 `s`의 길이를 구한다.
-
-**RETURN VALUE**
-문자열 `s`의 길이
-
-**ISSUES**
-`size_t`형을 반환하므로 count value도 동일한 자료형으로 선언한다.
--   [size_t형에 대하여](#size_t형에-대하여)
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_strncmp
-> string n compare
-
-**PROTOTYPE**
-```c
-int ft_strncmp(const char *s1, const char *s2, size_t n)
-```
-
-**DESCRIPTION**
-문자열 s1과 s2를 n만큼 비교합니다.
-
-```.vim
-"The comparison is done using unsigned characters, so that ‘\200’ is greater than ‘\0’."
-```
-8진수 '\200', 즉 10진수 128의 수가 '\0'보다 커야 한다는 말은 char가 아닌 unsigned char형으로 비교해야 한다는 말로 해석하였습니다. (char형 비교 시 128은 오버플로우 발생)
-
-**RETURN VALUE**
-s1가 크면 양수를, s2가 크면 음수를, 같다면 0을 반환합니다.
-
-**ISSUES**
-`const char`형으로 매개변수를 받는 이유
->   ft_strncmp 함수는 비교의 목적으로 쓰이므로 매개변수로 받는 문자열 s1, s2 값이 조작되면 안된다. 따라서 해당 매개변수들의 자료형을 const char형으로 받는다.
-
-그렇다면 비교를 위해 `unsigned char`형으로 casting 할 때, const unsigned char형이 되어야 할 것 같아 상수화를 유지시켰다.
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_strlcpy
-> string length(?) copy
-
-**PROTOTYPE**
-```c
-size_t  strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
-```
-> 해당 `restrict qualifier`는 `c99 standard` 키워드로, 해당 과제에서는 다루지 않습니다.
-
-**DESCRIPTION**
-문자열 src에서 dst로 dstsize bytes 만큼 복사합니다. strncpy 함수에서는 n의 size가 src length보다 작을 경우 NULL이 보장되지 못한다는 단점이 있었습니다. 이를 보완한 함수로, 복사가 끝나면 문자열 끝에 NULL문자(\0)가 보장됩니다.
--   dstsize보다 src의 길이가 클 경우 -> src의 NULL이 복사
--   dstsize보다 src의 길이가 작을 경우 -> src-1만큼 복사 후 NULL 저장
-
-**RETURN VALUE**
-복사를 시도하려고 하는 길이인, src의 길이를 반환합니다.
-
-**ISSUES**
-src는 원본으로, 읽어들이기만 해야하므로(변경되면 안되므로) const인 반면에, dst는 src의 내용을 복사해야 하므로(변경되어야 하므로) const가 아니라고 이해했습니다.
-왜 src의 길이를 반환할까?
-> strlcpy 함수는 문자열에 NULL을 보장하는데에 목적이 있습니다. 따라서 복사된 이후에 NULL의 유무가 중요하다고 생각했습니다. 이를 확인하기 위해서는 NULL이 위치한 index 값을 아는 것이 유의미하다고 생각했고 strlcpy의 반환값인 src 길이가 복사된 dst의 NULL 위치를 말해주게 됩니다. 즉, NULL을 확보하는 해당 함수의 의도에 맞게 NULL의 위치를 알려주기 위해 해당 반환 값이 의미를 가진다고 이해했습니다.
-
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
+📌 Libc functions # 4
 
 ### ft_strlcat
 > string length(?) cat
@@ -409,22 +524,28 @@ size_t  strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 
 ---
 
-### ft_strnstr
-> string n string
+### ft_strlcpy
+> string length(?) copy
 
 **PROTOTYPE**
 ```c
-char    *strnstr(const char *haystack, const char *needle, size_t len)
+size_t  strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
 ```
+> 해당 `restrict qualifier`는 `c99 standard` 키워드로, 해당 과제에서는 다루지 않습니다.
 
 **DESCRIPTION**
-문자열 haystack의 전체 길이 중 len길이 내에서, needle을 찾아줍니다.
+문자열 src에서 dst로 dstsize bytes 만큼 복사합니다. strncpy 함수에서는 n의 size가 src length보다 작을 경우 NULL이 보장되지 못한다는 단점이 있었습니다. 이를 보완한 함수로, 복사가 끝나면 문자열 끝에 NULL문자(\0)가 보장됩니다.
+-   dstsize보다 src의 길이가 클 경우 -> src의 NULL이 복사
+-   dstsize보다 src의 길이가 작을 경우 -> src-1만큼 복사 후 NULL 저장
 
 **RETURN VALUE**
-문자열 haystack에서 찾은 needle의 시작 주소값을 반환합니다.
+복사를 시도하려고 하는 길이인, src의 길이를 반환합니다.
 
 **ISSUES**
-len만큼 찾기 때문에 needle을 찾는 과정에서도 len길이를 확인하면서 찾아야 합니다.
+src는 원본으로, 읽어들이기만 해야하므로(변경되면 안되므로) const인 반면에, dst는 src의 내용을 복사해야 하므로(변경되어야 하므로) const가 아니라고 이해했습니다.
+왜 src의 길이를 반환할까?
+> strlcpy 함수는 문자열에 NULL을 보장하는데에 목적이 있습니다. 따라서 복사된 이후에 NULL의 유무가 중요하다고 생각했습니다. 이를 확인하기 위해서는 NULL이 위치한 index 값을 아는 것이 유의미하다고 생각했고 strlcpy의 반환값인 src 길이가 복사된 dst의 NULL 위치를 말해주게 됩니다. 즉, NULL을 확보하는 해당 함수의 의도에 맞게 NULL의 위치를 알려주기 위해 해당 반환 값이 의미를 가진다고 이해했습니다.
+
 
 <div align = "right">
 	<b><a href = "#Contents">↥ top</a></b>
@@ -465,198 +586,55 @@ int 반환형 범위까지만 처리 하고 싶다면 두가지 이유로  디�
 	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
----
+--------
 
-### ft_memset
-> memory set
+### ft_strnstr
+> string n string
 
 **PROTOTYPE**
 ```c
-void    *memset(void *b, int c, size_t len);
+char    *strnstr(const char *haystack, const char *needle, size_t len)
 ```
 
 **DESCRIPTION**
-메모리 b를 len 길이만큼 c로 초기화 합니다. bzero 대신, memset으로 대체된 함수로 0으로 초기화 하는데 쓰여집니다.
+문자열 haystack의 전체 길이 중 len길이 내에서, needle을 찾아줍니다.
 
 **RETURN VALUE**
-초기화 된 메모리 b의 주소를 반환합니다.
+문자열 haystack에서 찾은 needle의 시작 주소값을 반환합니다.
 
 **ISSUES**
-[void* 형에 대하여](#void*-형에-대하여)
-int형 배열 주소를 전달하고 1으로 바꾸고 싶을 때 이상한 결과가 나오는 이유는?
+len만큼 찾기 때문에 needle을 찾는 과정에서도 len길이를 확인하면서 찾아야 합니다.
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+---
+
+### ft_strncmp
+> string n compare
+
+**PROTOTYPE**
+```c
+int ft_strncmp(const char *s1, const char *s2, size_t n)
+```
+
+**DESCRIPTION**
+문자열 s1과 s2를 n만큼 비교합니다.
+
 ```.vim
-1 대신, 16843009 가 나온다.
+"The comparison is done using unsigned characters, so that ‘\200’ is greater than ‘\0’."
 ```
-memset 함수는 1바이트 단위로 값을 초기화 합니다. 컴퓨터는 값을 1바이트 단위로 저장하기 때문에 memset 함수도 1바이트 단위로 읽습니다. 두번째 매개변수에 1 값을 전달하면 1바이트 단위로 1을 만들기 때문에 0000 0001이 네개 이어진 0000 0001 0000 0001 0000 0001 0000 0001 가 됩니다. 이를 십진수로 계산하면 16843009가 나옵니다. 따라서 memset 함수는 동적할당을 받을 경우 메모리의 값에 쓰레기가 들어있기 때문에 memset 함수를 사용해 0으로 초기화할 때 많이 쓰는 것 같습니다.
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_bzero
-> byte zero
-
-**PROTOTYPE**
-```c
-void    ft_bzero(void *s, size_t n);
-```
-
-**DESCRIPTION**
-메모리 s의 n byte까지를 0으로 초기화 합니다. memset으로 대체된 함수로 현재는 사용되지 않습니다.
+8진수 '\200', 즉 10진수 128의 수가 '\0'보다 커야 한다는 말은 char가 아닌 unsigned char형으로 비교해야 한다는 말로 해석하였습니다. (char형 비교 시 128은 오버플로우 발생)
 
 **RETURN VALUE**
-.
+s1가 크면 양수를, s2가 크면 음수를, 같다면 0을 반환합니다.
 
 **ISSUES**
-memset과는 다르게 bzero는 왜 void형 인가?
+`const char`형으로 매개변수를 받는 이유
+>   ft_strncmp 함수는 비교의 목적으로 쓰이므로 매개변수로 받는 문자열 s1, s2 값이 조작되면 안된다. 따라서 해당 매개변수들의 자료형을 const char형으로 받는다.
 
-:question:
-
-명확한 느낌이 안드는데 bzeor가 사라진 이유를 확인한다면 더 이해할 수 있지 않을까...
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_memchr
-> memory char
-
-**PROTOTYPE**
-```c
-void *memchr(const void *s, int c, size_t n)
-```
-
-**DESCRIPTION**
-메모리 영역 s에서 n bytes 까지 확인하여 문자 c가 처음 발견된 곳의 포인터를 반환합니다.
-
-**RETURN VALUE**
-처음으로 값 c가 나타나는 문자열의 주소를 반환합니다.
-
-**ISSUES**
-.
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_memcpy
-> memory copy
-
-**PROTOTYPE**
-```c
-void    *ft_memcpy(void *dst, const void *src, size_t n);
-```
-
-**DESCRIPTION**
-메모리 영역 src의 n bytes만큼을 dst로 복사합니다. 이때 src와 dst의 메모리 영역이 겹쳐서는 안됩니다.
-```.vim
-If dst and src overlap, behavior is undefined.
-```
-메모리 영역이 겹친디면, memcpy 대신 memmove를 사용 합니다.
-
-**RETURN VALUE**
-복사된 메모리 dst 주소를 반환합니다.
-
-**ISSUES**
-strcpy() vs memcpy()
-> 가장 큰 특징은 memcpy는 형에 관계없이 임의의 영역을 지정한 byte 수만큼 복사하는 기능을 수행합니다. 'strcpy()'는 매번 '문자 하나씩 읽어서' 그것이 널문자인지 아닌지 확인한 뒤 하나씩 복사해야 하고, 'memcpy()'는 '메모리 관점의 복사'라 꽤 큰 블럭 단위로 복사가 가능하다고 합니다.
-
-strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 전달받은 문자열이 끝에 NULL이 없는 char 배열인 경우 문제가 되기에 안정성 측면에서 memcpy를 선호하는 의견이 많았습니다.
-[출처 사이트](http://blog.naver.com/kihoyaa/10000790352)
-
-[memcpy() vs memmove()](#memcpy()-vs-memmove())
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_memccpy.c
-> memory copy until c found
-
-**PROTOTYPE**
-```c
-void    *ft_memccpy(void *dst,
-					const void *src,
-					int c,
-					size_t n);
-```
-
-**DESCRIPTION**
-메모리 src를 n bytes만큼 dst로 복사합니다. 이때 src에서 c가 나타날 때까지만 복사합니다(첫번째 c까지 복사합니다). src와 dst의 메모리 영역이 겹쳐서는 안됩니다.
-
-먼저 memchr을 통해서 c를 찾습니다. 다음 c가 위치한 인덱스 + 1만큼 memcpy을 통해 복사하는 방식으로 구현했습니다.
-
-**RETURN VALUE**
-src안에서 c를 찾는다면 그 다음 포인터를 리턴하고 그게 아니라면 NULL을 리턴합니다.
-
-**ISSUES**
-`memcpy` vs `memmcpy`
-`strcpy` vs `memcpy`
-`memcpy` vs `memmove`
-[const에 대하여](#const에-대하여)
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_memcmp
-> memory compare
-
-**PROTOTYPE**
-```c
-int ft_memcmp(const void *s1, const void *s2, size_t n);
-```
-
-**DESCRIPTION**
-메모리 s1과 s2를 n byte까지 비교합니다.
-
-**RETURN VALUE**
-strcmp와 동일합니다.
-
-**ISSUES**
-strcmp() vs memcmp()
--   strcmp에서 "strcmp\0abc" , "strcmp\0123" 는 NULL을 만나면 종료하기 때문에 0을 반환합니다. 그러나 memcmp 로 위의 10 바이트를 검사하면 틀리다고 인식하여 int 값이 나옵니다. `문자열간의 문자상수 int형을 계산`하는 것과 `문자열간의 메모리영역을 비교`한다는 차이가 있습니다.
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
----
-
-### ft_memmove
-> memory move
-
-**PROTOTYPE**
-```c
-void    *ft_memmove(void *dst, const void *src, size_t len);
-```
-
-**DESCRIPTION**
-memcpy와 쓰임을 동일하나, src와 dst의 메모리 영역이 겹칠 때 사용합니다. 해당 함수를 사용하지 않고 복사하기 위해서는 반복문을 사용해야 한다는 소요를 줄일 수 있습니다.
-
-src의 주소가 dst보다 클 경우 *dst++ = *src++를 통해 복사하고, 작을 경우 끝에서 거꾸로 복사를 합니다.
-> index 0, 1, 2, 3을 1, 2, 3, 4에 복사한다면 0이 1에 저장됨으로써 기존에 있던 인덱스 1의 값을 인덱스 2에 저장할 수 없는 경우가 작을 경우(src < dst)에 해당합니다. 0, 1, 2, 3 인덱스 값을 1, 2, 3, 4에 저장하는 상황이 man에서 언급하는 overlap에 해당됩니다. src의 주소가 dst 보다 작을 경우 거꾸로 저장하므로써 overlap의 문제를 해결할 수 있습니다.
-
-
-
-**RETURN VALUE**
-복사된 메모리 dst
-
-**ISSUES**
-memcpy() vs memmove()
-> 두 함수 모두 특정 메모리 주소에서 원하는 크기 만큼을 다른 곳으로 복사합니다. 다른 점은 이름 뿐으로, 매개변수도 동일합니다. 메뉴얼에서 메모리 영역이 곂칠 때(overlap) memmove를 사용한다고 명시되어 있습니다.
-```.vim
-The two strings may overlap;
-```
+그렇다면 비교를 위해 `unsigned char`형으로 casting 할 때, const unsigned char형이 되어야 할 것 같아 상수화를 유지시켰다.
 
 <div align = "right">
 	<b><a href = "#Contents">↥ top</a></b>
@@ -711,6 +689,8 @@ char    *strdup(const char *s1);
 ---
 
 ## Part 2 - Additional functions
+
+📌 Additional functions # 1
 
 ### ft_substr
 > subpart of string
@@ -1233,9 +1213,18 @@ warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', poss
 
 - 문자를 다루는 함수의 매개변수가 int형인 이유
 
-상당 수의 코드에서 int로 인자를 받아 1byte씩 읽는 경우가 많은데, 내가 찾은 이유들을 열거하자면, 먼저 char형이 없었던 적에 사용됐던 코드라는 이유가 있습니다.(실제로 char형으로 라이브러리를 지원할 경우 올드 코드들은 동작이 멈추거나 의도와는 다른 행동을 합니다) char형이 만들어진 후에도 올드 코드를 모두 수정하는데에 많은 비용을 발생하기 때문에 기존의 함수들을 굳이 수정하지 않는다고 합니다.
+많은 이유들을 찾을 수 있었는데 가장 납득이 되었던 이유 세가지를 정리해보겠습니다.
 
-메모리 엑세스 단위가 int형으로, 실제로 사용자가 char형을 사용한다 해도 int로 메모리를 받습니다.(char형이 int형 안에 속해 있습니다.)
+1. char형이 없던 당시의 함수이기 때문에
+해당 함수가 만들어졌던 당시 char형이 없어 대부분의 매개변수의 자료형이 int형이라는 이유가 있습니다. 실제로 많은 문자를 다루는 함수들이 int형 매개변수를 사용하고 있습니다.
+
+2. 순전히 아스키코드 값 int형을 받고 싶기 때문에
+`'a'`는 int형 입니다. 따라서 자연스럽게 int형으로 매개변수를 전달해 줍니다.
+
+3. 캐시 히트레이트(Cache Hit ratio) 효율성을 높이기 위해서
+기술의 발전으로 프로세서 속도는 빠르게 증가해온 반면, 메모리의 속도는 이를 따라가지 못했습니다. 프로세서가 아무리 빨라도 메모리의 처리 속도가 느리면 결과적으로 전체 시스템 속도는 느려집니다. 이를 개선하기 위한 장치가 바로 캐시(Cache)입니다. 캐시의 효율성 측면에서 1 byte 보다 4 byte일 때 효율성이 개선됩니다. 이러한 이유로 매개변수를 int형으로 받는다는 의견이 있습니다.
+
+[캐시 히트레이트 자세히 이해하기](https://parksb.github.io/article/29.html)
 
 ---
 
