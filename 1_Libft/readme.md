@@ -138,17 +138,21 @@ Q1) `memset(str, 1, 4);` 에서는 왜 `00000001 00000001 00000001 00000000` 이
 > byte zero
 
 **PROTOTYPE**
+
 ```c
 void    ft_bzero(void *s, size_t n);
 ```
 
 **DESCRIPTION**
+
 메모리 s의 n byte까지를 0으로 초기화 합니다. memset으로 대체된 함수로 현재는 사용되지 않습니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 memset과는 다르게 bzero는 왜 void형 인가?
 
 :question:
@@ -165,11 +169,13 @@ memset과는 다르게 bzero는 왜 void형 인가?
 > memory move
 
 **PROTOTYPE**
+
 ```c
 void    *ft_memmove(void *dst, const void *src, size_t len);
 ```
 
 **DESCRIPTION**
+
 memcpy와 쓰임을 동일하나, src와 dst의 메모리 영역이 겹칠 때 사용합니다. 해당 함수를 사용하지 않고 복사하기 위해서는 반복문을 사용해야 한다는 소요를 줄일 수 있습니다.
 
 src의 주소가 dst보다 클 경우 *dst++ = *src++를 통해 복사하고, 작을 경우 끝에서 거꾸로 복사를 합니다.
@@ -178,9 +184,11 @@ src의 주소가 dst보다 클 경우 *dst++ = *src++를 통해 복사하고, �
 
 
 **RETURN VALUE**
+
 복사된 메모리 dst
 
 **ISSUES**
+
 memcpy() vs memmove()
 > 두 함수 모두 특정 메모리 주소에서 원하는 크기 만큼을 다른 곳으로 복사합니다. 다른 점은 이름 뿐으로, 매개변수도 동일합니다. 메뉴얼에서 메모리 영역이 곂칠 때(overlap) memmove를 사용한다고 명시되어 있습니다.
 ```.vim
@@ -197,17 +205,21 @@ The two strings may overlap;
 > memory compare
 
 **PROTOTYPE**
+
 ```c
 int ft_memcmp(const void *s1, const void *s2, size_t n);
 ```
 
 **DESCRIPTION**
+
 메모리 s1과 s2를 n byte까지 비교합니다.
 
 **RETURN VALUE**
+
 strcmp와 동일합니다.
 
 **ISSUES**
+
 strcmp() vs memcmp()
 -   strcmp에서 "strcmp\0abc" , "strcmp\0123" 는 NULL을 만나면 종료하기 때문에 0을 반환합니다. 그러나 memcmp 로 위의 10 바이트를 검사하면 틀리다고 인식하여 int 값이 나옵니다. `문자열간의 문자상수 int형을 계산`하는 것과 `문자열간의 메모리영역을 비교`한다는 차이가 있습니다.
 
@@ -221,14 +233,18 @@ strcmp() vs memcmp()
 > memory char
 
 **PROTOTYPE**
+
+
 ```c
 void *memchr(const void *s, int c, size_t n)
 ```
 
 **DESCRIPTION**
+
 메모리 영역 s에서 n bytes 까지 확인하여 문자 c가 처음 발견된 곳의 포인터를 반환합니다.
 
 **RETURN VALUE**
+
 처음으로 값 c가 나타나는 문자열의 주소를 반환합니다.
 
 **ISSUES**
@@ -244,11 +260,13 @@ void *memchr(const void *s, int c, size_t n)
 > memory copy
 
 **PROTOTYPE**
+
 ```c
 void    *ft_memcpy(void *dst, const void *src, size_t n);
 ```
 
 **DESCRIPTION**
+
 메모리 영역 src의 n bytes만큼을 dst로 복사합니다. 이때 src와 dst의 메모리 영역이 겹쳐서는 안됩니다.
 ```.vim
 If dst and src overlap, behavior is undefined.
@@ -256,9 +274,11 @@ If dst and src overlap, behavior is undefined.
 메모리 영역이 겹친디면, memcpy 대신 memmove를 사용 합니다.
 
 **RETURN VALUE**
+
 복사된 메모리 dst 주소를 반환합니다.
 
 **ISSUES**
+
 strcpy() vs memcpy()
 > 가장 큰 특징은 memcpy는 형에 관계없이 임의의 영역을 지정한 byte 수만큼 복사하는 기능을 수행합니다. 'strcpy()'는 매번 '문자 하나씩 읽어서' 그것이 널문자인지 아닌지 확인한 뒤 하나씩 복사해야 하고, 'memcpy()'는 '메모리 관점의 복사'라 꽤 큰 블럭 단위로 복사가 가능하다고 합니다.
 
@@ -279,18 +299,22 @@ strcpy나 memcpy나 속도상 엄청나게 큰 차이는 없지만, strcpy로 �
 > is alphabetic character
 
 **PROTOTYPE**
+
 ```c
 int ft_isalpha(int c)
 ```
 
 **DESCRIPTION**
+
 매개변수 `c`가 문자인지 확인합니다. (`A` == 65, `Z` == 90, `a` == 97, `z` == 122)
 
 **RETURN VALUE**
+
 문자가 아닐 경우, 0을 반환합니다.
 문자가 맞다면, 0이 아닌 int형을 반환합니다.
 
 **ISSUES**
+
 문자열을 다루는 함수인데 왜 int형 매개변수로 받나?
 
 - [문자를 다루는 함수의 매개변수가 int형인 이유](#문자를-다루는-함수의-매개변수가-int형인-이유)
@@ -305,19 +329,24 @@ int ft_isalpha(int c)
 > is digit character
 
 **PROTOTYPE**
+
 ```c
 int ft_isdigit(int c)
 ```
 
 **DESCRIPTION**
+
 매개변수 `c`가 숫자인지 확인합니다. (`0` == 48, `9` == 57)
 
 **RETURN VALUE**
+
 숫자가 아닐 경우, 0을 반환합니다.
 숫자가 맞다면, 0이 아닌 int형을 반환합니다.
 
 **ISSUES**
+
 .
+
 <div align = "right">
 	<b><a href = "#Contents">↥ top</a></b>
 </div>
@@ -328,16 +357,18 @@ int ft_isdigit(int c)
 > is alphanumeric character
 
 **PROTOTYPE**
+
 ```c
 int ft_isalnum(int c)
 ```
 
 **DESCRIPTION**
+
 매개변수 `c`가 알파벳 또는 숫자인지 확인합니다.
 
 **RETURN VALUE**
-아닐 경우, 0을 반환합니다.
-맞다면, 0이 아닌 int형을 반환합니다.
+
+아닐 경우, 0을 반환합니다. 맞다면, 0이 아닌 int형을 반환합니다.
 
 **ISSUES**
 .
@@ -352,19 +383,21 @@ int ft_isalnum(int c)
 > is ASCII character
 
 **PROTOTYPE**
+
 ```c
 int ft_isascii(int c)
 ```
 
 **DESCRIPTION**
-매개변수 `c`가 ASCII 문자인지 확인합니다.
-확장 아스키가 아닌, 0부터 127까지 문자를 확인한다.
+
+매개변수 `c`가 ASCII 문자인지 확인합니다. 확장 아스키가 아닌, 0부터 127까지 문자를 확인한다.
 
 **RETURN VALUE**
-아닐 경우, 0을 반환합니다.
-맞다면, 0이 아닌 int형을 반환합니다.
+
+아닐 경우, 0을 반환합니다. 맞다면, 0이 아닌 int형을 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -377,19 +410,21 @@ int ft_isascii(int c)
 > is printable character
 
 **PROTOTYPE**
+
 ```c
 int ft_isprint(int c)
 ```
 
 **DESCRIPTION**
-매개변수 `c`가 출력 가능한 문자인지 확인합니다.
-출력 가능한 문자는 `SP`(32)부터 `~`(126)까지 입니다.
+
+매개변수 `c`가 출력 가능한 문자인지 확인합니다. 출력 가능한 문자는 `SP`(32)부터 `~`(126)까지 입니다.
 
 **RETURN VALUE**
-아닐 경우, 0을 반환합니다.
-맞다면, 0이 아닌 int형을 반환합니다.
+
+아닐 경우, 0을 반환합니다. 맞다면, 0이 아닌 int형을 반환합니다.
 
 **ISSUES**
+
 `DEL`(127)은 delete control character로, 명령어에 해당합니다.
 
 <div align = "right">
@@ -404,19 +439,23 @@ int ft_isprint(int c)
 > to upper case character
 
 **PROTOTYPE**
+
 ```c
 int ft_toupper(int c)
 ```
 
 **DESCRIPTION**
+
 매개변수 `c`가 소문자라면 대문자로 바꿔줍니다.
 대문자와 소문자간의 차이는 `32`입니다
 
 **RETURN VALUE**
+
 소문자는 대문자로 바꿔 반환합니다.
 소문자가 아니라면 그대로 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -429,18 +468,21 @@ int ft_toupper(int c)
 > to lower case character
 
 **PROTOTYPE**
+
 ```c
 int ft_tolower(int c)
 ```
 
 **DESCRIPTION**
+
 매개변수 `c`가 대문자라면 소문자로 바꿔줍니다.
 
 **RETURN VALUE**
-대문자는 소문자로 바꿔 반환합니다.
-대문자가 아니라면 그대로 반환합니다.
+
+대문자는 소문자로 바꿔 반환합니다. 대문자가 아니라면 그대로 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -457,9 +499,11 @@ char    *ft_strchr(const char *s, int c);
 ```
 
 **DESCRIPTION**
+
 문자열 `s`에서 문자 `c`가 처음 발견된 곳의 포인터를 반환한다. c가 '\0'일 경우 종료 Null 문자를 찾습니다.
 
 **RETURN VALUE**
+
 문자 `c`가 처음 발견된 곳의 포인터. 문자열 `s`에 문자 `c`가 없으면 Null 포인터를 반환합니다.
 
 **ISSUES**
@@ -474,14 +518,17 @@ char    *ft_strchr(const char *s, int c);
 > string rear character
 
 **PROTOTYPE**
+
 ```c
 char    *ft_strrchr(const char *s, int c);
 ```
 
 **DESCRIPTION**
+
 문자열 `s`에 문자 `c`가 마지막으로 발견된 곳의 포인터를 반환한다. c가 '\0'일 경우 종료 Null 문자를 찾는다.
 
 **RETURN VALUE**
+
 문자 `c`가 마지막으로 발견된 곳의 포인터. 문자열 `s`에 문자 `c`가 없으면 Null 포인터
 
 **ISSUES**
@@ -498,18 +545,21 @@ char    *ft_strrchr(const char *s, int c);
 > string length(?) cat
 
 **PROTOTYPE**
+
 ```c
 size_t  strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 ```
 > 해당 `restrict qualifier`는 `c99 standard` 키워드로, 해당 과제에서는 다루지 않습니다.
 
 **DESCRIPTION**
+
 문자열 dst뒤에 src를 dstsize bytes 만큼만 이어붙여줍니다. strlcpy와 마찬가지로 NULL문자(\0)를 보장하는 함수입니다.
 매개변수 dst_size의 크기는 NULL 자리가 `포함된` 크기입니다.
 >   dstsize = dest_len + src_len + `1`(NULL);
 
 
 **RETURN VALUE**
+
 -   dest_len보다 dstsize가 클 경우
 	-   dest_len + src_len을 dstsize - 1만큼 이어 붙인다
 	-   그리고 dstsize 번째에 NULL을 저장(dstsize는 NULL의 index)
@@ -527,6 +577,7 @@ size_t  strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 	```
 
 **ISSUES**
+
 리턴 값의 의미에 대해 생각해 보았습니다.
 -   dest_len보다 dstsize가 클 경우 (cat 실행이 가능)
 	> src를 모두 붙여넣지 못하더라도 src의 전체 길이를 더해서 리턴합니다. man에서는 이것을 잘라내기 감지(모두 붙였을 경우 dst_len + src_len에 반해, dstsize가 이보다 작을 경우 src가 잘리게 된다)를 간단히 하기위해 dst와 src의 초기 길이를 더한 값을 리턴한다고 명시되어 있습니다.
@@ -549,20 +600,24 @@ size_t  strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 > string length(?) copy
 
 **PROTOTYPE**
+
 ```c
 size_t  strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
 ```
 > 해당 `restrict qualifier`는 `c99 standard` 키워드로, 해당 과제에서는 다루지 않습니다.
 
 **DESCRIPTION**
+
 문자열 src에서 dst로 dstsize bytes 만큼 복사합니다. strncpy 함수에서는 n의 size가 src length보다 작을 경우 NULL이 보장되지 못한다는 단점이 있었습니다. 이를 보완한 함수로, 복사가 끝나면 문자열 끝에 NULL문자(\0)가 보장됩니다.
 -   dstsize보다 src의 길이가 클 경우 -> src의 NULL이 복사
 -   dstsize보다 src의 길이가 작을 경우 -> src-1만큼 복사 후 NULL 저장
 
 **RETURN VALUE**
+
 복사를 시도하려고 하는 길이인, src의 길이를 반환합니다.
 
 **ISSUES**
+
 src는 원본으로, 읽어들이기만 해야하므로(변경되면 안되므로) const인 반면에, dst는 src의 내용을 복사해야 하므로(변경되어야 하므로) const가 아니라고 이해했습니다.
 왜 src의 길이를 반환할까?
 > strlcpy 함수는 문자열에 NULL을 보장하는데에 목적이 있습니다. 따라서 복사된 이후에 NULL의 유무가 중요하다고 생각했습니다. 이를 확인하기 위해서는 NULL이 위치한 index 값을 아는 것이 유의미하다고 생각했고 strlcpy의 반환값인 src 길이가 복사된 dst의 NULL 위치를 말해주게 됩니다. 즉, NULL을 확보하는 해당 함수의 의도에 맞게 NULL의 위치를 알려주기 위해 해당 반환 값이 의미를 가진다고 이해했습니다.
@@ -583,12 +638,15 @@ int atoi(const char *str)
 ```
 
 **DESCRIPTION**
+
 문자열 str을 int로 변환합니다.
 
 **RETURN VALUE**
+
 변환된 정수를 반환합니다
 
 **ISSUES**
+
 문자열 내용이 바뀌면 안되므로 const로 매개변수를 받으며, '++'나 '--'가 sign으로 올 경우 정상적인 int로 변환하지 않고, 0을 반환합니다.
 
 
@@ -613,17 +671,21 @@ int 반환형 범위까지만 처리 하고 싶다면 두가지 이유로  디�
 > string n string
 
 **PROTOTYPE**
+
 ```c
 char    *strnstr(const char *haystack, const char *needle, size_t len)
 ```
 
 **DESCRIPTION**
+
 문자열 haystack의 전체 길이 중 len길이 내에서, needle을 찾아줍니다.
 
 **RETURN VALUE**
+
 문자열 haystack에서 찾은 needle의 시작 주소값을 반환합니다.
 
 **ISSUES**
+
 len만큼 찾기 때문에 needle을 찾는 과정에서도 len길이를 확인하면서 찾아야 합니다.
 
 <div align = "right">
@@ -636,11 +698,13 @@ len만큼 찾기 때문에 needle을 찾는 과정에서도 len길이를 확인�
 > string n compare
 
 **PROTOTYPE**
+
 ```c
 int ft_strncmp(const char *s1, const char *s2, size_t n)
 ```
 
 **DESCRIPTION**
+
 문자열 s1과 s2를 n만큼 비교합니다.
 
 ```.vim
@@ -649,9 +713,11 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
 8진수 '\200', 즉 10진수 128의 수가 '\0'보다 커야 한다는 말은 char가 아닌 unsigned char형으로 비교해야 한다는 말로 해석하였습니다. (char형 비교 시 128은 오버플로우 발생)
 
 **RETURN VALUE**
+
 s1가 크면 양수를, s2가 크면 음수를, 같다면 0을 반환합니다.
 
 **ISSUES**
+
 `const char`형으로 매개변수를 받는 이유
 >   ft_strncmp 함수는 비교의 목적으로 쓰이므로 매개변수로 받는 문자열 s1, s2 값이 조작되면 안된다. 따라서 해당 매개변수들의 자료형을 const char형으로 받는다.
 
@@ -667,17 +733,21 @@ s1가 크면 양수를, s2가 크면 음수를, 같다면 0을 반환합니다.
 > contiguous allocation
 
 **PROTOTYPE**
+
 ```c
 void    *ft_calloc(size_t count, size_t size);
 ```
 
 **DESCRIPTION**
+
 메모리공간(count x size)을 0으로 초기화하여 할당해줍니다.
 
 **RETURN VALUE**
+
 할당 성공시 할당된 공간의 포인터를, 할당 실패시 NULL 포인터를 반환합니다.
 
 **ISSUES**
+
 malloc이 SIZE_MAX 값을 넘길 경우 동적할당이 되지 않는다는 것을 알게 되었습니다. 따라서 size * count 값이 SIZE_MAX 값을 넘기는 경우 할당하지 않고 NULL을 리턴하도록 예외처리 하였습니다.
 
 <div align = "right">
@@ -690,14 +760,17 @@ malloc이 SIZE_MAX 값을 넘길 경우 동적할당이 되지 않는다는 것�
 > string duplicate
 
 **PROTOTYPE**
+
 ```c
 char    *strdup(const char *s1);
 ```
 
 **DESCRIPTION**
+
 동적할당 후 문자열 s1을 복제합니다.
 
 **RETURN VALUE**
+
 복제한 문자열의 포인터를 반환합니다.
 
 **ISSUES**
@@ -717,18 +790,22 @@ char    *strdup(const char *s1);
 > subpart of string
 
 **PROTOTYPE**
+
 ```c
 char    *ft_substr(char const *s, unsigned int start, size_t len);
 ```
 
 **DESCRIPTION**
+
 문자열 s에서 두번째 매개변수 start index부터 len개 만큼의 부분 문자열을 새로 만듭니다.
 
 
 **RETURN VALUE**
+
 만들어진 부분 문자열의 포인터를 반환합니다.
 
 **ISSUES**
+
 start가 문자열 길이보다 클 경우에는 예외처리가 필요합니다. NULL이 들어간 1칸의 동적할당을 해주고 리턴해야 합니다. 또한 start에서 시작하여 len까지 이동했을 때, 문자열의 길이를 넘어서는 경우가 있습니다. 이 또한 예외처리로 len값을 수정해야 합니다.
 
 <div align = "right">
@@ -746,12 +823,15 @@ char    *ft_strjoin(char const *s1, char const *s2);
 ```
 
 **DESCRIPTION**
+
 문자열 s1에 문자열 s2를 이어 붙여서 새로운 문자열을 만듭니다.
 
 **RETURN VALUE**
+
 s1에 s2가 이어 붙여진 새로운 문자열 포인터를 반환합니다
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -764,21 +844,25 @@ s1에 s2가 이어 붙여진 새로운 문자열 포인터를 반환합니다
 > string trim
 
 **PROTOTYPE**
+
 ```c
 char    *ft_strtrim(char const *s1, char const *set);
 ```
 
 **DESCRIPTION**
+
 문자열 s1의 맨 앞, 뒤로 set에 들어 있는 문자들을 제거하고 새로운 메모리를 할당해 새 문자열을 만들어줍니다.
 `strchr()` 함수를 통해 set을 확인할 수 있습니다.
 
 **RETURN VALUE**
+
 문자열 s1 맨 앞 뒤로 set에 들어 있는 문자들이 제거된 새로운 문자열을 반환합니다.
 
 예를들어, ft_strtrim("123abc123def312", "123") 이라면
 > return (abc123def);   // 가운데 123은 제거하지 않습니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -791,19 +875,23 @@ char    *ft_strtrim(char const *s1, char const *set);
 > string split
 
 **PROTOTYPE**
+
 ```c
 char    **ft_split(char const *s, char c);
 ```
 
 **DESCRIPTION**
+
 문자열 s1을 구분자 c 기준으로 나누어 2차원 배열로 만듭니다.
 
 2차원 배열에 단어를 넣을 때마다 ft_substr()를 활용할 수 있습니다. ft_substr(s, (i + 1 - len[n]), len[n])을 통해 다음 넣을 단어의 시작 주소값에 접근할 수 있습니다.
 
 **RETURN VALUE**
+
 나누어진 2차원 배열을 반환합니다.
 
 **ISSUES**
+
 기존에 만들었던 split과 다르게 free를 구현합니다.
 프로토타입이 변경되었습니다. (const char *str -> char const *str)
 -	[const char * vs char const *](#const-char-*-vs-char-const-*)
@@ -818,17 +906,21 @@ char    **ft_split(char const *s, char c);
 > integer to ascii character
 
 **PROTOTYPE**
+
 ```c
 char    *ft_itoa(int n);
 ```
 
 **DESCRIPTION**
+
 정수 n을 문자열로 반환해줍니다.
 
 **RETURN VALUE**
+
 정수 n에서 ascii character로 변환된 문자열을 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -841,20 +933,21 @@ char    *ft_itoa(int n);
 > string mapping iterate
 
 **PROTOTYPE**
+
 ```c
 char    *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 ```
 
 **DESCRIPTION**
-문자열 s 각각의 문자에 두번째 매개변수 f함수를 적용(mapping)합니다. 이때 원본 문자열은 건들지 않고 새로운 문자열을 동적할당하여 반환합니다.
-함수포인터의 매개변수에서 unsigned int는 index를, char는 index에 해당하는 문자를 의미합니다.
-특정 index에 해당하는 값에 매핑하고 싶을 때 사용되는 함수입니다.
-striteri()가 단순 순회 후 적용이라면, 해당 함수는 새로운 메모리 동적할당 후 함수 첫번째 매개변수로 받은 문자열 내용을 저장하여 반환합니다.
+
+문자열 s 각각의 문자에 두번째 매개변수 f함수를 적용(mapping)합니다. 이때 원본 문자열은 건들지 않고 새로운 문자열을 동적할당하여 반환합니다. 함수포인터의 매개변수에서 unsigned int는 index를, char는 index에 해당하는 문자를 의미합니다. 특정 index에 해당하는 값에 매핑하고 싶을 때 사용되는 함수입니다. striteri()가 단순 순회 후 적용이라면, 해당 함수는 새로운 메모리 동적할당 후 함수 첫번째 매개변수로 받은 문자열 내용을 저장하여 반환합니다.
 
 **RETURN VALUE**
+
 mapping되어 만들어진 새로운 문자열을 반환합니다.
 
 **ISSUES**
+
 [mapping에 대하여](#mapping에-대하여)
 
 
@@ -868,15 +961,17 @@ mapping되어 만들어진 새로운 문자열을 반환합니다.
 > string mapping iterate index(?)
 
 **PROTOTYPE**
+
 ```c
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 ```
 
 **DESCRIPTION**
-문자열을 순회하며 함수 f를 적용시킵니다.
-문자열 각각의 문자들을 하나씩 순회하며 f함수를 적용시키는 예로 putchar가 있습니다.
+
+문자열을 순회하며 함수 f를 적용시킵니다. 문자열 각각의 문자들을 하나씩 순회하며 f함수를 적용시키는 예로 putchar가 있습니다.
 
 **RETURN VALUE**
+
 널 포인터를 가리키는 문자열이 들어올 수 있으므로 널가드 체크가 필요합니다. 사용자의 책임이므로 없어도 된다는 것이 개인적인 의견이긴 합니다.
 
 **ISSUES**
@@ -891,22 +986,25 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 > put character fd
 
 **PROTOTYPE**
+
 ```c
 void    ft_putchar_fd(char c, int fd);
 ```
 
 **DESCRIPTION**
+
 fd == 1 이라면 문자 c를 출력해줍니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 fd가 음수일 경우에 예외처리?
 > fd에 음수를 넣는 경우는 사용자의 책임이라는 생각이 강하게 들지만 디펜스를 해야하는 입장에서 넣어서 나쁠건 없다고 생각하여 이를 예외처리 하였습니다.
 
-널가드 문제?
-할당되지 않는 문자열주소가 전달된다면 널가드 체크를 해야한다?
+널가드 문제? 할당되지 않는 문자열주소가 전달된다면 널가드 체크를 해야한다?
 
 -   개인 의견
 >   동적할당이 되는 시점에서 널가드를 잡았을 테니 할당되지 않은채로 전달될 일은 없다고 판단되며 널가드를 해당 함수에 넣을 경우 필요하지 않는 널가드를 이중으로 체크한다는 느낌이 듭니다. 해당 널가드를 써야하는 경우는 매개변수에 문자열 주소를 받는 모든 함수가 시작되기 전에 일괄적인 널가드 체크가 있었어야 한다고 생각합니다.
@@ -925,17 +1023,21 @@ fd가 음수일 경우에 예외처리?
 > put string fd
 
 **PROTOTYPE**
+
 ```c
 void ft_putstr_fd(char *s, int fd);
 ```
 
 **DESCRIPTION**
+
 fd == 1 이라면 문자열 s를 출력해줍니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -948,17 +1050,22 @@ fd == 1 이라면 문자열 s를 출력해줍니다.
 > put string end line
 
 **PROTOTYPE**
+
 ```c
 void    ft_putendl_fd(char *s, int fd);
 ```
 
 **DESCRIPTION**
+
 putstr_fd() 이후 개행(\n)을 붙여줍니다.
 putstr_fd()를 호출한 후  putchar_fd()를 통해 개행을 출력합니다.
+
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -971,17 +1078,21 @@ putstr_fd()를 호출한 후  putchar_fd()를 통해 개행을 출력합니다.
 > put number
 
 **PROTOTYPE**
+
 ```c
 void    ft_putnbr_fd(int n, int fd);
 ```
 
 **DESCRIPTION**
+
 숫자 n을 write함수(fd)를 통해 출력합니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -996,18 +1107,22 @@ void    ft_putnbr_fd(int n, int fd);
 > list new
 
 **PROTOTYPE**
+
 ```c
 t_list	*ft_lstnew(void *content);
 ```
 
 **DESCRIPTION**
+
 새로운 노드를 만들고 매개변수 content를 내용으로 넣어줍니다.
 이떄 content가 NULL일 때도 content가 NULL인 요소가 만들어져야 합니다.
 
 **RETURN VALUE**
+
 새로운 노드를 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -1020,17 +1135,21 @@ t_list	*ft_lstnew(void *content);
 >	list size
 
 **PROTOTYPE**
+
 ```c
 int    ft_lstsize(t_list *lst);
 ```
 
 **DESCRIPTION**
+
 list의 길이를 구합니다.
 
 **RETURN VALUE**
+
 길이를 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -1043,17 +1162,21 @@ list의 길이를 구합니다.
 > list last
 
 **PROTOTYPE**
+
 ```c
 t_list    *ft_lstlast(t_list *lst);
 ```
 
 **DESCRIPTION**
+
 lst의 마지막 노드를 찾아줍니다.
 
 **RETURN VALUE**
+
 lst의 마지막 노드를 반환합니다.
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -1066,17 +1189,21 @@ lst의 마지막 노드를 반환합니다.
 > list add front
 
 **PROTOTYPE**
+
 ```c
 void    ft_lstadd_front(t_list **lst, t_list *new);
 ```
 
 **DESCRIPTION**
+
 list의 head 앞에 새로만든 new_node를 연결합니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 new_node의 next가 lst시작 노드를 가리키면 맨 앞에 연결됩니다.
 
 <div align = "right">
@@ -1089,17 +1216,21 @@ new_node의 next가 lst시작 노드를 가리키면 맨 앞에 연결됩니다.
 > list add back
 
 **PROTOTYPE**
+
 ```c
 void    ft_lstadd_back(t_list **lst, t_list *new);
 ```
 
 **DESCRIPTION**
+
 list의 tail 뒤에 새로만든 new_node를 연결합니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 head부터 시작하여 tail까지 연결된 노드를 반복문을 통해 이동한 후 마지막 노드가 가리키는 next가 new_node를 가리키면 맨 뒤에 연결됩니다.
 lstlast()를 통해 마지막 노드를 찾을 수 있습니다.
 
@@ -1113,14 +1244,17 @@ lstlast()를 통해 마지막 노드를 찾을 수 있습니다.
 >	list delete one
 
 **PROTOTYPE**
+
 ```c
 void    ft_lstdelone(t_list *lst, void (*del)(void*));
 ```
 
 **DESCRIPTION**
+
 lst의 특정 노드를 삭제합니다. lst->content에 del을 적용해주고 lst를 free합니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
@@ -1136,17 +1270,21 @@ lst->next는 free하지 않습니다.
 >	list clear
 
 **PROTOTYPE**
+
 ```c
 void    ft_lstclear(t_list **lst, void (*del)(void*));
 ```
 
 **DESCRIPTION**
+
 lst의 content를 지우고 리스트 전체를 초기화 합니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 연결 후 초기화 되어야 합니다. 따라서 초기화 대상 노드를 curr로 전달(curr = *lst)한 후 해당 노드 전 후의 노드를 연결합니다.(`*lst = (*lst) ->next)`) 연결되었기 때문에 temp 역할을 하는 curr을 통해 해당 노드를 초기화 합니다. 이때도 마찬가지로 curr->next를 free하지 않습니다.
 
 <div align = "right">
@@ -1160,17 +1298,21 @@ lst의 content를 지우고 리스트 전체를 초기화 합니다.
 >	list iteration
 
 **PROTOTYPE**
+
 ```c
 void    ft_lstiter(t_list *lst, void (*f)(void *));
 ```
 
 **DESCRIPTION**
+
 리스트를 순회하면서 각 노드마다 f를 적용합니다.
 
 **RETURN VALUE**
+
 .
 
 **ISSUES**
+
 .
 
 <div align = "right">
@@ -1183,17 +1325,22 @@ void    ft_lstiter(t_list *lst, void (*f)(void *));
 > list mapping
 
 **PROTOTYPE**
+
 ```c
 t_list    *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 ```
 
 **DESCRIPTION**
+
 lst의 노드들을 지정한 함수 f를 적용하여 새로운 리스트와 노드에 복사하는 함수입니다.
 
 **RETURN VALUE**
 
+.
+
 
 **ISSUES**
+
 노드가 생성되지 않았다면 lstclear()를 통해 전체 리스트를 초기화하고 null을 리턴해야 합니다. 노드가 성공적으로 만들어졌다면, lstadd_back()을 통해 새로운 노드를 달아주며 새 리스트를 만들어 나갑니다.
 
 <div align = "right">
