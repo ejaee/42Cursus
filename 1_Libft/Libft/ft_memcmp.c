@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:36:47 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/07 13:42:04 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/09 19:02:09 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,3 @@ int	ft_memcmp(const void *str1, const void *str2, size_t count)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	printf("%d\n", ft_memcmp("apple/0abc", "apple/0def", 9));
-	printf("%d\n", ft_memcmp("apple/0def", "apple/0adc", 9));
-}
-*/

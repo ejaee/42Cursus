@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 09:59:53 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 10:42:21 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/07/07 11:37:01 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/07/09 18:38:59 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void	*content)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	t_list	*new_node;
+	size_t	idx_d;
+	size_t	idx_s;
+	size_t	len_d;
+	size_t	len_s;
 
-	new_node = (t_list *) malloc(sizeof(t_list));
-	if (!new_node)
-		return (0);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	len_d = ft_strlen(dest);
+	len_s = ft_strlen(src);
+	idx_d = len_d;
+	idx_s = 0;
+	if (size <= len_d)
+		return (len_s + size);
+	while (src[idx_s] && idx_d < size - 1)
+		dest[idx_d++] = src[idx_s++];
+	dest[idx_d] = '\0';
+	return (len_d + len_s);
 }

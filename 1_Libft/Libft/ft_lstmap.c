@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:30:45 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 15:52:06 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/08 16:30:36 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_list;
 	t_list	*newnode;
 
-	if (!lst || !f || !del)
+	if (!lst || !f)
 		return (NULL);
 	new_list = NULL;
 	while (lst)

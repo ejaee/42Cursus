@@ -21,7 +21,7 @@
  read $a
  git clone https://github.com/alelievr/libft-unit-test.git
  cd libft-unit-test/
- sed -i "" 's/LIBFTDIR    =    ..\/libft/LIBFTDIR    =    ..\//' Makefile
+ sed -i "" 's/LIBFTDIR    =    ..\/libft/LIBFTDIR    =    ..\//' Makefile
  make f
  cd ..
  echo -e "\033[32;1m"libftTester"\033[m"
@@ -53,4 +53,3 @@
  read $a
  make
  echo -e "\033[32;1m"DONE"\033[m"
-

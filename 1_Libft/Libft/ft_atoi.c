@@ -6,11 +6,10 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:36:16 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 16:00:50 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/09 18:39:14 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "libft.h"
 
 int	ft_atoi(const char *str)

@@ -6,13 +6,13 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 22:09:07 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 16:14:40 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/09 20:21:51 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_word(char const *str, char c)
+static int	count_word(char const *str, char c)
 {
 	int	cnt;
 
@@ -31,7 +31,7 @@ int	count_word(char const *str, char c)
 	return (cnt);
 }
 
-char	*ft_strlen_dup(char const **str, char c)
+static char	*ft_strlen_dup(char const **str, char c)
 {
 	int		word_len;
 	int		cnt;
@@ -55,7 +55,7 @@ char	*ft_strlen_dup(char const **str, char c)
 	return (copy);
 }
 
-char	**free_copy(char **str, int size)
+static char	**free_copy(char **str, int size)
 {
 	int	index;
 
@@ -90,32 +90,3 @@ char	**ft_split(char const *s, char c)
 	copy[index] = 0;
 	return (copy);
 }
-//
-//#include <stdio.h>
-//int main(void)
-//{
-// char **arr;
-// char *str = "hello, ejae, nice to meet you";
-// char *str2 = "hello, ejae, nice to meet you";
-// char *str3 = "hello";
-// char charset = ' ';
-// char charset2 = '\0';
-// char charset3 = 'h';
-//
-// arr = ft_split(str, charset);
-// int index;
-// index = -1;
-// while (++index < 6)
-// printf("%s\n", arr[index]);
-// free(arr);
-// arr = ft_split(str2, charset2);
-// index = -1;
-// while (++index < 1)
-// printf("%s\n", arr[index]);
-// free(arr);
-// arr = ft_split(str3, charset3);
-// if (arr[0] == NULL)
-// printf("hello NULL~!\n");
-// free(arr);
-// return (0);
-//}
