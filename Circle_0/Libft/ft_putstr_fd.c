@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:46:36 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/09 23:49:08 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:29:22 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,4 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	while (*s)
 		ft_putchar_fd(*s++, fd);
-
 }

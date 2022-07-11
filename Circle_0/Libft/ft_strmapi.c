@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:41:13 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 09:56:19 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:33:43 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	idx = 0;
 	if (!s)
-		return (0);
+		return (NULL);
 	str = malloc(ft_strlen(s) + 1);
 	if (!str)
 		return (NULL);

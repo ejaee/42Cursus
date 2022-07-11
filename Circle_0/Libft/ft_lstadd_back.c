@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:05:06 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/08 10:42:19 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:36:38 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,4 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	ft_lstlast(*lst)->next = new;
 }
+

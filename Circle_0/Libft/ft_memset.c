@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:36:54 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/09 23:34:30 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:04:19 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int main(void)
 	for(i=0;i<10;i++)
 		printf("%d",arr[i]);//쓰레기 값 출력
 	printf("\n");
-	memset(arr, 0, 3);//arr의 메모리를 0으로 설정   
-	//ft_memset(arr,1,sizeof(arr));//arr의 메모리를 0으로 설정   
+	//memset(arr, 0, 3);//arr의 메모리를 0으로 설정   
+	ft_memset(arr,1,3);//arr의 메모리를 0으로 설정   
 	printf("==설정 후 ==\n");
 	for(i=0;i<10;i++)
 		printf("%d",arr[i]);
