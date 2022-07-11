@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
+RM = rm -rf
 NAME = libft.a
 HEADER = libft.h
 
@@ -16,8 +16,8 @@ SRCS_B = \
 ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 
-OBJS = $(SRCS:.c=.o)
-OBJS_B = $(SRCS_B:.c=.o)
+OBJS = $(SS_B:.cRCS:.c=.o)
+OBJS_B = $(SRC=.o)
 
 ifdef ADD_BONUS
 		OBJECTS = $(OBJS) $(OBJS_B)
@@ -26,7 +26,7 @@ else
 endif
 
 %o : %c
-		$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+		$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJECTS)
 		ar rcs $(NAME) $(OBJECTS)
@@ -41,6 +41,8 @@ clean :
 
 fclean : clean
 		$(RM) $(NAME)
-re :	fclean all
+re :
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY : all clean fclean re bonus
