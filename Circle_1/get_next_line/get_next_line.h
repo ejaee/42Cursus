@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 12:00:35 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/12 16:12:35 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/07/18 10:31:39 by choiejae          #+#    #+#             */
+/*   Updated: 2022/07/18 11:30:30 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE   1024
 # endif
 
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
+# include <unistd.h>
+# include <stdlib.h>
+
+int ft_strlen(const char *s);
+char    *ft_strjoin(char *s1, char *s2);
+char    *ft_strndup(const char *src, int start, int num);
 
 #endif
