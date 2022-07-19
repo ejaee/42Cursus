@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_util.c                               :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 10:20:46 by choiejae          #+#    #+#             */
-/*   Updated: 2022/07/18 11:30:54 by choiejae         ###   ########.fr       */
+/*   Created: 2022/07/19 15:20:19 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/07/19 15:20:24 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char    *ft_strjoin(char *s1, char *s2)
     return (connected_s);
 }
 
-// src 문자열 start부터 num만큼 복제 (문자열 크기로 조각내기)
 char    *ft_strndup(const char *src, int start, int num)
 {
     char    *temp;

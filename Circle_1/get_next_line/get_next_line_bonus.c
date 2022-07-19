@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 10:04:31 by choiejae          #+#    #+#             */
-/*   Updated: 2022/07/19 15:01:09 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/07/19 15:22:28 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/07/19 15:25:10 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char *get_line(int fd, char **backup, char *buf)
 char *get_next_line(int fd)
 {
 	char	*buf;
-	static char	*backup;
+	static char	*backup[OPEN_MAX];
 
 	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (buf == NULL)
@@ -85,9 +85,9 @@ char *get_next_line(int fd)
 		free(buf);
 		return (NULL);
 	}
-	if (backup != NULL && is_newline(backup) != -1)
-		return (split_to_line(&backup, buf));
-	if (backup == NULL)
-		backup = ft_strndup("", 0, 0);
-	return (get_line(fd, &backup, buf));
+	if (backup[fd] != NULL && is_newline(backup[fd]) != -1)
+		return (split_to_line(&backup[fd], buf));
+	if (backup[fd] == NULL)
+		backup[fd] = ft_strndup("", 0, 0);
+	return (get_line(fd, &backup[fd], buf));
 }

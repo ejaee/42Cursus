@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 10:31:39 by choiejae          #+#    #+#             */
-/*   Updated: 2022/07/19 15:21:44 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/07/19 15:20:31 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/07/19 15:30:13 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE   1024
+#  define BUFFER_SIZE 1024
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 49152
 # endif
 
 # include <unistd.h>
