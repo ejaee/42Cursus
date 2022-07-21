@@ -120,7 +120,7 @@ ssize_t read (int fd, void *buf, size_t len)
 
 -	OPEN_MAX
 
-	FD의 최대값을 말하며, 단일 프로그램에 허용되는 최대 열린 파일 수를 정의하는 상수 입니다. 즉, 하나의 프로세스 당 최대 OPEN_MAX개의 파일을 열 수 있습니다. OPEN_MAX 값은 플랫폼에 따라 다릅니다. 유닉스 시스템에서 C언어의 OPEN_MAX는 limits.h에 정의되어 있습니다. `getconf OPEN_MAX` 명령어로 값을 확인할 수 있습니다.
+	FD의 최대값을 말하며, 단일 프로그램에 허용되는 최대 열린 파일 수를 정의하는 상수 입니다. 즉, 하나의 프로세스 당 최대 OPEN_MAX개의 파일을 열 수 있습니다. OPEN_MAX 값은 플랫폼에 따라 다릅니다. 유닉스 시스템에서 C언어의 OPEN_MAX는 limits.h에 정의되어 있습니다. `getconf OPEN_MAX` 또는 `ulimit -n` 명령어로 값을 확인할 수 있습니다. `ulimit -n 수정숫자` 를 통해 값을 바꿀 수 있는데 현재 클러스터 맥에서 수정가능한 최대값이 49152임을 확인하여 정의하지 않은 경우 최대값으로 초기화해 주었습니다.
 
 [fd 참조 사이트1](https://twofootdog.tistory.com/51)<br>
 [fd 참조 사이트2](https://code4human.tistory.com/123)<br>
@@ -237,35 +237,6 @@ gcc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.
 		개행을 담거나 개행 없이 파일 끝까지 읽어야하는 경우에 속하므로 buf를 통해  read() 해야 합니다. get_line()을 통해 read() 합니다. 마찬가지로 read()를 완료했다면 split_to_line()을 통해 line을 만듭니다.
 --------------------------------------------------
 
-[sample]
-
-**PROTOTYPE**
-
-```c
-ssize_t read (int fd, void *buf, size_t len)
-```
-
-**DESCRIPTION**
-
-문자열 `s`의 길이를 구한다.
-
-**RETURN VALUE**
-
-문자열 `s`의 길이
-
-**ISSUES**
-
-`size_t`형을 반환하므로 count value도 동일한 자료형으로 선언한다.
--   [size_t형에 대하여](#size_t형에-대하여)
-
-<div align = "right">
-	<b><a href = "#Contents">↥ top</a></b>
-</div>
-
-## Question
-
---------------------------------------------------
-
 ###	프로세스(process)
 
 <div align = "right">
@@ -290,7 +261,7 @@ ssize_t read (int fd, void *buf, size_t len)
 
 --------------------------------------------------
 
-###	redirection
+###	Redirection
 
 `리다이렉션`이란 `출력의 방향을 바꾸는 것`을 말합니다. 예를들어 일반 컴퓨터의 `표준 출력` 장치는 `모니터`이고 `표준 입력` 장치는 `키보드` 입니다. 출력의 방향을 바꾼다는 것은 모니터로 출력되어야 할 내용을 파일로 저장 시킨다든지 또는 통신 포트나 프린터로 출력의 방향을 바꿀 수 있음을 말합니다. 표준 입력을 받거나 표준 출력을 할 뿐만 아니라, 파일로 표준 입력을 받고, 파일로 표준 출력을 받을 수 있습니다.
 
