@@ -115,7 +115,7 @@ ssize_t read (int fd, void *buf, size_t len)
 
 -	fd table
 
-	각각의 `프로세스`는 `파일 디스크립터 테이블`을 가지고 있습니다. 파일 디스크립터 테이블에는 `파일 디스크립터`가 저장되어 있습니다. 프로세스가 생성될 때 기본적으로 0, 1, 2에 해당하는 fd가 매핑됩니다. `파일 디스크립터 테이블`의 각 항목은 `FD 플래그`와 `파일 테이블로의 포인터`를 가지고 있습니다. 이 포인터를 이용하여 FD를 통해 파일을 참조할 수 있는 겁니다. 프로세스는 FD 테이블과 FD 테이블의 정보를 직접 고칠 수 없으며 반드시 `커널`을 통해 수정할 수 있습니다. 
+	각각의 `프로세스`는 `파일 디스크립터 테이블`을 가지고 있습니다. 파일 디스크립터 테이블에는 `파일 디스크립터`가 저장되어 있습니다. 프로세스가 생성될 때 기본적으로 0, 1, 2에 해당하는 fd가 매핑됩니다. `파일 디스크립터 테이블`의 각 항목은 `FD 플래그`와 `파일 테이블로의 포인터`를 가지고 있습니다. 이 포인터를 이용하여 FD를 통해 파일을 참조할 수 있는 겁니다. 프로세스는 FD 테이블과 FD 테이블의 정보를 직접 고칠 수 없으며 반드시 `커널`을 통해 수정할 수 있습니다.
 
 
 -	OPEN_MAX
@@ -190,6 +190,51 @@ gcc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.
 
 ## Logic
 
+
+### Values
+
+-	char *buf
+
+	 BUFFER_SIZE 크기를 가진 buffer로, read() 를 BUFFER_SIZE 만큼 읽어옵니다. 개행이 들어가거나, 파일의 끝을 만날 때 까지 read() 합니다.
+
+-	static char	*backup
+
+	read()의 시작점을 가리킵니다. 정적 변수를 통해 다음 GNL() 함수가 호출될 때 이전에 반환된 line 이후의 지점을 읽도록 합니다.
+
+-	char *line
+
+	GNL() 함수의 반환값으로, 개행 또는 파일 끝까지의 문자열을 가리킵니다.
+
+### Step
+
+1.	버퍼를 BUFFER_SIZE 만큼 동적할당 합니다.
+
+2.	처음 GNL() 함수가 호출된 경우 정적 변수 backup이 가리키는 게 없으므로 파일의 맨 처음을 읽을 수 있도록 malloc(1)으로 동적할당 후 '\0'이 들어있는 메모리를 가리키게 합니다.
+
+		```.c
+		if (backup == NULL)
+			backup = ft_strndup("", 0, 0);
+		```
+
+3.	두번째부터 GNL() 함수가 호출될 경우 정적 변수 backup에 의해 다음 읽을 line을 가리키고 있기 때문에 개행의 유/ 무를 확인해야 합니다.
+
+	-	개행이 있는 경우
+
+		이전 GNL() 호출에서 buf가 개행을 담은 경우.
+	 	> 예를들어 이전 호출 때 정적 변수 backup가 "hello\nejachoi\n\n"를 담은 경우 line은 "hello\n"를 담고 backup에는 "ejachoi\n\n"를 담고 있습니다.
+
+		```.c
+		if (backup != NULL && is_newline(backup) != -1)
+			return (split_to_line(&backup, buf));
+		```
+	 	해당 경우에는 buf를 통해 read() 할 필요가 없습니다. 바로 line을 만들 수 있으므로 split_to_line()으로 line을 생성합니다.
+
+	-	개행이 없는 경우
+
+		```.c
+		return (get_line(fd, &backup, buf));
+		```
+		개행을 담거나 개행 없이 파일 끝까지 읽어야하는 경우에 속하므로 buf를 통해  read() 해야 합니다. get_line()을 통해 read() 합니다. 마찬가지로 read()를 완료했다면 split_to_line()을 통해 line을 만듭니다.
 --------------------------------------------------
 
 [sample]
