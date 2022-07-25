@@ -157,8 +157,6 @@ ssize_t read (int fd, void *buf, size_t len)
 	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
-------
-
 ## FD
 _file descriptor_
 
@@ -317,5 +315,3 @@ _리다이렉션_
 <div align = "right">
 	<b><a href = "#Contents">↥ top</a></b>
 </div>
-
---------------------------------------------------
