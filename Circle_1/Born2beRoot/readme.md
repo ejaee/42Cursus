@@ -178,7 +178,7 @@ hostnamectl
 -----
 
 ## **User**
-![Alt text](./pictures/User.png)
+![Alt text](./pictures/user.png)
 
 ### ✅ Check belongs to the sudo, user42 groups
 
@@ -200,13 +200,33 @@ sudo visudo
 
 ### ✅ new user 만들고
 
-`id ejachoi` : ejachoi user가 속하는 그룹 확인
-2. `adduser [newuser]` : user 생성
-    - `useradd [newuser]` : 계정만 생성됨. 디렉토리 등등은 별도로 설정 필요
-3. `passwd [newuser]` : newuser의 비밀번호 설정
-4. `addgroup [newgroup]` : group 생성
-5. `usermod -G [newgroup] [newuser]` : newuser를 newgroup에 배정
-6. `userdel -f [user]` : 강제삭제
+`id ejachoi`
+
+: ejachoi user가 속하는 그룹 확인
+
+`adduser [newuser]`
+
+: user 생성
+
+- `useradd [newuser]`
+
+	: 계정만 생성됨. 디렉토리 등등은 별도로 설정 필요
+
+`passwd [newuser]`
+
+: newuser의 비밀번호 설정
+
+`addgroup [newgroup]`
+
+: group 생성
+
+`usermod -G [newgroup] [newuser]`
+
+: newuser를 newgroup에 배정
+
+`userdel -f [user]`
+
+: 강제삭제
 
 -----
 
