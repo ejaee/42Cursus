@@ -2,9 +2,6 @@
 
 _요약: VirtualBox를 이용해 운영체제를 설치해보는 프로젝트 입니다._
 
-
-
-
 # **Contents**
 
 - [**Born2beRoot**](#born2beroot)
@@ -18,6 +15,7 @@ _요약: VirtualBox를 이용해 운영체제를 설치해보는 프로젝트 �
 	- [**SSH**](#ssh)
 	- [**Script monitoring**](#script-monitoring)
 - [**Bonus**](#bonus)
+
 
 # **Mandatory part**
 
@@ -104,7 +102,7 @@ _무료 오픈 소스 소프트웨어로 만든 운영체제입니다_
 
 	센트OS(영어: CentOS)는 센트OS 프로젝트에서 레드햇 제휴로 개발한 컴퓨터 운영체제입니다
 
-	서버용으로 리눗그를 운영할 목적으로 대부분 쓰이고 있습니다.
+	서버용으로 리눅스를 운영할 목적으로 대부분 쓰이고 있습니다.
 
 
 ###  **✅ APT and aptitude 설명하기**
@@ -152,6 +150,7 @@ Sudo crontab -e
 
 _[script에서 설명](#Script-monitoring)_
 
+-----
 
 ## **Simple setup**
 ![Alt text](./pictures/Simple_setup.png)
@@ -175,6 +174,8 @@ ss -tunpl
 hostnamectl
 
 //정보 확인
+
+-----
 
 ## **User**
 ![Alt text](./pictures/User.png)
@@ -206,6 +207,8 @@ sudo visudo
 4. `addgroup [newgroup]` : group 생성
 5. `usermod -G [newgroup] [newuser]` : newuser를 newgroup에 배정
 6. `userdel -f [user]` : 강제삭제
+
+-----
 
 ## **SUDO**
 _임시 root 권한으로, 현재 계정에서 root 권한을 빌려서 명령어를 실행합니다_
@@ -247,10 +250,6 @@ _임시 root 권한으로, 현재 계정에서 root 권한을 빌려서 명령�
 -	a 옵션:
 
 	G옵션에서만 함께 쓰일 수 있고, 유저가 속해있지만 명령어에 나열되어있지 않는 그룹에 관하여 탈퇴처리 되지 않습니다.
-
-
-
-
 
 ### ✅ 과제에서 부과한 엄격한 룰을 보이며 sudo의 가치와 작동을 설명하기
 
@@ -322,7 +321,7 @@ _root 권한으로 command 실행_
 ```vim
 1. `sudo` 인증시에는 비밀번호가 틀렸을 때 3번의 기회만이 주어져야 합니다. ⇒ passwd
 
-2. `sudo` 권한 사용 중에는 비밀번호가 틀렸을 때 여러분이 설정한 오류 메시지가 출력되어야 합니다
+2. `sudo` 권한 사용 중에는 비밀번호가 틀렸을 때 여러분이 설정한 오류 메시지가 출력되어야 합니다.
 
 3. `sudo` 권한을 이용하여 수행한 명령어들은 입출력 모두 기록되어야 합니다. 해당 기록은 log 파일로 /var/log/sudo 폴더에 저장되어야 합니다.
 
@@ -421,6 +420,8 @@ _과제에서 부여한 룰_
 
 	//sudo 실행 시 로그인 기회 수
 
+-----
+
 ## **UFW**
 
 ![Alt text](./pictures/ufw.png)
@@ -486,7 +487,7 @@ _ss -tunlp_
 
 > pid : 프로세스 목록
 
-
+-----
 
 ## **SSH**
 _Secure Shell_
@@ -698,10 +699,3 @@ _COMM=sudo
 	_AppArmor가 실행 중인지 확인_
 
 
-
-
-
-
-
-
-## **SUDO**
