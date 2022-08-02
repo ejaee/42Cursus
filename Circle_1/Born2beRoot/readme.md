@@ -9,11 +9,17 @@ _요약: VirtualBox를 이용해 운영체제를 설치해보는 프로젝트 �
 
 - [**Born2beRoot**](#born2beroot)
 - [**Contents**](#contents)
-- [**Key Word**](#key-word)
-	- [Virtual box](#virtual-box)
-	- [Debian](#debian)
+- [**Mandatory part**](#mandatory-part)
+	- [**Project overview**](#project-overview)
+	- [**Simple setup**](#simple-setup)
+	- [**User**](#user)
+	- [**SUDO**](#sudo)
+	- [**UFW**](#ufw)
+	- [**SSH**](#ssh)
+	- [**Script monitoring**](#script-monitoring)
+- [**Bonus**](#bonus)
 
-# **Key Word**
+# **Mandatory part**
 
 ## **Project overview**
 
@@ -150,6 +156,56 @@ _[script에서 설명](#Script-monitoring)_
 ## **Simple setup**
 ![Alt text](./pictures/Simple_setup.png)
 
+### ✅ Check UFW service
+
+sudo ufw status numbered
+
+### ✅ Check SSH service
+
+systemctl status ssh
+
+//openserver 실행 중인지 여부 확인
+
+ss -tunpl
+
+//정보 확인
+
+### ✅ Check Debian
+
+hostnamectl
+
+//정보 확인
+
+## **User**
+![Alt text](./pictures/User.png)
+
+### ✅ Check belongs to the sudo, user42 groups
+
+cat /etc/group
+
+or
+
+id ejachoi
+
+### ✅ 과제에서 부과된 passwd policy 적용 여부 확인하기
+
+chage -l ejachoi
+
+sudo vi /etc/shadow
+
+sudo visudo
+
+[visudo의 내용은 아래에서 다루고 있습니다](#과제에서-부여한-룰)
+
+### ✅ new user 만들고
+
+`id ejachoi` : ejachoi user가 속하는 그룹 확인
+2. `adduser [newuser]` : user 생성
+    - `useradd [newuser]` : 계정만 생성됨. 디렉토리 등등은 별도로 설정 필요
+3. `passwd [newuser]` : newuser의 비밀번호 설정
+4. `addgroup [newgroup]` : group 생성
+5. `usermod -G [newgroup] [newuser]` : newuser를 newgroup에 배정
+6. `userdel -f [user]` : 강제삭제
 
 ## **SUDO**
 _임시 root 권한으로, 현재 계정에서 root 권한을 빌려서 명령어를 실행합니다_
@@ -528,7 +584,7 @@ _ssh root@localhost -p 4242_
 ![Alt text](./pictures/ssh_permission_no.png)
 _ssh 설정파일 : vi /etc/ssh/sshd_config_
 
-## Script monitoring
+## **Script monitoring**
 
 ![Alt text](./pictures/monitoring.png)
 
@@ -600,6 +656,8 @@ systemd
 _COMM=sudo
 
 : 특정로그(sudo) 보기
+
+# **Bonus**
 
 ## PHP
 
