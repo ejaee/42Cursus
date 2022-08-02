@@ -724,13 +724,13 @@ _COMM=sudo
 
 # **Bonus**
 
+![Alt text](./pictures/bonus.png)
+
 ## PHP
 
 ## MariaDB
 
 ## WorldPress ... DB
-
-## WorldPress
 
 ## WorㅣdPress ... MariaDB
 
