@@ -366,7 +366,7 @@ _과제에서 부여한 룰_
 	//sudo 실행 시 로그인 기회 수
 
 ## **UFW**
-
+.
 ![Alt text](./pictures/ufw.png)
 
 ### ✅ UFW 설치 및 작동 여부 확인하기
