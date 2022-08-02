@@ -16,6 +16,11 @@ _요약: VirtualBox를 이용해 운영체제를 설치해보는 프로젝트 �
 	- [**Script monitoring**](#script-monitoring)
 - [**Bonus**](#bonus)
 
+[과제 수행 참고 사이트]
+
+* [setting 참고 사이트](https://velog.io/@appti/born2beroot-Virtualbox-Debian-설치)
+
+* [mandatory - bonus 참고 사이트](https://velog.io/@augus-xury/가상머신Debian-세팅하기#php-설치)
 
 # **Mandatory part**
 
@@ -104,6 +109,9 @@ _무료 오픈 소스 소프트웨어로 만든 운영체제입니다_
 
 	서버용으로 리눅스를 운영할 목적으로 대부분 쓰이고 있습니다.
 
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
 
 ###  **✅ APT and aptitude 설명하기**
 
@@ -135,6 +143,10 @@ _패키지관리 프로그램의 한 유형입니다_
 	위 둘의 가장 큰 차이는 프론트엔드 지원 유/무 입니다.
 	```
 
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
 ###  **✅ script 정보 5분마다 보이기**
 
 ![Alt text](./pictures/crontab_e.png)
@@ -149,6 +161,10 @@ Sudo crontab -e
 
 
 _[script에서 설명](#Script-monitoring)_
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
 
 -----
 
@@ -174,6 +190,10 @@ ss -tunpl
 hostnamectl
 
 //정보 확인
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
 
 -----
 
@@ -228,6 +248,10 @@ sudo visudo
 
 : 강제삭제
 
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
 -----
 
 ## **SUDO**
@@ -241,6 +265,10 @@ _임시 root 권한으로, 현재 계정에서 root 권한을 빌려서 명령�
 	$ dpkg -l sudo
 	```
 	_dpkg = package manager for Debian_
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
 
 ### ✅ sudo 그룹에 새 사용자를 할당하기
 
@@ -270,6 +298,10 @@ _임시 root 권한으로, 현재 계정에서 root 권한을 빌려서 명령�
 -	a 옵션:
 
 	G옵션에서만 함께 쓰일 수 있고, 유저가 속해있지만 명령어에 나열되어있지 않는 그룹에 관하여 탈퇴처리 되지 않습니다.
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
 
 ### ✅ 과제에서 부과한 엄격한 룰을 보이며 sudo의 가치와 작동을 설명하기
 
@@ -440,6 +472,10 @@ _과제에서 부여한 룰_
 
 	//sudo 실행 시 로그인 기회 수
 
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
 -----
 
 ## **UFW**
@@ -512,6 +548,8 @@ _ss -tunlp_
 ## **SSH**
 _Secure Shell_
 
+![Alt text](./pictures/ssh.png)
+
 원격 호스트에 접속하기 위해 사용되는 보안 프로토콜
 
 - 프로토콜
@@ -573,12 +611,6 @@ OpenBSD Secure Shell server(openssh)
 - 망 환경에서 사용자 간 또는 컴퓨터 간의 대화를 위한 논리적 연결
 - 프로세스들 사이에서 통신을 하기 위해 메시지 교환을 통해 서로를 인식한 이후부터 통신을 마칠 때뇬까지의 기간.
 
-
-### ✅ 새로운 계정을 생성하여 SSH의 동작을 테스트하기
-
-?
-
-
 ### ❓ SSH를 이용한 root 연결을 허용하면 절대 안 되는 이유
 
 관리자는 시스템관리를 위해 원칙적으로 시스템 콘솔에서 직접 관리 작업을 수행합니다.
@@ -604,6 +636,12 @@ _ssh root@localhost -p 4242_
 
 ![Alt text](./pictures/ssh_permission_no.png)
 _ssh 설정파일 : vi /etc/ssh/sshd_config_
+
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+-----
 
 ## **Script monitoring**
 
@@ -678,6 +716,12 @@ _COMM=sudo
 
 : 특정로그(sudo) 보기
 
+<div align = "right">
+	<b><a href = "#Contents">↥ top</a></b>
+</div>
+
+-----
+
 # **Bonus**
 
 ## PHP
@@ -693,8 +737,7 @@ _COMM=sudo
 ## Signature
 
 
-
-3. AppArmor
+* AppArmor
 
 	_Application Armor_
 
@@ -717,5 +760,3 @@ _COMM=sudo
 	$ sudo aa-enabled //활성화 여부 확인
 	```
 	_AppArmor가 실행 중인지 확인_
-
-
