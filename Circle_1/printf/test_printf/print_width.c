@@ -5,6 +5,7 @@ int	main(){
 	int t = printf("t : %1d\n", 42);	//	ignored width
 	int a = printf("a : %30d\n", 42);  //	fail
 	int b = printf("b : %2147483648d\n", 42); //	width = 0
+	int bb = printf("b : %-2147483649d\n", 42); //	width = 0
 	int c = printf("c : %9223372036854775809d\n", 42); //	width = 0
 	int d = printf("d : %*d\n", 2147483647, 42);
 
