@@ -49,4 +49,8 @@ int	main()
 	printf("%x\n", -2147483647);
 	// printf("%x\n", 2147483648); -> lX
 	
+	printf("\n----- test empty -----\n%d\n%s\n%d\n", 1, "\0", 1);
+
+	printf("\n===== test empty =====\n%s", NULL);
+
 }
