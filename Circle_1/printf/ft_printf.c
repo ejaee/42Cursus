@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/08 15:43:36 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:35:03 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,35 @@ int ft_print_base(unsigned int num, const char type)
 	return (ft_strlen_base(num, 16));
 }
 
+int	ft_print_ptr(unsigned long ptr)
+{
+	char	*hex;
+	char	stack[17];
+	int idx;
+	int res;
+
+	hex = "0123456789abcdef";
+	idx = 0;
+	if (write (1, "0x", 2) == -1)
+		return (-1);
+	if (ptr == 0)
+	{
+		if (write (1, "0", 1) == -1)
+			return (-1);
+		return (3);
+	}
+	while (ptr)
+	{
+		stack[idx++] = hex[ptr % 16];
+		ptr /= 16;
+	}
+	res = idx--;
+	while (idx >= 0)
+		if (write (1, &stack[idx--], 1) == -1)
+			return (-1);
+	return (res + 2);
+}
+
 int	check_type(const char c, va_list *ap)
 {
 	if (c == 'c')
@@ -126,9 +155,9 @@ int	check_type(const char c, va_list *ap)
 	else if (c == 'u' || c == 'x' || c == 'X')
 		// u는 음수에 대한 underflow 구현
 		return (ft_print_base(va_arg(*ap, unsigned int), c));
-	// 	// int_max 값에 대해 컴파일 되지 않으므로 int?!
-	// else if (c == 'p')
-	// 	return (ft_print_ptr());
+	 	// int_max 값에 대해 컴파일 되지 않으므로 int?!
+	else if (c == 'p')
+		return (ft_print_ptr(va_arg(*ap, unsigned long)));
 	else if (c == '%')
 		return (ft_print_char('%'));
 	else
@@ -181,4 +210,23 @@ int	main()
 	printf("p = %d\nft = %d\n", a, b);
 
 	printf("\n\n========== %%p ==========\n\n");
+
+	char *p;
+	char *pp;
+	char *ppp;
+
+	int c = printf("%p\n", NULL);
+	int d = ft_printf("%p\n", NULL);
+	
+	printf("p = %d\nft = %d\n\n", c, d);
+
+	c = printf("%p\n", pp);
+	d = ft_printf("%p\n", pp);
+
+	printf("p = %d\nft = %d\n\n", c, d);
+
+	c = printf("%p\n", ppp);
+	d = ft_printf("%p\n", ppp);
+
+	printf("p = %d\nft = %d\n\n", c, d);
 }
