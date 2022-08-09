@@ -53,4 +53,7 @@ int	main()
 
 	printf("\n===== test empty =====\n%s", NULL);
 
+	int size = printf("%s", "\0");
+	printf("\n::%d::\n", size);
+
 }

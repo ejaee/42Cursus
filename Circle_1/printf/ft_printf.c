@@ -6,12 +6,12 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/08 16:35:03 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:09:06 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 // type : %c
 int	ft_print_char(int c)
 {
@@ -66,7 +66,7 @@ int	ft_putnbr_base(long long num, char *base)
 	return (0);
 }
 
-int	ft_print_int(int num)
+int	ft_print_integer(int num)
 {
 	int len;
 	char *str;
@@ -95,7 +95,7 @@ int	ft_strlen_base(unsigned int num, int type)
 	return (cnt);
 }
 
-int ft_print_base(unsigned int num, const char type)
+int ft_print_unsigned_integer(unsigned int num, const char type)
 {
 	char *str;
 
@@ -150,11 +150,11 @@ int	check_type(const char c, va_list *ap)
 		return (ft_print_string(va_arg(*ap, unsigned char *)));
 	// int
 	else if (c == 'd' || c == 'i')
-		return (ft_print_int(va_arg(*ap, int)));
+		return (ft_print_integer(va_arg(*ap, int)));
 	// unsigned int
 	else if (c == 'u' || c == 'x' || c == 'X')
 		// u는 음수에 대한 underflow 구현
-		return (ft_print_base(va_arg(*ap, unsigned int), c));
+		return (ft_print_unsigned_integer(va_arg(*ap, unsigned int), c));
 	 	// int_max 값에 대해 컴파일 되지 않으므로 int?!
 	else if (c == 'p')
 		return (ft_print_ptr(va_arg(*ap, unsigned long)));
@@ -194,6 +194,7 @@ int ft_printf(const char *format, ...)
 	return (printed_len);
 }
 
+#include <stdio.h>
 
 int	main()
 {
@@ -203,6 +204,9 @@ int	main()
 	ft_printf("ft_printf : %s %s %d\n", "\0", NULL, 42);
 
 	printf("\n\n========== %%u %%X %%x ==========\n\n");
+
+	printf("underflow p : %u %X %x : \n\n", -2147483647, -2147483647, -2147483647);
+	ft_printf("underflow ft : %u %X %x : \n\n", -2147483647, -2147483647, -2147483647);
 
 	int a = printf("%u %X %x : \n", 2147483647, 2147483647, 2147483647);
 	int b = ft_printf("%u %X %x : \n", 2147483647, 2147483647, 2147483647);
