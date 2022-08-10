@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:37:20 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/08 13:50:47 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:19:26 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ char	*ft_strrchr(const char *s, int c)
 	if (s[idx] == (char)c)
 		return ((char *)(s + idx));
 	return (0);
+}
 }

@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:36:54 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/08 13:56:37 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:04:19 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memset(void *b, int c, size_t len)
 		*((unsigned char *)b + len) = (unsigned char)c;
 	return (b);
 }
-/*
+
 #include <string.h>
 #include <stdio.h>
 int main(void)
@@ -38,4 +38,4 @@ int main(void)
 	printf("\n");
 	return 0;
 }
-*/
+

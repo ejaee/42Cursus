@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/09 19:09:06 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:10:58 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	ft_strlen_base(unsigned int num, int type)
 		return (0);
 	while (1)
 	{
-		if (num < type)
+		if (num < (unsigned int)type)
 			break;
-		num /= type;
+		num /= (unsigned int)type;
 		cnt++;
 	}
 	return (cnt);
@@ -193,7 +193,7 @@ int ft_printf(const char *format, ...)
 	}
 	return (printed_len);
 }
-
+/*
 #include <stdio.h>
 
 int	main()
@@ -234,3 +234,4 @@ int	main()
 
 	printf("p = %d\nft = %d\n\n", c, d);
 }
+*/
