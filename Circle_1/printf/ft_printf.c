@@ -6,11 +6,68 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/10 15:10:58 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:03:59 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	ft_len(int n)
+{
+	int			size;
+	long long	num;
+
+	size = 1;
+	num = n;
+	if (num < 0)
+	{
+		num *= -1;
+		size++;
+	}
+	while (num > 9)
+	{
+		size++;
+		num /= 10;
+	}
+	return (size);
+}
+
+char	*ft_itoa(int n)
+{
+	long long	num;
+	int			len;
+	char		*arr;
+
+	num = n;
+	len = ft_len(n);
+	arr = (char *) malloc (sizeof(char) * (len + 1));
+	if (!arr)
+		return (0);
+	if (num == 0)
+		arr[0] = '0';
+	if (num < 0)
+	{
+		arr[0] = '-';
+		num *= -1;
+	}
+	arr[len] = '\0';
+	while (num)
+	{
+		arr[--len] = num % 10 + '0';
+		num /= 10;
+	}
+	return (arr);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	cnt;
+
+	cnt = 0;
+	while (s[cnt])
+		cnt++;
+	return (cnt);
+}
 
 // type : %c
 int	ft_print_char(int c)
@@ -75,6 +132,7 @@ int	ft_print_integer(int num)
 	len = ft_strlen(str);
 	if (ft_putnbr_base(num, "0123456789") == -1)
 		return (-1);
+	free(str);
 	return (len);
 }
 
@@ -98,12 +156,16 @@ int	ft_strlen_base(unsigned int num, int type)
 int ft_print_unsigned_integer(unsigned int num, const char type)
 {
 	char *str;
+	int res;
 
 	if (type == 'u')
 	{
+		res = 0;
 		str = ft_itoa(num);
 		ft_putnbr_base(num, "0123456789");
-		return (ft_strlen(str));
+		res = ft_strlen(str);
+		free (str);
+		return (res);
 	}
 	else if(type == 'X')
 		ft_putnbr_base(num, "0123456789ABCDEF");
@@ -145,6 +207,8 @@ int	check_type(const char c, va_list *ap)
 {
 	if (c == 'c')
 		return (ft_print_char(va_arg(*ap, int)));
+	else if (c == '%')
+		return (ft_print_char('%'));
 	else if (c == 's')
 		// str = NULL 예외처리
 		return (ft_print_string(va_arg(*ap, unsigned char *)));
@@ -158,8 +222,6 @@ int	check_type(const char c, va_list *ap)
 	 	// int_max 값에 대해 컴파일 되지 않으므로 int?!
 	else if (c == 'p')
 		return (ft_print_ptr(va_arg(*ap, unsigned long)));
-	else if (c == '%')
-		return (ft_print_char('%'));
 	else
 	// % 뒤에 잘못된 서식 지정자가 들어온 경우
 		return (-1);
@@ -193,11 +255,24 @@ int ft_printf(const char *format, ...)
 	}
 	return (printed_len);
 }
-/*
+
 #include <stdio.h>
 
 int	main()
 {
+	printf("=========== test ===========\n\n");
+
+	printf(" %u ", -1);
+	printf("\n");
+	ft_printf(" %u ", -1);
+	printf("\n\n");
+	
+	printf(" %u ", -9);
+	printf("\n");
+	ft_printf(" %u ", -9);
+	printf("\n\n");
+
+
 	printf("\n\n========== %%s ==========\n\n");
 
 	printf("printf : %s %s %d\n", "\0", NULL, 42);
@@ -234,4 +309,3 @@ int	main()
 
 	printf("p = %d\nft = %d\n\n", c, d);
 }
-*/
