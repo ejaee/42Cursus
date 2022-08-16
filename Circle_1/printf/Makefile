@@ -4,7 +4,8 @@ CFLAGS		= -Wall -Wextra -Werror
 
 HEADER 		= ft_printf.h
 
-SRCS 		= ft_printf.c
+SRCS 		= ft_printf.c print_func.c utils.c
+
 
 OBJS 		= $(SRCS:c=o) 
 
