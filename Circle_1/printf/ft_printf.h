@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/16 15:52:43 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/16 20:58:14 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdio.h>
 
 /*
 *****************************   MAIN FUNCTION   *******************************
@@ -38,7 +39,7 @@ int		ft_print_ptr(unsigned long long ptr);
 
 size_t	ft_strlen(const char *s);
 int		ft_strlen_base(long long num, int type);
-int		ft_putnbr_base(long long num, char *base);
+int		ft_putnbr_base(long long nbr, char *type, int base_size);
 char	*ft_baseset(char type);
 
 #endif

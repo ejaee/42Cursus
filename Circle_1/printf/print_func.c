@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_func.c                                    :+:      :+:    :+:   */
+/*   print_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/16 15:49:07 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/16 20:59:14 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_print_string(unsigned char *str)
 
 	if (str == NULL)
 	{
-		write (1, "(null)", 6);
+		if (write (1, "(null)", 6) == -1)
+			return (-1);
 		return (6);
 	}
 	len = ft_strlen((char *)str);
@@ -39,25 +40,24 @@ int	ft_print_string(unsigned char *str)
 
 int	ft_print_nbr(long long nbr, const char type)
 {
-	char	*base;
-	int		ft_res;
 	int		res;
+	char	*base;
+	int		base_size;
 
-	base = ft_baseset(type);
-	res = 0;
-	if (type == 'p')
+	if (nbr == 0)
 	{
-		if (write (1, "0x", 2) == -1)
+		if (write (1, "0", 1) == -1)
 			return (-1);
-		res += 2;
+		return (1);
 	}
-	ft_res = ft_putnbr_base(nbr, base);
-	if (ft_res == -1)
+	base = ft_baseset(type);
+	base_size = ft_strlen(base);
+	if (ft_putnbr_base(nbr, base, base_size) == -1)
 		return (-1);
 	if (type == 'd' || type == 'i' || type == 'u')
-		res += ft_strlen_base(nbr, 10);
+		res = ft_strlen_base(nbr, 10);
 	else
-		res += ft_strlen_base(nbr, 16);
+		res = ft_strlen_base(nbr, 16);
 	return (res);
 }
 
