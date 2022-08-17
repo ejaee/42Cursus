@@ -6,20 +6,20 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/16 20:59:14 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:36:29 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_char(int c)
+int	ft_print_chr(int c)
 {
 	if (write (1, &c, 1) == -1)
 		return (-1);
 	return (1);
 }
 
-int	ft_print_string(unsigned char *str)
+int	ft_print_str(unsigned char *str)
 {
 	int	len;
 

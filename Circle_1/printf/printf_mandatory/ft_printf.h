@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/16 20:58:14 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:36:20 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		check_type(const char c, va_list *ap);
 *****************************   PRINT FUNCTION   *******************************
 */
 
-int		ft_print_char(int c);
-int		ft_print_string(unsigned char *str);
+int		ft_print_chr(int c);
+int		ft_print_str(unsigned char *str);
 int		ft_print_nbr(long long nbr, const char type);
 int		ft_print_ptr(unsigned long long ptr);
 

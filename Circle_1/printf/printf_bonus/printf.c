@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   printf.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/17 13:37:20 by choiejae         ###   ########.fr       */
+/*   Created: 2022/08/17 13:19:01 by choiejae          #+#    #+#             */
+/*   Updated: 2022/08/17 13:20:16 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	check_type(const char c, va_list *ap)
-{
-	if (c == 'c')
-		return (ft_print_chr(va_arg(*ap, int)));
-	else if (c == '%')
-		return (ft_print_chr('%'));
-	else if (c == 's')
-		return (ft_print_str(va_arg(*ap, unsigned char *)));
-	else if (c == 'd' || c == 'i')
-		return (ft_print_nbr(va_arg(*ap, int), c));
-	else if (c == 'u' || c == 'X' || c == 'x')
-		return (ft_print_nbr(va_arg(*ap, unsigned int), c));
-	else if (c == 'p')
-		return (ft_print_ptr(va_arg(*ap, unsigned long long)));
-	else
-		return (-1);
-}
 
 int	ft_printf(const char *format, ...)
 {
@@ -49,7 +31,7 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 		{
-			check_fail = ft_print_chr((int)*format);
+			check_fail = ft_print_char((int)*format);
 			if (check_fail == -1)
 				return (-1);
 			printed_len++;
