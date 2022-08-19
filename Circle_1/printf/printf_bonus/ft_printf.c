@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/19 14:58:18 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:45:55 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_type(const char c, va_list *ap, t_info *info)
 	else if (c == '%')
 		return (ft_print_chr('%'));
 	else if (c == 's')
-		return (ft_print_str(va_arg(*ap, unsigned char *)));
+		return (ft_print_str(va_arg(*ap, unsigned char *), info));
 	else if (c == 'd' || c == 'i')
 		return (ft_print_nbr(va_arg(*ap, int), c, info));
 	else if (c == 'u' || c == 'X' || c == 'x')
@@ -34,29 +34,35 @@ void	check_info(const char c, t_info *info)
 {
 	if (c == '#')
 		info->hash = 1;
-	else if (c == '0')
-		info->zero = 1;
 	else if (c == ' ' && info->sign == 0)
 		info->space = 1;
 	else if (c == '+')
 		info->sign = 1;
 	else if (c == '-')
 		info->left = 1;
-	// else if (ft_isdigit((int)c))
-	// 	// 숫자를 info->width에 담기
-	// else if (c == '.')
-	// 	//  숫자를 info->prec에 담기
+	else if (c == '0' && !info->flag)
+		info->zero = 1;
+	else if (ft_isdigit((int)c) && info->prec == -1)
+	{
+		info->width = info->width * 10 + c - '0';
+		info->flag = 1;
+	}
+	else if (c == '.')
+		info->prec = 0;
+	else if (ft_isdigit((int)c) && info->prec != -1)
+		info->prec = info->prec * 10 + c - '0';
 }
 
 void init_info(t_info *info)
 {
 	info->hash = 0; // #
-    info->zero = 0; // 0
     info->space = 0; // ' '
     info->sign = 0; // +
     info->left = 0; // -
+	info->zero = 0; // 0
     info->width = 0; // [max]
-    info->prec = 0; // [min]
+    info->prec = -1; // [min]
+	info->flag = 0; // nbr flag
 }
 
 int	ft_printf(const char *format, ...)
@@ -92,31 +98,99 @@ int	ft_printf(const char *format, ...)
 	return (printed_len);
 }
 
-int	main()
-{
-	int a;
-	a =  printf("% d\n", 0);
-	printf("::%d::\n", a);
-	a = ft_printf("% d\n", 0);
-	printf("::%d::\n", a);
-	
-	a =  printf("% d\n", 1);
-	printf("::%d::\n", a);
-	a = ft_printf("% d\n", 1);
-	printf("::%d::\n", a);
-	
+// int	main()
+// {
+// 	int a;
 
-	a =  printf("%+d\n", 1);
-	printf("::%d::\n", a);
-	a = ft_printf("%+d\n", 1);
-	printf("::%d::\n", a);
-	
+// 	a = printf("%s", NULL);
+// 	printf("\n--%d--\n", a);
+// 	a = ft_printf("%s", NULL);
+// 	printf("\n--%d--\n", a);
 
 
-	a =  printf("% +d\n", 1);
-	printf("::%d::\n", a);
-	a = ft_printf("% +d\n", 1);
-	printf("::%d::\n", a);
+// 	a = printf(" NULL %s NULL ", NULL);
+// 	printf("\n--%d--\n", a);
+// 	a = ft_printf(" NULL %s NULL ", NULL);
+// 	printf("\n--%d--\n", a);
+
+// 	a =  printf("%.4s", "2147483651");
+// 	printf("\n--%d--\n", a);
+// 	a = ft_printf("%.4s", "2147483651");
+// 	printf("\n--%d--\n", a);
+	
+
+// 	a =  printf("%20s", "2147483651");
+// 	printf("\n--%d--\n", a);
+// 	a = ft_printf("%20s", "2147483651");
+// 	printf("\n--%d--\n", a);
+
+// 	a =  printf("%020s", "2147483651");
+// 	printf("\n--%d--\n", a);
+// 	a = ft_printf("%020s", "2147483651");
+// 	printf("\n--%d--\n", a);
+
+
+// 	a =  printf("%-020s", "2147483651");
+// 	printf("\n--%d--\n", a);
+// 	a = ft_printf("%-020s", "2147483651");
+// 	printf("\n--%d--\n", a);
+
+	// a =  printf("%21u", 2147483651);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%21u", 2147483651);
+	// printf("\n--%d--\n", a);
+	
+	// a =  printf("%021u", 2147483651);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%021u", 2147483651);
+	// printf("\n--%d--\n", a);
+
+	// a =  printf("%.21u", 2147483651);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%.21u", 2147483651);
+	// printf("\n--%d--\n", a);
+
+	// a =  printf("%21.21u", 2147483651);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%21.21u", 2147483651);
+	// printf("\n--%d--\n", a);
+	
+
+
+	// a =  printf("%4d", 21474);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%4d", 21474);
+	// printf("\n--%d--\n", a);
+	
+
+	// a =  printf("%07d", 21474);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%07d", 21474);
+	// printf("\n--%d--\n", a);
+	
+
+	// a =  printf("% d\n", 0);
+	// printf("::%d::\n", a);
+	// a = ft_printf("% d\n", 0);
+	// printf("::%d::\n", a);
+	
+	// a =  printf("% d\n", 1);
+	// printf("::%d::\n", a);
+	// a = ft_printf("% d\n", 1);
+	// printf("::%d::\n", a);
+	
+
+	// a =  printf("%+d\n", 1);
+	// printf("::%d::\n", a);
+	// a = ft_printf("%+d\n", 1);
+	// printf("::%d::\n", a);
+	
+
+
+	// a =  printf("% +d\n", 1);
+	// printf("::%d::\n", a);
+	// a = ft_printf("% +d\n", 1);
+	// printf("::%d::\n", a);
 	
 
 	// a =  printf("% #X\n", 1);
@@ -124,16 +198,16 @@ int	main()
 	// a = ft_printf("% #X\n", 1);
 	// printf("::%d::\n", a);
 
-	a =  printf("% x\n", 0);
-	printf("::%d::\n", a);
-	a = ft_printf("% x\n", 0);
-	printf("::%d::\n", a);
+	// a =  printf("% x\n", 0);
+	// printf("::%d::\n", a);
+	// a = ft_printf("% x\n", 0);
+	// printf("::%d::\n", a);
 
 
-	a =  printf("%  +x\n", 0);
-	printf("::%d::\n", a);
-	a = ft_printf("% +x\n", 0);
-	printf("::%d::\n", a);
+	// a =  printf("%  +x\n", 0);
+	// printf("::%d::\n", a);
+	// a = ft_printf("% +x\n", 0);
+	// printf("::%d::\n", a);
 
 
 	// a =  printf("% d\n", 0);
@@ -146,4 +220,4 @@ int	main()
 	// a = ft_printf("% d\n", 1);
 	// printf("::%d::\n", a);
 
-}
+// }

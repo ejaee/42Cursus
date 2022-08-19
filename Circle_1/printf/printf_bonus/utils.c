@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/19 14:36:18 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:33:42 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	ft_strlen_base(long long num, int type)
 	return (cnt);
 }
 
-int	ft_putnbr_base(long long nbr, char *base, int base_size, t_info 
-*info)
+int	ft_putnbr_base(long long nbr, char *base, int base_size)
 {
 	char	stack[12];
 	int		idx;
