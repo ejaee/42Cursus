@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/19 21:33:45 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:23:17 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_info
     int width; // [max]
     int prec; // .[min]
     int flag; // flag
+    int print_len;
+    int padding_len;
+    int flag_minus;
 }   t_info;
 
 /*
@@ -42,7 +45,7 @@ int		check_type(const char c, va_list *ap, t_info *info);
 *****************************   PRINT FUNCTION   *******************************
 */
 
-int		ft_print_chr(int c);
+int		ft_print_chr(int c, t_info *info);
 int		ft_print_str(unsigned char *str, t_info *info);
 int		ft_print_nbr(long long nbr, const char type, t_info *info);
 int		ft_print_ptr(unsigned long long ptr);
@@ -52,8 +55,8 @@ int		ft_print_ptr(unsigned long long ptr);
 */
 
 size_t	ft_strlen(const char *s);
-int		ft_strlen_base(long long num, int type);
-int	    ft_putnbr_base(long long nbr, char *base, int base_size);
+int		ft_strlen_base(long long nbr, int type, t_info *info);
+int	    ft_putnbr_base(long long nbr, char *base, t_info *info);
 char	*ft_baseset(char type);
 
 /*

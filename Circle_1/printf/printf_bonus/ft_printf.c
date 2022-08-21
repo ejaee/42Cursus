@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/19 21:45:55 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:34:10 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	check_type(const char c, va_list *ap, t_info *info)
 {
 	if (c == 'c')
-		return (ft_print_chr(va_arg(*ap, int)));
+		return (ft_print_chr(va_arg(*ap, int), info));
 	else if (c == '%')
-		return (ft_print_chr('%'));
+		return (ft_print_chr('%', info));
 	else if (c == 's')
 		return (ft_print_str(va_arg(*ap, unsigned char *), info));
 	else if (c == 'd' || c == 'i')
@@ -63,6 +63,9 @@ void init_info(t_info *info)
     info->width = 0; // [max]
     info->prec = -1; // [min]
 	info->flag = 0; // nbr flag
+	info->print_len = 0;
+	info->padding_len = 0;
+	info->flag_minus = 0;
 }
 
 int	ft_printf(const char *format, ...)
@@ -88,7 +91,8 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 		{
-			check_fail = ft_print_chr((int)*format);
+			init_info(&info);
+			check_fail = ft_print_chr((int)*format, &info);
 			if (check_fail == -1)
 				return (-1);
 			printed_len++;
@@ -102,122 +106,9 @@ int	ft_printf(const char *format, ...)
 // {
 // 	int a;
 
-// 	a = printf("%s", NULL);
+// 	a = printf(" %04d ", -14);
 // 	printf("\n--%d--\n", a);
-// 	a = ft_printf("%s", NULL);
+// 	a = ft_printf(" %04d ", -14);
 // 	printf("\n--%d--\n", a);
-
-
-// 	a = printf(" NULL %s NULL ", NULL);
-// 	printf("\n--%d--\n", a);
-// 	a = ft_printf(" NULL %s NULL ", NULL);
-// 	printf("\n--%d--\n", a);
-
-// 	a =  printf("%.4s", "2147483651");
-// 	printf("\n--%d--\n", a);
-// 	a = ft_printf("%.4s", "2147483651");
-// 	printf("\n--%d--\n", a);
-	
-
-// 	a =  printf("%20s", "2147483651");
-// 	printf("\n--%d--\n", a);
-// 	a = ft_printf("%20s", "2147483651");
-// 	printf("\n--%d--\n", a);
-
-// 	a =  printf("%020s", "2147483651");
-// 	printf("\n--%d--\n", a);
-// 	a = ft_printf("%020s", "2147483651");
-// 	printf("\n--%d--\n", a);
-
-
-// 	a =  printf("%-020s", "2147483651");
-// 	printf("\n--%d--\n", a);
-// 	a = ft_printf("%-020s", "2147483651");
-// 	printf("\n--%d--\n", a);
-
-	// a =  printf("%21u", 2147483651);
-	// printf("\n--%d--\n", a);
-	// a = ft_printf("%21u", 2147483651);
-	// printf("\n--%d--\n", a);
-	
-	// a =  printf("%021u", 2147483651);
-	// printf("\n--%d--\n", a);
-	// a = ft_printf("%021u", 2147483651);
-	// printf("\n--%d--\n", a);
-
-	// a =  printf("%.21u", 2147483651);
-	// printf("\n--%d--\n", a);
-	// a = ft_printf("%.21u", 2147483651);
-	// printf("\n--%d--\n", a);
-
-	// a =  printf("%21.21u", 2147483651);
-	// printf("\n--%d--\n", a);
-	// a = ft_printf("%21.21u", 2147483651);
-	// printf("\n--%d--\n", a);
-	
-
-
-	// a =  printf("%4d", 21474);
-	// printf("\n--%d--\n", a);
-	// a = ft_printf("%4d", 21474);
-	// printf("\n--%d--\n", a);
-	
-
-	// a =  printf("%07d", 21474);
-	// printf("\n--%d--\n", a);
-	// a = ft_printf("%07d", 21474);
-	// printf("\n--%d--\n", a);
-	
-
-	// a =  printf("% d\n", 0);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% d\n", 0);
-	// printf("::%d::\n", a);
-	
-	// a =  printf("% d\n", 1);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% d\n", 1);
-	// printf("::%d::\n", a);
-	
-
-	// a =  printf("%+d\n", 1);
-	// printf("::%d::\n", a);
-	// a = ft_printf("%+d\n", 1);
-	// printf("::%d::\n", a);
-	
-
-
-	// a =  printf("% +d\n", 1);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% +d\n", 1);
-	// printf("::%d::\n", a);
-	
-
-	// a =  printf("% #X\n", 1);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% #X\n", 1);
-	// printf("::%d::\n", a);
-
-	// a =  printf("% x\n", 0);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% x\n", 0);
-	// printf("::%d::\n", a);
-
-
-	// a =  printf("%  +x\n", 0);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% +x\n", 0);
-	// printf("::%d::\n", a);
-
-
-	// a =  printf("% d\n", 0);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% d\n", 0);
-	// printf("::%d::\n", a);
-
-	// a =  printf("% d\n", 1);
-	// printf("::%d::\n", a);
-	// a = ft_printf("% d\n", 1);
-	// printf("::%d::\n", a);
 
 // }

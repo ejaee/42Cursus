@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/19 21:33:42 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:29:04 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,55 +22,59 @@ size_t	ft_strlen(const char *s)
 	return (cnt);
 }
 
-int	ft_strlen_base(long long num, int type)
+int	ft_strlen_base(long long nbr, int type, t_info *info)
 {
 	int	cnt;
 
 	cnt = 1;
-	if (num < 0)
+	info->flag_minus = 0;
+	if (nbr < 0)
 	{
-		cnt++;
-		num *= -1;
+		info->flag_minus = 1;
+		nbr *= -1;
 	}
 	while (1)
 	{
-		if (num < type)
+		if (nbr < type)
 			break ;
-		num /= type;
+		nbr /= type;
 		cnt++;
 	}
+	if (info->sign || info->space)
+		cnt++;
+	if (info->hash)
+		cnt +=2;
 	return (cnt);
 }
 
-int	ft_putnbr_base(long long nbr, char *base, int base_size)
+int	ft_putnbr_base(long long nbr, char *base, t_info *info)
 {
 	char	stack[12];
 	int		idx;
-	int		res;
+	int		base_size;
 
 	idx = 0;
-	if (nbr < 0)
-	{
-		if (write (1, "-", 1) == -1)
-			return (-1);
-		nbr *= -1;
-	}
+	base_size = ft_strlen(base);
 	if (nbr == 0)
 	{
 		if (write (1, "0", 1) == -1)
 			return (-1);
 		return (1);
 	}
+	if (nbr < 0)
+		nbr *= -1;
 	while (nbr)
 	{
 		stack[idx++] = base[nbr % base_size];
 		nbr /= base_size;
 	}
-	res = idx--;
-	while (idx >= 0)
-		if (write (1, &stack[idx--], 1) == -1)
+	while (idx < info->prec--)
+		if (write (1, "0", 1) == -1)
 			return (-1);
-	return (res);
+	while (--idx >= 0)
+		if (write (1, &stack[idx], 1) == -1)
+			return (-1);
+	return (0);
 }
 
 char	*ft_baseset(char type)
