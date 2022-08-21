@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:34:10 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:38:21 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ int	ft_printf(const char *format, ...)
 	return (printed_len);
 }
 
-// int	main()
-// {
-// 	int a;
+int	main()
+{
+	int a;
 
-// 	a = printf(" %04d ", -14);
-// 	printf("\n--%d--\n", a);
-// 	a = ft_printf(" %04d ", -14);
-// 	printf("\n--%d--\n", a);
+	a = printf(" %013X ", UINT_MAX);
+	printf("\n--%d--\n", a);
+	a = ft_printf(" %013X ", UINT_MAX);
+	printf("\n--%d--\n", a);
 
-// }
+}

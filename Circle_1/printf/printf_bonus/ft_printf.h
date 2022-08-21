@@ -6,7 +6,7 @@
 /*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:23:17 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:38:51 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
-
+# include <limits.h>
 # define TYPE "csdiuXxp%"
 
 typedef struct s_info
