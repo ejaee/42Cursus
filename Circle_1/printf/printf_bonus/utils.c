@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/21 22:29:04 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:22:16 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,19 @@ int	ft_strlen_base(long long nbr, int type, t_info *info)
 	return (cnt);
 }
 
+int	ft_print_prec(int idx, t_info *info)
+{
+	int	remain_prec;
+
+	remain_prec = info->prec;
+	while (idx < remain_prec--)
+	{
+		if (write (1, "0", 1) == -1)
+			return (-1);
+	}
+	return (0);
+}
+
 int	ft_putnbr_base(long long nbr, char *base, t_info *info)
 {
 	char	stack[12];
@@ -57,6 +70,8 @@ int	ft_putnbr_base(long long nbr, char *base, t_info *info)
 	base_size = ft_strlen(base);
 	if (nbr == 0)
 	{
+		if (ft_print_prec(1, info) == -1)
+			return (-1);
 		if (write (1, "0", 1) == -1)
 			return (-1);
 		return (1);
@@ -68,9 +83,8 @@ int	ft_putnbr_base(long long nbr, char *base, t_info *info)
 		stack[idx++] = base[nbr % base_size];
 		nbr /= base_size;
 	}
-	while (idx < info->prec--)
-		if (write (1, "0", 1) == -1)
-			return (-1);
+	if (ft_print_prec(idx, info) == -1)
+		return (-1);
 	while (--idx >= 0)
 		if (write (1, &stack[idx], 1) == -1)
 			return (-1);

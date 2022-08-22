@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:38:21 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/22 17:45:57 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	check_type(const char c, va_list *ap, t_info *info)
 	else if (c == '%')
 		return (ft_print_chr('%', info));
 	else if (c == 's')
-		return (ft_print_str(va_arg(*ap, unsigned char *), info));
+		return (ft_print_str(va_arg(*ap, char *), info));
 	else if (c == 'd' || c == 'i')
 		return (ft_print_nbr(va_arg(*ap, int), c, info));
 	else if (c == 'u' || c == 'X' || c == 'x')
 		return (ft_print_nbr(va_arg(*ap, unsigned int), c, info));
 	else if (c == 'p')
-		return (ft_print_ptr(va_arg(*ap, unsigned long long)));
+		return (ft_print_ptr(va_arg(*ap, unsigned long long), ft_baseset(c), info));
 	else
 		return (-1);
 }
@@ -48,7 +48,10 @@ void	check_info(const char c, t_info *info)
 		info->flag = 1;
 	}
 	else if (c == '.')
+	{
 		info->prec = 0;
+		info->zero = 0;
+	}
 	else if (ft_isdigit((int)c) && info->prec != -1)
 		info->prec = info->prec * 10 + c - '0';
 }
@@ -102,13 +105,283 @@ int	ft_printf(const char *format, ...)
 	return (printed_len);
 }
 
-int	main()
-{
-	int a;
+// int	main()
+// {
+// 	int a;
 
-	a = printf(" %013X ", UINT_MAX);
-	printf("\n--%d--\n", a);
-	a = ft_printf(" %013X ", UINT_MAX);
-	printf("\n--%d--\n", a);
+
+
+	// // p - width
+	// a = printf("%5p", 12);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%5p", 12);
+	// printf("\n--%d--\n\n", a);
+
+	// // s - width || prec
+
+	// a = printf("%.3s", NULL);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.3s", NULL);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%012.0d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%012.0d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%12.0s", "-12345");
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%12.0s", "-12345");
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%012.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%012.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%03.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%03.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-012.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-012.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-03.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-03.8d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// printf("\n==========================\n");
+	// p - check flag ' ' '0'
+
+
+	// a = printf("%5p", 0); // '-' + '0' -> not left
+	// printf("\n--%d--\n\n", a); // '  0x0'
+	// a = ft_printf("%5p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("% 5p", 0); // '-' + '0' -> not left
+	// printf("\n--%d--\n\n", a); // '  0x0'
+	// a = ft_printf("% 5p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%+5p", 0); // sign
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%+5p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%5p", 0); // '-' + '0' -> not left
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%5p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-5p", 0); // '-' + '0' -> not left
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-5p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%05p", 0); // applied 0 -> left
+	// printf("\n--%d--\n\n", a); // and width zero "0x000"
+	// a = ft_printf("%05p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-05p", 0); // not applied ' '
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-05p", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("% 05p", 0); // not applied ' '
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("% 05p", 0);
+	// printf("\n--%d--\n\n", a);
+
+
+	// a = printf("%0.0p", 2);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0.0p", 2); // not print '0' -> '0x'
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%0.0p", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0.0p", 0); // not print '0' -> '0x'
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%0.0p", NULL);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0.0p", NULL); // not print '0' -> '0x'
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%0.2p", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0.2p", 0); // add print '0' -> 0x00 by prec
+	// printf("\n--%d--\n\n", a); // prec is not included '0x'
+
+	// a = printf("%0p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%0.2p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0.2p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%0.8p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%0.8p", 12345); // if prec > , add '0' like 0x00003039
+	// printf("\n--%d--\n\n", a);
+
+	// printf("\n==========================\n");
+		// p - width || prec
+
+	// a = printf("%5p", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%5p", 0); // not count width
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%.0p", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.0p", 0); // not print '0' -> '0x'
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%.2p", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.2p", 0); // add print '0' -> 0x00 by prec
+	// printf("\n--%d--\n\n", a); // prec is not included '0x'
+
+	// a = printf("%p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%.2p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.2p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%.8p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.8p", 12345); // if prec > , add '0' like 0x00003039
+	// printf("\n--%d--\n\n", a);
+
+	//	p - width && prec
+
+	// printf("\n==========================\n");
+
+	// a = printf("%p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%12.2p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%12.2p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%12.8p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%12.8p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%3.8p", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%3.8p", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%012.7d", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%012.7d", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-012.2d", -12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%+12.2d", 12345);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%+12.2d", 12345);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%7d", -54);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%7d", -54);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%07d", -54);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%07d", -54);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%+07d", 54);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%+07d", 54);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%07p", -54);
+	// printf("\n--%d--\n", a);
+	// a = ft_printf("%07p", -54);
+	// printf("\n--%d--\n\n", a);
+
+	// printf("\n==========================\n");
+
+	// a = printf("%.0d", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.0d", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%.d", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%.d", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%5.0d", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%5.0d", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%5.d", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%5.d", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-5.0d", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-5.0d", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// a = printf("%-5.d", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%-5.d", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// printf("\n==========================\n");
+
+
+
 
 }
+

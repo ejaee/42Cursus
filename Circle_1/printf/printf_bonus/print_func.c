@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/21 22:33:57 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/22 17:43:28 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	ft_print_chr(int c, t_info *info)
 	return (1);
 }
 
-int	ft_print_str2(unsigned char *str, t_info *info)
+int	ft_print_str2(char *str, t_info *info)
 {
 	int	len;
 
@@ -142,14 +142,10 @@ int	ft_print_str2(unsigned char *str, t_info *info)
 	return (0);
 }
 
-int	ft_print_str(unsigned char *str, t_info *info)
+int	ft_print_str(char *str, t_info *info)
 {
 	if (str == NULL)
-	{
-		if (write (1, "(null)", 6) == -1)
-			return (-1);
-		return (6);
-	}
+		str = "(null)";
 	info->print_len = ft_strlen((const char *)str);
 	if (info->prec > -1 && info->prec < info->print_len)
 		info->print_len = info->prec;
@@ -164,29 +160,31 @@ int	ft_print_str(unsigned char *str, t_info *info)
 
 int ft_print_nbr2(long long nbr, const char type, t_info *info)
 {
-	char	*base;
-
-	base = ft_baseset(type);
-	if (!info->left)
+	if (!info->left && !info->zero)
 	{
-		ft_print_sign(nbr, info);
-		if (ft_print_width(info) == -1)
+		if (ft_print_width(info) == -1	|| ft_print_sign(nbr, info) == -1 || ft_print_flag(nbr, type, info) == -1)
 			return (-1);
-		if (ft_print_flag(nbr, type, info) == -1)
-			return (-1);
-		if (ft_putnbr_base(nbr, base, info) == -1)
-			return (-1);
+		if (!(!info->prec && !nbr))
+			if (ft_putnbr_base(nbr, ft_baseset(type), info) == -1)
+				return (-1);
 	}
-	else
-	{
-		ft_print_sign(nbr, info);
-		if (ft_print_flag(nbr, type, info) == -1)
+	else if (info->left || (!info->left && info->zero))
+		if (ft_print_sign(nbr, info) == -1 || ft_print_flag(nbr, type, info) == -1)
 			return (-1);
-		if (ft_putnbr_base(nbr, base, info) == -1)
-			return (-1);
-		if (ft_print_width(info) == -1)
-			return (-1);
-	}
+		if (info->zero)
+		{
+			if (ft_print_width(info) == -1)
+				return (-1);
+			if (!(!info->prec && !nbr))
+				if (ft_putnbr_base(nbr, ft_baseset(type), info) == -1)
+					return (-1);
+		}
+		else
+			if (!(!info->prec && !nbr))
+				if (ft_putnbr_base(nbr, ft_baseset(type), info) == -1)
+					return (-1);
+			if (ft_print_width(info) == -1)
+				return (-1);
 	return (0);
 }
 
@@ -206,7 +204,12 @@ int	ft_print_nbr(long long nbr, const char type, t_info *info)
 		info->print_len = info->prec;
 	if (info->flag_minus)
 		info->print_len++;
+	if (!info->prec && !nbr)
+		info->print_len = 0;
 	info->padding_len = info->width - info->print_len;
+// printf("\n==width : %d==\n", info->width);
+// printf("\n==print : %d==\n", info->print_len);
+// printf("\n==padding : %d==\n\n", info->padding_len);
 	if (ft_print_nbr2(nbr, type, info) == -1)
 		return (-1);
 	if (info->width > info->print_len)
@@ -215,31 +218,65 @@ int	ft_print_nbr(long long nbr, const char type, t_info *info)
 		return (info->print_len);
 }
 
-int	ft_print_ptr(unsigned long long ptr)
+int	ft_printlen_ptr(unsigned long long ptr)
 {
-	char	*hex;
-	char	stack[17];
-	int		idx;
-	int		res;
+	int	cnt;
 
-	hex = "0123456789abcdef";
-	idx = 0;
-	if (write (1, "0x", 2) == -1)
-		return (-1);
+	cnt = 0;
 	if (ptr == 0)
-	{
-		if (write (1, "0", 1) == -1)
-			return (-1);
-		return (3);
-	}
+		return (1);
 	while (ptr)
 	{
-		stack[idx++] = hex[ptr % 16];
+		cnt++;
 		ptr /= 16;
 	}
-	res = idx--;
-	while (idx >= 0)
-		if (write (1, &stack[idx--], 1) == -1)
+	return (cnt);
+}
+
+int	ft_print_ptr2(unsigned long long ptr, char *hex, t_info *info)
+{
+	if (info->left || (!info->left && info->zero))
+	{
+		if (write (1, "0x", 2) == -1)
 			return (-1);
-	return (res + 2);
+		if (!(!info->prec && !ptr))
+		{
+			if (ft_putnbr_base(ptr, hex, info) == -1)
+				return (-1);
+		}
+		if (ft_print_width(info) == -1)
+			return (-1);
+	}
+	else if (!info->left)
+	{
+		if (ft_print_width(info) == -1)
+			return (-1);
+		if (write (1, "0x", 2) == -1)
+			return (-1);
+		if (!(!info->prec && !ptr))
+		{
+			if (ft_putnbr_base(ptr, hex, info) == -1)
+				return (-1);
+		}
+	}
+	return (0);
+}
+
+int	ft_print_ptr(unsigned long long ptr, char *hex, t_info *info)
+{
+	int		idx;
+
+	idx = 0;
+	// cnt only nbr len (not cnt '0x')
+	info->print_len = ft_printlen_ptr(ptr);
+	if (info->prec > info->print_len)
+		info->print_len = info->prec;
+	if (!info->prec && !ptr)
+		info->print_len = 0;
+	info->padding_len = info->width - info->print_len - 2;
+
+	ft_print_ptr2(ptr, hex, info);
+	if (info->padding_len > 0)
+		return (info->width);
+	return (info->print_len + 2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:38:51 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:22:38 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 
 typedef struct s_info
 {
-    int hash; // #
-    int zero; // 0
-    int space; // ' '
-    int sign; // +
-    int left; // -
-    int width; // [max]
-    int prec; // .[min]
-    int flag; // flag
-    int print_len;
-    int padding_len;
-    int flag_minus;
+	int hash; // #
+	int zero; // 0
+	int space; // ' '
+	int sign; // +
+	int left; // -
+	int width; // [max]
+	int prec; // .[min]
+	int flag; // flag
+	int print_len;
+	int padding_len;
+	int flag_minus;
 }   t_info;
 
 /*
@@ -46,9 +46,9 @@ int		check_type(const char c, va_list *ap, t_info *info);
 */
 
 int		ft_print_chr(int c, t_info *info);
-int		ft_print_str(unsigned char *str, t_info *info);
+int		ft_print_str(char *str, t_info *info);
 int		ft_print_nbr(long long nbr, const char type, t_info *info);
-int		ft_print_ptr(unsigned long long ptr);
+int		ft_print_ptr(unsigned long long ptr, char *hex, t_info *info);
 
 /*
 *****************************   UTILS FUNCTION   *******************************
