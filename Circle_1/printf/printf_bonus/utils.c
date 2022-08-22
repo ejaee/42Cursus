@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/22 20:31:52 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 21:25:27 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	ft_strlen_base(long long nbr, int type, t_info *info)
 		nbr /= type;
 		cnt++;
 	}
-	if (info->sign || info->space)
-		cnt++;
 	if (info->hash)
 		cnt +=2;
 	return (cnt);

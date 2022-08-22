@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/22 20:32:21 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 22:25:12 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	ft_print_hash(const char type)
 	return (res);
 }
 
-int	ft_print_space(long long nbr)
+int	ft_print_space(long long nbr, t_info *info)
 {
 	int res;
 
 	res = 0;
-	if (nbr >= 0)
+	if (nbr >= 0 && !info->sign)
 	{
 		res = write (1, " ", 1);
 		if (res == -1)
@@ -89,7 +89,7 @@ int	ft_print_flag(long long nbr, const char type, t_info *info)
 	}
 	else if (info->space && (type != 'X' || type != 'x'))
 	{
-		if (ft_print_space(nbr) == -1)
+		if (ft_print_space(nbr, info) == -1)
 			return (-1);
 	}
 	return (0);
@@ -199,10 +199,10 @@ int	ft_print_nbr(long long nbr, const char type, t_info *info)
 		info->print_len = ft_strlen_base(nbr, 16, info);
 	if (info->prec > info->print_len)
 		info->print_len = info->prec;
-	if (info->flag_minus)
-		info->print_len++;
 	if (!info->prec && !nbr)
 		info->print_len = 0;
+	if (info->flag_minus || info->sign || info->space)
+		info->print_len++;
 	info->padding_len = info->width - info->print_len;
 // printf("\n==width : %d==\n", info->width);
 // printf("\n==print : %d==\n", info->print_len);

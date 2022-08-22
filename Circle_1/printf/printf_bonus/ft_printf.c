@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/22 20:40:31 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 22:26:39 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,15 +439,102 @@ int	ft_printf(const char *format, ...)
 // 	a = ft_printf("%5.0x", 0);
 // 	printf("\n--%d--\n\n", a);
 
-// 	a = printf("%5.x", 0);
+	// a = printf("%5.x", 0);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("%5.x", 0);
+	// printf("\n--%d--\n\n", a);
+
+	// printf("\n==========================\n");
+
+// 	a = printf("% +8.5d", 34);
 // 	printf("\n--%d--\n\n", a);
-// 	a = ft_printf("%5.x", 0);
+// 	a = ft_printf("%+8.5d", 34);
 // 	printf("\n--%d--\n\n", a);
 
+// 	a = printf("% +8.5d", -34);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%+8.5d", -34);
+// 	printf("\n--%d--\n\n", a);
 
+// 	a = printf("% 0+8.3d", -8473);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% 0+8.3d", -8473);
+// 	printf("\n--%d--\n\n", a);
 
+// 	a = printf("% +5.0d", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% +5.0d", 0);
+// 	printf("\n--%d--\n\n", a);
 
+// 	a = printf("% -7d", -14);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% -7d", -14);
+// 	printf("\n--%d--\n\n", a);
 
+// 	a = printf("% 07d", -54);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% 07d", -54);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% 8.5d", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% 8.5d", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% .0d", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% .0d", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% .5d", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% .5d", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% -8.0d", 34);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% -8.0d", 34);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% -8.5d", 34);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% -8.5d", 34);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% 8.3d", -8473);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% 8.3d", -8473);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% -8.5d", 34);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% -8.5d", 34);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("this % d number", 17);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("this % d number", 17);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% +.3i", 3723);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% +.3i", 3723);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% -+.3i", 3723);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% -+.3i", 3723);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% .3i", -3723);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% .3i", -3723);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% 6.3i", -3723);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% 6.3i", -3723);
+// 	printf("\n--%d--\n\n", a);
 
 // }
 
