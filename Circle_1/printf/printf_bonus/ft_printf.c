@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/22 17:46:56 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 20:40:31 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,6 +379,72 @@ int	ft_printf(const char *format, ...)
 	// printf("\n--%d--\n\n", a);
 
 	// printf("\n==========================\n");
+
+
+	// a = printf("this %d number", 173);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf("this %d number", 173);
+	// printf("\n--%d--\n\n", a);
+
+
+// 	a = printf("%3x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%3x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%-3x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%-3x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%.3x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%.3x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%8.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%8.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%-8.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%-8.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%08.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%08.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%0-8.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%0-8.5x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+
+// 	a = printf("%.0x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%.0x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%.x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%.x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+
+// 	a = printf("%5.0x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%5.0x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%5.x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%5.x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+
 
 
 
