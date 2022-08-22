@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/22 16:22:38 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:00:33 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ typedef struct s_info
 	int left; // -
 	int width; // [max]
 	int prec; // .[min]
-	int flag; // flag
 	int print_len;
 	int padding_len;
+	int flag_sep_zero; // flag
 	int flag_minus;
 }   t_info;
 
@@ -66,6 +66,5 @@ char	*ft_baseset(char type);
 char	*ft_strchr(const char *s, int c);
 int	    ft_isdigit(int c);
 int	    ft_print_flag(long long nbr, const char type, t_info *info);
-int	    ft_print_hash(const char type);
 
 #endif

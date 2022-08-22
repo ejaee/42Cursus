@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/22 21:25:27 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:08:59 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_strlen_base(long long nbr, int type, t_info *info)
 		info->flag_minus = 1;
 		nbr *= -1;
 	}
+	// if (info->hash && nbr)
+	// 	cnt +=2;
 	while (1)
 	{
 		if (nbr < type)
@@ -40,8 +42,6 @@ int	ft_strlen_base(long long nbr, int type, t_info *info)
 		nbr /= type;
 		cnt++;
 	}
-	if (info->hash)
-		cnt +=2;
 	return (cnt);
 }
 

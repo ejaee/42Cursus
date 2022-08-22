@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/22 22:25:12 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:09:34 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,22 @@ int	ft_print_sign(long long nbr, t_info *info)
 	return (0);
 }
 
-int	ft_print_hash(const char type)
+int	ft_print_hash(long long nbr, const char type)
 {
-	int	res;
-
-	res = 0;
-	if (type == 'X')
+	if (nbr)
 	{
-		if (write (1, "0X", 2) == -1)
-			return (-1);
-		res = 2;
+		if (type == 'X')
+		{
+			if (write (1, "0X", 2) == -1)
+				return (-1);
+		}
+		else if (type == 'x')
+		{
+			if (write (1, "0x", 2) == -1)
+				return (-1);
+		}
 	}
-	else if (type == 'x')
-	{
-		if (write (1, "0x", 2) == -1)
-			return (-1);
-		res = 2;
-	}
-	return (res);
+	return (1);
 }
 
 int	ft_print_space(long long nbr, t_info *info)
@@ -84,7 +82,7 @@ int	ft_print_flag(long long nbr, const char type, t_info *info)
 {
 	if (info->hash)
 	{
-		if (ft_print_hash(type) == -1)
+		if (ft_print_hash(nbr, type) == -1)
 			return (-1);
 	}
 	else if (info->space && (type != 'X' || type != 'x'))
@@ -199,6 +197,8 @@ int	ft_print_nbr(long long nbr, const char type, t_info *info)
 		info->print_len = ft_strlen_base(nbr, 16, info);
 	if (info->prec > info->print_len)
 		info->print_len = info->prec;
+	if (info->hash && nbr)
+		info->print_len += 2;
 	if (!info->prec && !nbr)
 		info->print_len = 0;
 	if (info->flag_minus || info->sign || info->space)

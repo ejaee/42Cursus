@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/22 22:26:39 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/22 23:11:49 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	check_info(const char c, t_info *info)
 		info->sign = 1;
 	else if (c == '-')
 		info->left = 1;
-	else if (c == '0' && !info->flag)
+	else if (c == '0' && !info->flag_sep_zero)
 		info->zero = 1;
 	else if (ft_isdigit((int)c) && info->prec == -1)
 	{
 		info->width = info->width * 10 + c - '0';
-		info->flag = 1;
+		info->flag_sep_zero = 1;
 	}
 	else if (c == '.')
 	{
@@ -65,7 +65,7 @@ void init_info(t_info *info)
 	info->zero = 0; // 0
     info->width = 0; // [max]
     info->prec = -1; // [min]
-	info->flag = 0; // nbr flag
+	info->flag_sep_zero = 0; // nbr flag
 	info->print_len = 0;
 	info->padding_len = 0;
 	info->flag_minus = 0;
@@ -531,9 +531,19 @@ int	ft_printf(const char *format, ...)
 // 	a = ft_printf("% .3i", -3723);
 // 	printf("\n--%d--\n\n", a);
 
-// 	a = printf("% 6.3i", -3723);
+// 	a = printf("%#x", 0);
 // 	printf("\n--%d--\n\n", a);
-// 	a = ft_printf("% 6.3i", -3723);
+// 	a = ft_printf("%#x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%#3x", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%#3x", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%#8.5X", 34);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%#8.5X", 34);
 // 	printf("\n--%d--\n\n", a);
 
 // }
