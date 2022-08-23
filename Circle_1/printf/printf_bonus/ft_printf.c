@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/23 19:34:56 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/23 22:39:34 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ int	check_type(const char c, va_list *ap, t_info *info)
 		(ft_print_ptr(va_arg(*ap, unsigned long long), ft_baseset(c), info));
 	else
 		return (-1);
+}
+
+void	init_info(t_info *info)
+{
+	info->hash = 0;
+	info->space = 0;
+	info->sign = 0;
+	info->left = 0;
+	info->zero = 0;
+	info->width = 0;
+	info->prec = -1;
+	info->flag_sep_zero = 0;
+	info->print_len = 0;
+	info->padding_len = 0;
+	info->flag_minus = 0;
+	info->impos_flag = 0;
 }
 
 void	check_info(const char c, t_info *info)
@@ -56,50 +72,27 @@ void	check_info(const char c, t_info *info)
 	}
 	else if (ft_isdigit((int)c) && info->prec != -1)
 		info->prec = info->prec * 10 + c - '0';
-}
-
-void	init_info(t_info *info)
-{
-	info->hash = 0;
-	info->space = 0;
-	info->sign = 0;
-	info->left = 0;
-	info->zero = 0;
-	info->width = 0;
-	info->prec = -1;
-	info->flag_sep_zero = 0;
-	info->print_len = 0;
-	info->padding_len = 0;
-	info->flag_minus = 0;
+	else
+		info->impos_flag = 1;
 }
 
 int	parse_percent(const char **format, va_list *ap, t_info *info)
 {
-	while (**format)
+	init_info(info);
+	while (*++*format && !ft_strchr(TYPE, **format))
 	{
-		if (**format == '%')
-		{
-			init_info(info);
-			while (*++*format && !ft_strchr(TYPE, **format))
-				check_info(**format, info);
-			if (info->zero && info->left)
-				info->zero = 0;
-			info->total_print_fail = check_type(**format, ap, info);
-			if (info->total_print_fail == -1)
-				return (-1);
-			info->total_print_len += info->total_print_fail;
-		}
-		else
-		{
-			init_info(info);
-			info->total_print_fail = ft_print_chr((int)**format, info);
-			if (info->total_print_fail == -1)
-				return (-1);
-			info->total_print_len++;
-		}
-		++*format;
+		check_info(**format, info);
+		if (info->impos_flag)
+			break;
 	}
-	return (info->total_print_len);
+	if (info->impos_flag)
+		return (info->total_print_len);
+	if (info->zero && info->left)
+		info->zero = 0;
+	info->total_print_fail = check_type(**format, ap, info);
+	if (info->total_print_fail == -1)
+		return (-1);
+	return (info->total_print_fail);
 }
 
 int	ft_printf(const char *format, ...)
@@ -110,17 +103,43 @@ int	ft_printf(const char *format, ...)
 	info.total_print_len = 0;
 	info.total_print_fail = 0;
 	va_start(ap, format);
-	info.total_print_len = parse_percent(&format, &ap, &info);
+	while (*format)
+	{
+		if (*format == '%')
+			info.total_print_len += parse_percent(&format, &ap, &info);
+		else
+		{
+			init_info(&info);
+			info.total_print_fail = ft_print_chr((int)*format, &info);
+			if (info.total_print_fail == -1)
+				return (-1);
+			info.total_print_len++;
+		}
+		if (!info.impos_flag)
+			++format;
+		else
+			init_info(&info);
+	}
 	return (info.total_print_len);
 }
 
 // int	main()
 // {
 // 	int a;
-// 	a = printf("% 0+8.5i", 34);
+
+// 	a = printf("%2.6#13.2d", 345);
 // 	printf("\n--%d--\n\n", a);
-// 	a = ft_printf("% 0+8.5i", 34);
+// 	a = ft_printf("%2.6#13.2d", 345);
 // 	printf("\n--%d--\n\n", a);
+
+
+
+
+// 	a = printf("%010.5d", -216);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%010.5d", -216);
+// 	printf("\n--%d--\n\n", a);
+
 // 	// a = ft_printf("%2147483647d", 1);
 // 	// printf("\n--%d--\n\n", a);
 // }

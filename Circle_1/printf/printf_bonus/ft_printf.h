@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/23 19:35:51 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/23 21:55:54 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <limits.h>
 # define TYPE "csdiuXxp%"
+# define FLAG "# 0+.-123456789"
 
 typedef struct s_info
 {
@@ -32,6 +33,7 @@ typedef struct s_info
 	int	padding_len;
 	int	flag_sep_zero;
 	int	flag_minus;
+	int	impos_flag;
 	int	total_print_len;
 	int	total_print_fail;
 }	t_info;
