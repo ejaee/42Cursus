@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/23 12:15:27 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/23 19:17:26 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_print_hash(long long nbr, const char type)
 
 int	ft_print_space(long long nbr, t_info *info)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	if (nbr >= 0 && !info->sign)
@@ -156,36 +156,49 @@ int	ft_print_str(char *str, t_info *info)
 		return (info->print_len);
 }
 
-int ft_print_nbr2(long long nbr, const char type, t_info *info)
+int	ft_print_right_nbr(long long nbr, const char type, t_info *info)
 {
-	if (!info->left && !info->zero)
+	int	base_size;
+
+	if (type == 'd' || type == 'i' || type == 'u')
+		base_size = 10;
+	else
+		base_size = 16;
+	if (ft_print_width(info) == -1 || ft_print_sign(nbr, info) == -1 \
+		|| ft_print_flag(nbr, type, info) == -1)
+		return (-1);
+	if (!(!info->prec && !nbr))
+		if (ft_putnbr_base(nbr, ft_baseset(type), base_size, info) == -1)
+			return (-1);
+	return (0);
+}
+
+int	ft_print_left_nbr(long long nbr, const char type, t_info *info)
+{
+	int	base_size;
+
+	if (type == 'd' || type == 'i' || type == 'u')
+		base_size = 10;
+	else
+		base_size = 16;
+	if (ft_print_sign(nbr, info) == -1 || ft_print_flag(nbr, type, info) == -1)
+		return (-1);
+	if (info->zero)
 	{
-		if (ft_print_width(info) == -1	|| ft_print_sign(nbr, info) == -1 || ft_print_flag(nbr, type, info) == -1)
+		if (ft_print_width(info) == -1)
 			return (-1);
 		if (!(!info->prec && !nbr))
-			if (ft_putnbr_base(nbr, ft_baseset(type), info) == -1)
+			if (ft_putnbr_base(nbr, ft_baseset(type), base_size, info) == -1)
 				return (-1);
-		return (0);
 	}
-	else if (info->left || (!info->left && info->zero))
-		if (ft_print_sign(nbr, info) == -1 || ft_print_flag(nbr, type, info) == -1)
+	else
+	{
+		if (!(!info->prec && !nbr))
+			if (ft_putnbr_base(nbr, ft_baseset(type), base_size, info) == -1)
+				return (-1);
+		if (ft_print_width(info) == -1)
 			return (-1);
-		if (info->zero)
-		{
-			if (ft_print_width(info) == -1)
-				return (-1);
-			if (!(!info->prec && !nbr))
-				if (ft_putnbr_base(nbr, ft_baseset(type), info) == -1)
-					return (-1);
-		}
-		else
-		{
-			if (!(!info->prec && !nbr))
-				if (ft_putnbr_base(nbr, ft_baseset(type), info) == -1)
-					return (-1);
-			if (ft_print_width(info) == -1)
-				return (-1);
-		}
+	}
 	return (0);
 }
 
@@ -204,18 +217,21 @@ int	ft_print_nbr(long long nbr, const char type, t_info *info)
 	if (info->flag_minus || info->sign || info->space)
 		info->print_len++;
 	info->padding_len = info->width - info->print_len;
-// printf("\n==width : %d==\n", info->width);
-// printf("\n==print : %d==\n", info->print_len);
-// printf("\n==padding : %d==\n\n", info->padding_len);
-	if (ft_print_nbr2(nbr, type, info) == -1)
-		return (-1);
+	if (!info->left && !info->zero)
+	{
+		if (ft_print_right_nbr(nbr, type, info) == -1)
+			return (-1);
+	}
+	else if (info->left || (!info->left && info->zero))
+		if (ft_print_left_nbr(nbr, type, info) == -1)
+			return (-1);
 	if (info->width > info->print_len)
 		return (info->width);
 	else
 		return (info->print_len);
 }
 
-int	ft_printlen_ptr(unsigned long long ptr)
+int	ft_ptrlen_base(unsigned long long ptr)
 {
 	int	cnt;
 
@@ -261,14 +277,12 @@ int	ft_print_ptr2(unsigned long long ptr, char *hex, t_info *info)
 
 int	ft_print_ptr(unsigned long long ptr, char *hex, t_info *info)
 {
-	// cnt only nbr len (not cnt '0x')
-	info->print_len = ft_printlen_ptr(ptr);
+	info->print_len = ft_ptrlen_base(ptr);
 	if (info->prec > info->print_len)
 		info->print_len = info->prec;
 	if (!info->prec && !ptr)
 		info->print_len = 0;
 	info->padding_len = info->width - info->print_len - 2;
-
 	ft_print_ptr2(ptr, hex, info);
 	if (info->padding_len > 0)
 		return (info->width);

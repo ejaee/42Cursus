@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/23 12:17:29 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:34:55 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	ft_strlen_base(long long nbr, int type, t_info *info)
 		info->flag_minus = 1;
 		nbr *= -1;
 	}
-	// if (info->hash && nbr)
-	// 	cnt +=2;
 	while (1)
 	{
 		if (nbr < type)
@@ -58,14 +56,12 @@ int	ft_print_prec(int idx, t_info *info)
 	return (0);
 }
 
-int	ft_putnbr_base(long long nbr, char *base, t_info *info)
+int	ft_putnbr_base(long long nbr, char *base, int base_size, t_info *info)
 {
 	char	stack[12];
 	int		idx;
-	int		base_size;
 
 	idx = 0;
-	base_size = ft_strlen(base);
 	if (nbr == 0)
 	{
 		if (ft_print_prec(1, info) == -1)
@@ -93,10 +89,8 @@ int	ft_putptr_base(unsigned long long nbr, char *base, t_info *info)
 {
 	char	stack[20];
 	int		idx;
-	int		base_size;
 
 	idx = 0;
-	base_size = ft_strlen(base);
 	if (nbr == 0)
 	{
 		if (ft_print_prec(1, info) == -1)
@@ -109,8 +103,8 @@ int	ft_putptr_base(unsigned long long nbr, char *base, t_info *info)
 		nbr *= -1;
 	while (nbr)
 	{
-		stack[idx++] = base[nbr % base_size];
-		nbr /= base_size;
+		stack[idx++] = base[nbr % 16];
+		nbr /= 16;
 	}
 	if (ft_print_prec(idx, info) == -1)
 		return (-1);
@@ -142,7 +136,6 @@ char	*ft_strchr(const char *s, int c)
 		s++;
 	}
 }
-
 
 int	ft_isdigit(int c)
 {
