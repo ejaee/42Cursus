@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/23 12:20:25 by choiejae         ###   ########.fr       */
+/*   Updated: 2022/08/23 15:43:37 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_info(const char c, t_info *info)
 	else if (c == '.')
 	{
 		info->prec = 0;
-		info->zero = 0;
+		info->flag_sep_zero = 1;
 	}
 	else if (ft_isdigit((int)c) && info->prec != -1)
 		info->prec = info->prec * 10 + c - '0';
@@ -87,6 +87,8 @@ int	ft_printf(const char *format, ...)
 			init_info(&info);
 			while (*++format && !ft_strchr(TYPE, *format))
 				check_info(*format, &info);
+			if (info.zero && info.left)
+				info.zero = 0;
 			check_fail = check_type(*format, &ap, &info);
 			if (check_fail == -1)
 				return (-1);
@@ -108,8 +110,6 @@ int	ft_printf(const char *format, ...)
 // int	main()
 // {
 // 	int a;
-
-
 
 	// // p - width
 	// a = printf("%5p", 12);
@@ -557,21 +557,21 @@ int	ft_printf(const char *format, ...)
 // 	printf("\n--%d--\n\n", a);
 
 
-	a = printf(" %010.10d ", 9223372036854775806);
-	printf("\n--%d--\n\n", a);
-	a = ft_printf(" %010.10d ", 9223372036854775806);
-	printf("\n--%d--\n\n", a);
+	// a = printf(" %010.10d ", 9223372036854775806);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf(" %010.10d ", 9223372036854775806);
+	// printf("\n--%d--\n\n", a);
 
-	a = printf(" %.10d ", 9223372036854775806);
-	printf("\n--%d--\n\n", a);
-	a = ft_printf(" %.10d ", 9223372036854775806);
-	printf("\n--%d--\n\n", a);
+	// a = printf(" %.10d ", 9223372036854775806);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf(" %.10d ", 9223372036854775806);
+	// printf("\n--%d--\n\n", a);
 
 
-	a = printf(" %.10d ", LONG_MAX);
-	printf("\n--%d--\n\n", a);
-	a = ft_printf(" %.10d ", LONG_MAX);
-	printf("\n--%d--\n\n", a);
+	// a = printf(" %.10d ", LONG_MAX);
+	// printf("\n--%d--\n\n", a);
+	// a = ft_printf(" %.10d ", LONG_MAX);
+	// printf("\n--%d--\n\n", a);
 
 
 // 	a = printf(" %-11x ", LONG_MAX);
@@ -589,6 +589,41 @@ int	ft_printf(const char *format, ...)
 // 	a = ft_printf(" %-11X ", LONG_MAX);
 // 	printf("\n--%d--\n\n", a);
 
+// 	a = printf("%#0-8.5X", 34);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%#0-8.5X", 34);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%#0-8.5X", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%#0-8.5X", 0);
+// 	printf("\n--%d--\n\n", a);
+
+
+// 	a = printf("this %#x number", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("this %#x number", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("% 03i", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("% 03i", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%.20d:%.0d:%.0d:%.d:%.d:%.d:", 1023, 0, (int)-2147483648, 0, 1, (int)-2147483648);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%.20d:%.0d:%.0d:%.d:%.d:%.d:", 1023, 0, (int)-2147483648, 0, 1, (int)-2147483648);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%.10X", (unsigned int)-1);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%.10X", (unsigned int)-1);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf("%.010X", (unsigned int)-1);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf("%.010X", (unsigned int)-1);
+// 	printf("\n--%d--\n\n", a);
 
 // }
 
