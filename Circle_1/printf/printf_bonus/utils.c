@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:35:13 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/22 23:08:59 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/23 12:17:29 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,37 @@ int	ft_print_prec(int idx, t_info *info)
 int	ft_putnbr_base(long long nbr, char *base, t_info *info)
 {
 	char	stack[12];
+	int		idx;
+	int		base_size;
+
+	idx = 0;
+	base_size = ft_strlen(base);
+	if (nbr == 0)
+	{
+		if (ft_print_prec(1, info) == -1)
+			return (-1);
+		if (write (1, "0", 1) == -1)
+			return (-1);
+		return (1);
+	}
+	if (nbr < 0)
+		nbr *= -1;
+	while (nbr)
+	{
+		stack[idx++] = base[nbr % base_size];
+		nbr /= base_size;
+	}
+	if (ft_print_prec(idx, info) == -1)
+		return (-1);
+	while (--idx >= 0)
+		if (write (1, &stack[idx], 1) == -1)
+			return (-1);
+	return (0);
+}
+
+int	ft_putptr_base(unsigned long long nbr, char *base, t_info *info)
+{
+	char	stack[20];
 	int		idx;
 	int		base_size;
 

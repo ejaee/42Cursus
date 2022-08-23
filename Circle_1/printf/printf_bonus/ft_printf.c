@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/22 23:11:49 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/23 12:20:25 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -545,6 +545,50 @@ int	ft_printf(const char *format, ...)
 // 	printf("\n--%d--\n\n", a);
 // 	a = ft_printf("%#8.5X", 34);
 // 	printf("\n--%d--\n\n", a);
+
+// 	a = printf(" %p %p ", 0xffffffff, -0xffffffff);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf(" %p %p ", 0xffffffff, -0xffffffff);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
+// 	printf("\n--%d--\n\n", a);
+
+
+	a = printf(" %010.10d ", 9223372036854775806);
+	printf("\n--%d--\n\n", a);
+	a = ft_printf(" %010.10d ", 9223372036854775806);
+	printf("\n--%d--\n\n", a);
+
+	a = printf(" %.10d ", 9223372036854775806);
+	printf("\n--%d--\n\n", a);
+	a = ft_printf(" %.10d ", 9223372036854775806);
+	printf("\n--%d--\n\n", a);
+
+
+	a = printf(" %.10d ", LONG_MAX);
+	printf("\n--%d--\n\n", a);
+	a = ft_printf(" %.10d ", LONG_MAX);
+	printf("\n--%d--\n\n", a);
+
+
+// 	a = printf(" %-11x ", LONG_MAX);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf(" %-11x ", LONG_MAX);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf(" %-1x ", 0);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf(" %-1x ", 0);
+// 	printf("\n--%d--\n\n", a);
+
+// 	a = printf(" %-11X ", LONG_MAX);
+// 	printf("\n--%d--\n\n", a);
+// 	a = ft_printf(" %-11X ", LONG_MAX);
+// 	printf("\n--%d--\n\n", a);
+
 
 // }
 

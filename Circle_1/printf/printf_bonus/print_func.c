@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:48:51 by choiejae          #+#    #+#             */
-/*   Updated: 2022/08/22 23:09:34 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/23 12:15:27 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ int	ft_print_ptr2(unsigned long long ptr, char *hex, t_info *info)
 			return (-1);
 		if (!(!info->prec && !ptr))
 		{
-			if (ft_putnbr_base(ptr, hex, info) == -1)
+			if (ft_putptr_base(ptr, hex, info) == -1)
 				return (-1);
 		}
 		if (ft_print_width(info) == -1)
@@ -252,7 +252,7 @@ int	ft_print_ptr2(unsigned long long ptr, char *hex, t_info *info)
 			return (-1);
 		if (!(!info->prec && !ptr))
 		{
-			if (ft_putnbr_base(ptr, hex, info) == -1)
+			if (ft_putptr_base(ptr, hex, info) == -1)
 				return (-1);
 		}
 	}
@@ -261,9 +261,6 @@ int	ft_print_ptr2(unsigned long long ptr, char *hex, t_info *info)
 
 int	ft_print_ptr(unsigned long long ptr, char *hex, t_info *info)
 {
-	int		idx;
-
-	idx = 0;
 	// cnt only nbr len (not cnt '0x')
 	info->print_len = ft_printlen_ptr(ptr);
 	if (info->prec > info->print_len)

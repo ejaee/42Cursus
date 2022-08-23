@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:23:56 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/22 23:00:33 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/23 12:14:56 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		ft_print_ptr(unsigned long long ptr, char *hex, t_info *info);
 size_t	ft_strlen(const char *s);
 int		ft_strlen_base(long long nbr, int type, t_info *info);
 int	    ft_putnbr_base(long long nbr, char *base, t_info *info);
+int		ft_putptr_base(unsigned long long nbr, char *base, t_info *info);
 char	*ft_baseset(char type);
 
 /*
