@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:48:34 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/08/24 15:07:24 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/08/24 15:21:32 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,27 +120,6 @@ int	ft_printf(const char *format, ...)
 		else
 			init_info(&info);
 	}
+	va_end(ap);
 	return (info.total_print_len);
 }
-
-// int	main()
-// {
-// 	int a;
-
-// 	a = printf("%kkd", 345);
-// 	printf("\n--%d--\n\n", a);
-// 	a = ft_printf("%kkd", 345);
-// 	printf("\n--%d--\n\n", a);
-
-// 	a = printf("%2.613.2d", 345);
-// 	printf("\n--%d--\n\n", a);
-// 	a = ft_printf("%2.613.2d", 345);
-// 	printf("\n--%d--\n\n", a);
-
-// 	a = printf("%010.5d", -216);
-// 	printf("\n--%d--\n\n", a);
-// 	a = ft_printf("%010.5d", -216);
-// 	printf("\n--%d--\n\n", a);
-// 	// a = ft_printf("%2147483647d", 1);
-// 	// printf("\n--%d--\n\n", a);
-// }
