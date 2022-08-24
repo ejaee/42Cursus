@@ -4,10 +4,10 @@ CFLAGS		= -Wall -Wextra -Werror
 
 HEADER 		= ft_printf.h
 
-SRCS 		= ft_printf.c print_func.c utils.c
+SRCS 		= ft_printf.c ft_print_str.c ft_print_nbr.c ft_print_ptr.c ft_print_flag.c ft_utils.c
 
 
-OBJS 		= $(SRCS:c=o) 
+OBJS 		= $(SRCS:c=o)
 
 NAME		= libftprintf.a
 
@@ -25,7 +25,7 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-re: 
+re:
 	make fclean
 	make all
 
