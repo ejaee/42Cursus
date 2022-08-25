@@ -12,25 +12,26 @@ _요약: stdio.h의 printf 함수를 구현하는 프로젝트 입니다._
 	- [printf()](#printf-1)
 		- [format specifier (서식 지정자)](#format-specifier-서식-지정자)
 		- [format tag (형식 태그)](#format-tag-형식-태그)
-- [**Logic**](#logic)
+- [**Logic (Mandatory)**](#logic-mandatory)
+- [**Bonus Issue**](#bonus-issue)
 - [**study sites**](#study-sites)
 
 # **Introduction**
 
-실제 printf의 동작을 모방한 ft_printf를 포함하는 라이브러리를 작성합니다.
+- 실제 printf의 동작을 모방한 ft_printf를 포함하는 라이브러리를 작성합니다.
 
-서식 지정자 `cspdiuxX%` 를 구현합니다.
+- 서식 지정자 `cspdiuxX%` 를 구현합니다.
 
-ar 명령어를 이용하여 라이브러리를 만들어야 합니다. libtool을 사용하는 것은 금지됩니다.
+- ar 명령어를 이용하여 라이브러리를 만들어야 합니다. libtool을 사용하는 것은 금지됩니다.
 
-[https://github.com/42seoul-translation/subject_ko/blob/master/ft_printf/ft_printf.ko.md](https://github.com/42seoul-translation/subject_ko/blob/master/ft_printf/ft_printf.ko.md)
+[과제pdf](https://github.com/42seoul-translation/subject_ko/blob/master/ft_printf/ft_printf.ko.md)
 
 # **Key Word**
 
 ##  variadic arguments
 _가변 인자_
 
-------
+
 
 **PROTOTYPE**
 
@@ -169,9 +170,9 @@ C언어의 표준 출력 함수로, 여러 종류의 데이터를 다양한 서�
 	문자열
 
 	```c
-	printf("%s", NULL) // -> (NULL) return = 6
-	printf("%s", "") // ->	return = 0
-	printf("%s", "\0") // -> return = 0
+	printf("%s", NULL) 	// -> return = 6(NULL) 
+	printf("%s", "") 	// -> return = 0
+	printf("%s", "\0") 	// -> return = 0
 	```
 
 
@@ -257,41 +258,70 @@ _서식 지정자에 숫자와 부호를 추가하여 출력 값의 간격을 �
 	8, 16진수 상수 표시에 0, 0x 0X를 앞에 붙입니다.
 
 	%o %x, %X만 적용합니다.
+	-	0은 `0x0`이 아닌, `0`으로 출력됩니다.
 
--	`'.'`
+
+-	**WIDTH**
+
+	_최종 출력되는 데이터 폭을 지정합니다._
+
+	```c
+	#include <stdio.h>
+
+
+	int main (){
+
+    	printf("1:%7d\n", 111); // ->  1:    111
+    	printf("2:%7d\n", 1111); // -> 2:   1111
+
+    	return (0);
+	}
+	```
+-	**PRECISION ' . '**
+
+	_몇 자리까지 출력해야하는지 지정합니다._
+
+	```c
+	#include <stdio.h>
+
+
+	int main (){
+
+    	printf("%.2f\n", 1.2); // -> 1.20
+    	printf("%.2f\n", 1.2053452); // -> 1.21
+
+    	return (0);
+	}
+	```
 
 	실수일 때 .n(n은 10진 정수)이면 소수점 이하 n자리까지 출력합니다.
 
-**WIDTH**
-_출력되는 데이터 폭을 지정합니다._
+	-	해당 과제에서는 %f를 고려하지 않습니다.
+	-	PRECISION - %s 특이사항
+		```c
+		1. PRECISION > strlen(str) 경우
 
-```c
-#include <stdio.h>
+			ex) printf("%.7s", "Hello"); // Hello(5)
+
+		2. PRECISION < strlen(str) 경우
+
+			ex) printf("%.3s", "Hello"); // Hel(3)
+
+		RECISION이 더 크면 그대로, 더 작으면 그만큼 잘린다.
+		```
+	-	PRECISION - %d,i 특이사항
+		```c
+		1. PRECISION > nbrlen(nbr) 경우
+
+			ex) printf("%.7s", 12345); // 0000012345(10)
+
+		2. PRECISION < nbrlen(nbr) 경우
+
+			ex) printf("%.3s", 12345); // 12345(5)
+		RECISION이 더 크면 그만큼 더해지고, 더 작으면 그대로.
+		```
 
 
-int main (){
-
-    printf("1:%7d\n", 111); // ->  1:    111
-    printf("2:%7d\n", 1111); // -> 2:   1111
-
-    return (0);
-}
-```
-**PRECISION**
-_몇 자리까지 출력해야하는지 지정합니다._
-
-```c
-#include <stdio.h>
-
-
-int main (){
-
-    printf("%.2f\n", 1.2); // -> 1.20
-    printf("%.2f\n", 1.2053452); // -> 1.21
-
-    return (0);
-}
-```
 
 
 <div align = "right">
@@ -300,7 +330,7 @@ int main (){
 
 ------
 
-# **Logic**
+# **Logic (Mandatory)**
 
 
 1. Values
@@ -404,11 +434,37 @@ int main (){
 	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
-# **Logic_BONUS**
 
-```.c
+# **Bonus Issue**
 
+system call 함수인 write 실패의 경우 -1을 리턴하도록 합니다.
+```c
+if (write (1, &c, 1) == -1) // 출력 후 if문 비교
+	return (-1);
 ```
+
+printf("%010.10d")의 경우 0을 각각 다르게 적용시켜야 합니다.
+```c
+가장 먼저 등장하는 flag 0을 먼저 고려하기
+
+문제점 
+: 이후 width와 prec를 저장할 때 0이 flag로 들어갈 수 있음
+
+해결 
+: width와 prec의 숫자 값을 받을 때에는 구조체에 선언된 flag_receiving_input을 1로 켜줌으로써 flag 0에 들어가지 않도록 조치
+```
+
+printf("%012.10#23.2d")의 경우 맨 마지막의 23.2가 적용되는 경우를 발견했습니다.
+
+```c
+warning: invalid conversion specifier '#' [-Wformat-invalid-specifier]
+        a = printf("%012.10#23.2d", 123);
+
+Defence
+: 컴파일간 경고가 발생하므로 이는 제대로 된 값이 들어가지 않은 경우므로 해당 경우를 고려하지 않음
+```
+
+
 
 # **study sites**
 
