@@ -55,7 +55,7 @@ int	main()
 	printf("%d\n", sum(5, a, b, c, d, e));
 }
 
-int sum(int num_args, ...)
+int	sum(int num_args, ...)
 {
 	va_list	ap;
 
@@ -74,12 +74,12 @@ int sum(int num_args, ...)
 ------
 
 -	**va_list ap**
-	
+
 	_가변 변수를 가리킬 포인터_
 
 
 	```c
-	typedef char *va_list;
+	typedef char*	va_list;
 	```
 
 	길이가 변할 수 있는 인수들을 저장하려면 가변의 저장공간이 필요합니다.
@@ -102,7 +102,7 @@ int sum(int num_args, ...)
 
 	첫 번째 가변인자 주소를 알려면 시작 주소값에 두 번째 인자인 고정인수를 더해주면 됩니다.
 
-	![Alt text](./pictures/va_start.png)
+	![Alt text](./printf_mandatory/pictures/va_start.png)
 
 	va _list 주소값에다가 고정 인수 크기를 더한 위치로 ap로 초기화 합니다.
 
@@ -114,7 +114,7 @@ int sum(int num_args, ...)
 
 	반복문을 돌리면서 인자 값 한 개 한 개씩 뽑습니다.
 
-	![Alt text](./pictures/va_start.png)
+	![Alt text](./printf_mandatory/pictures/va_start.png)
 
 	int 이하(char, short)의 메모리는 바이트패딩 되므로 int로 저장됩니다.
 
@@ -125,8 +125,10 @@ int sum(int num_args, ...)
 	_가변 인자 목록 포인터를 NULL로 초기화 합니다._
 
 <br><br>
+[#가변인자 참조](https://dojang.io/mod/page/view.php?id=577)
 
-[https://dojang.io/mod/page/view.php?id=577](https://dojang.io/mod/page/view.php?id=577)
+[#바이트패딩 참조](https://supercoding.tistory.com/37)
+
 
 <div align = "right">
 	<b><a href = "#Contents">↥ top</a></b>
@@ -138,25 +140,19 @@ int sum(int num_args, ...)
 ##  printf()
 _#include <stdio.h>_
 
-------
-
 **PROTOTYPE**
 
 ```c
 int printf(const char* format, ...)
 ```
-------
 
 **DESCRIPTION**
 
 C언어의 표준 출력 함수로, 여러 종류의 데이터를 다양한 서식에 맞춰 출력할 수 있게 해줍니다.
 
-------
-
 **RETURN VALUE**
 
 출력되는 문자의 개수를 반환합니다.
-
 
 ------
 
@@ -178,7 +174,7 @@ C언어의 표준 출력 함수로, 여러 종류의 데이터를 다양한 서�
 	printf("%s", "\0") // -> return = 0
 	```
 
-	
+
 
 -	%d, %i
 
@@ -275,7 +271,7 @@ _출력되는 데이터 폭을 지정합니다._
 
 int main (){
 
-    printf("1:%7d\n", 111); // ->  1:    111 
+    printf("1:%7d\n", 111); // ->  1:    111
     printf("2:%7d\n", 1111); // -> 2:   1111
 
     return (0);
@@ -311,7 +307,7 @@ int main (){
 
 	`int printed_len`
 
-	-	ft_printf() 함수의 반환값으로, 
+	-	ft_printf() 함수의 반환값으로,
 	-	출력된 문자의 개수를 반환합니다.
 	<br><br>
 
@@ -333,13 +329,13 @@ int main (){
 	va_start(ap, format)을 통해 첫번째 가변 인자에 접근시킵니다.
 
 	format의 값이 끝날 때까지 출력되어야 하므로
-	
+
 	while(*format)으로 반복문을 돌립니다.
 
 	경우의 수는 1. 서식 지정자가 아닌 경우 / 2. 인 경우로 나뉩니다.
 
 	서식 지정자가 아닌 경우
-	
+
 	**`ft_print_char((int)*format)`**로 문자를 출력합니다.
 
 	서식 지정자인 경우
@@ -352,7 +348,7 @@ int main (){
 	<br><br>
 
 	서식 지정자 함수
-	
+
 	**`ft_print_char(int c)`**
 
 	_%c_
@@ -382,7 +378,7 @@ int main (){
 
 	_%u_
 	-	`ft_print_integer(int num)`와 동일한 방식으로 작동합니다.
-	
+
 	_%x, %X_
 	-	`ft_putnbr_base(num, "0123456789ABCDEF")`로 출력합니다.
 	-	10진수가 16진수가 되므로 별도의 길이를 구하는 함수가 필요합니다.
@@ -390,7 +386,7 @@ int main (){
 	<br><br>
 
 	**`int	ft_putnbr_base(long long num, char *base)`**
-	
+
 	_integer(), unsigned integer() 함수가 출력할때 호출하는 함수입니다._
 	-	long long 형으로 num을 받으므로 integer, unsigned integer 모두 사용될 수 있습니다.
 	-	출력에 실패하면 `-1`, 성공하면 `0` 을 반환합니다.
@@ -408,6 +404,11 @@ int main (){
 	<b><a href = "#Contents">↥ top</a></b>
 </div>
 
+# **Logic_BONUS**
+
+```.c
+
+```
 
 # **study sites**
 
