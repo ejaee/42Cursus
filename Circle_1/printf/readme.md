@@ -1,15 +1,15 @@
-# **printf**
+# **printf** [![ejachoi's 42 ft_printf Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2702114)](https://github.com/JaeSeoKim/badge42)
 
 _요약: stdio.h의 printf 함수를 구현하는 프로젝트 입니다._
 
 # **Contents**
 
-- [**printf**](#printf)
+- [**printf** ![ejachoi's 42 ft_printf Score](https://github.com/JaeSeoKim/badge42)](#printf-)
 - [**Contents**](#contents)
 - [**Introduction**](#introduction)
 - [**Key Word**](#key-word)
 	- [variadic arguments](#variadic-arguments)
-	- [printf()](#printf-1)
+	- [printf()](#printf)
 		- [format specifier (서식 지정자)](#format-specifier-서식-지정자)
 		- [format tag (형식 태그)](#format-tag-형식-태그)
 - [**Logic (Mandatory)**](#logic-mandatory)

@@ -1,4 +1,4 @@
-# **Born2beRoot**
+# **Born2beRoot** [![ejachoi's 42 Born2beroot Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2687534)](https://github.com/JaeSeoKim/badge42)
 
 _요약: VirtualBox를 이용해 운영체제를 설치해보는 프로젝트 입니다._
 

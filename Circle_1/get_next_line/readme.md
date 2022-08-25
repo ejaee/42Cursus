@@ -1,4 +1,4 @@
-# **Get Next Line**
+# **Get Next Line** [![ejachoi's 42 get_next_line Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2658767)](https://github.com/JaeSeoKim/badge42)
 
 _요약: 파일 디스크립터로부터 읽혀진, 개행으로 끝나는 한 줄을 반환하는 함수를 구현하는 프로젝트 입니다._
 
@@ -7,7 +7,7 @@ _요약: 파일 디스크립터로부터 읽혀진, 개행으로 끝나는 한 �
 
 # **Contents**
 
-- [**Get Next Line**](#get-next-line)
+- [**Get Next Line** ![ejachoi's 42 get_next_line Score](https://github.com/JaeSeoKim/badge42)](#get-next-line-)
 - [**Contents**](#contents)
 - [**Introduction**](#introduction)
 - [**Logic**](#logic)
