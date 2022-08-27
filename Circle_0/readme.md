@@ -6,7 +6,7 @@
 
 ## Contents
 
-- [Libft ![ejachoi's 42 Libft Score](https://github.com/JaeSeoKim/badge42)](#libft-)
+- Libft ![ejachoi's 42 Libft Score](https://github.com/JaeSeoKim/badge42)](#libft-)
 	- [Contents](#contents)
 	- [Part 1 - Libc functions](#part-1---libc-functions)
 		- [ft_strlen](#ft_strlen)
