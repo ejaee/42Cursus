@@ -1,4 +1,4 @@
-# **push_swap**
+# [**push_swap**](https://github.com/ejaee/push_swap)
 
 _요약: stack 두개와 몇가지 operation을 활용하여 매개변수로 들어오는 숫자를 정렬하는 프로그램을 만듭니다._
 
@@ -24,8 +24,8 @@ _요약: stack 두개와 몇가지 operation을 활용하여 매개변수로 들
 - [**Logic (Mandatory)**](#logic-mandatory)
 	- [모래시계 알고리즘](#모래시계-알고리즘sandglass)
 - [**Logic (Bonus)**](#logic-bonus)
-- [**Issue**](#lssue)
-- [**Study sites**](#study-site)
+- [**Issue**](#issue)
+- [**Study sites**](#study-sites)
 
 
 # **Logic (Mandatory)**
