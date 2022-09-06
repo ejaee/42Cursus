@@ -24,7 +24,7 @@ _요약: stack 두개와 몇가지 operation을 활용하여 매개변수로 들
 - [**Logic (Mandatory)**](#logic-mandatory)
 	- [모래시계 알고리즘](#모래시계-알고리즘sandglass)
 - [**Logic (Bonus)**](#logic-bonus)
-- [**Issue**](#lssue)
+- [**Issue**](#issue)
 - [**Study sites**](#study-sites)
 
 
