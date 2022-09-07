@@ -6,13 +6,13 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:41:55 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/09/07 21:16:47 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/09/07 22:51:32 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gnl.h"
 
-static char	*buf_join(char *des, char *src, size_t slen)
+static char	*buf_join(char *des, char *src, size_t slen, int *error)
 {
 	size_t	dlen;
 	char	*join;
@@ -27,6 +27,7 @@ static char	*buf_join(char *des, char *src, size_t slen)
 	join = ft_calloc(dlen + slen + 1, sizeof(char));
 	if (!join)
 	{
+		*error = 1;
 		free(des);
 		return (NULL);
 	}
@@ -44,22 +45,24 @@ char	*get_next_line(int fd)
 	char		*res;
 	ssize_t		idx;
 	ssize_t		read_len;
+	int			error;
 
 	res = NULL;
 	idx = -1;
 	read_len = BUFFER_SIZE;
+	error = 0;
 	while (fd >= 0)
 	{
 		if (++idx == BUFFER_SIZE)
 		{
-			res = buf_join(res, read_buf, ft_strlen(read_buf));
+			res = buf_join(res, read_buf, ft_strlen(read_buf), &error);
 			read_len = read(fd, read_buf, BUFFER_SIZE);
-			if (read_len < 0)
+			if (read_len < 0 || error)
 				break ;
 			idx = 0;
 		}
 		if (idx == read_len || read_buf[idx] == '\n')
-			return (buf_join(res, read_buf, idx + 1));
+			return (buf_join(res, read_buf, idx + 1, &error));
 	}
 	free(res);
 	return (NULL);
