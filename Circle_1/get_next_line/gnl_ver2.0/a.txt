@@ -3,3 +3,5 @@ abcdefghij
 123456789
 abcdefghij
 123456789
+함수 두개로
+gnl 만들기

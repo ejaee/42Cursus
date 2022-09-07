@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 21:06:26 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/09/07 21:10:28 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/09/07 22:54:03 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE	1024
 # endif
 
-static char	*buf_join(char *des, char *src, size_t slen);
+static char	*buf_join(char *des, char *src, size_t slen, int *error);
 char		*get_next_line(int fd);
 
 size_t		ft_strlen(const char *s);
