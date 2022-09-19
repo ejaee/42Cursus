@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:39:50 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/09/19 15:55:59 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/09/19 16:31:10 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,21 @@ typedef struct s_coord
 {
 	int	y;
 	int	x;
-
 }	t_coord;
+
+typedef struct s_cnt
+{
+	int	collect;
+	int	exit;
+	int	player;
+}	t_cnt;
 
 typedef struct s_map
 {
 	int		cols;
 	int		rows;
 	char	**coord;
-
+	t_cnt	component;
 }	t_map;
 
 typedef struct s_game
