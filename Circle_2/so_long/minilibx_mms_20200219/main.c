@@ -76,16 +76,6 @@ int	is_walled(t_game *game)
 	return (TRUE);
 }
 
-void	cnt_component(t_game *game, char c)
-{
-	if (c == 'c')
-		game->map_info.component.collect++;
-	else if (c == 'e')
-		game->map_info.component.exit++;
-	else if (c == 'p')
-		game->map_info.component.player++;
-}
-
 void	map_load(t_game *game, char *file_name)
 {
 	int	fd;
@@ -97,22 +87,69 @@ void	map_load(t_game *game, char *file_name)
 	if (fd <= 0)
 		exit_error("issue : file open\n");
 	y = 0;
-	while (1)
+	line = get_next_line(fd);
+	while (line > 0)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break;
+printf(YELLOW "%s" RESET, line);
 		if (!is_rectangle(game, ft_strlen(line) - 1))
 			exit_error("issue : invaild map (is not rectangle)\n");
 		x = -1;
 		while (line[++x] && line[x] != '\n')
 			if (!is_component(game, line[x]))
 				exit_error("issue : invaild map (is not component)\n");
-			game->map_info.coord[y][x] = line[x];
+			else
+				game->map_info.coord[y][x] = line[x];
 		y++;
+		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
+}
+
+int	check_component_num(t_cnt component)
+{
+	if (component.collect == 0)
+		return (FALSE);
+	if (component.exit != 1)
+		return (FALSE);
+	if (component.player != 1)
+		return (FALSE);
+	return (TRUE);
+}
+
+void	init_component_num(t_cnt component)
+{
+	component.collect = 0;
+	component.exit = 0;
+	component.player = 0;
+}
+
+void	cnt_component(t_game *game, char c)
+{
+	if (c == 'C')
+		game->map_info.component.collect++;
+	else if (c == 'E')
+		game->map_info.component.exit++;
+	else if (c == 'P')
+		game->map_info.component.player++;
+}
+
+int	check_component(t_game *game)
+{
+	int	y;
+	int	x;
+
+	init_component_num(game->map_info.component);
+	y = -1;
+	while (game->map_info.coord[++y])
+	{
+		x = -1;
+		while (game->map_info.coord[y][++x])
+			cnt_component(game, game->map_info.coord[y][x]);
+	}
+	if (!check_component_num(game->map_info.component))
+		return (FALSE);
+	return (TRUE);
 }
 
 void	read_file(t_game *game, char *file_name)
@@ -128,7 +165,48 @@ void	read_file(t_game *game, char *file_name)
 	if (!is_walled(game))
 		exit_error("issue : invaild map (is invaild wall)\n");
 	// count component && check vaildate component number
-	if (!check_component_count())
+	if (!check_component(game))
+		exit_error("issue : invaild map (component cnt error)\n");
+}
+
+void	setting_window(t_game *game)
+{
+	int	img_height;
+	int	img_width;
+
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit_error("issue: mlx_init() fail\n");
+	img_height = game->map_info.cols;
+	img_width = game->map_info.rows;
+	game->win = mlx_new_window(game->mlx, img_width, img_height, "so long");
+	if (!game->win)
+		exit_error("issue: mlx_new_window() fail\n");
+}
+
+void	*ft_mlx_xpm_to_img(t_game *game, char *file_name)
+{
+	char	*path;
+	void	*img;
+
+	path = ft_strjoin("./img", "file_name");
+	img = mlx_xpm_file_to_image(game->mlx, path, ) // ??
+
+}
+
+void	setting_img(t_game *game)
+{
+	game->compo_img.img_1.ptr = ft_mlx_xpm_to_img(game, ) // ??
+	game->compo_img.img_0.ptr =
+	game->compo_img.img_c.ptr =
+	game->compo_img.img_e.ptr =
+	game->compo_img.img_p.ptr =
+}
+
+void	setting_game(t_game *game)
+{
+	setting_window(game);
+	setting_img(game);
 }
 
 int	main(int argc, char **argv)
@@ -140,5 +218,6 @@ int	main(int argc, char **argv)
 
 	read_file(&game, argv[1]);
 	printf(BLUE "vaild map!\n" RESET);
+	setting_game(&game);
 	// game.mlx = mlx_init();
 }
