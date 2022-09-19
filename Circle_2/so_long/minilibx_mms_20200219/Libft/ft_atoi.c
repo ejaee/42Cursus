@@ -6,7 +6,7 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:36:16 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/07/11 15:27:39 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/09/18 13:45:00 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_atoi(const char *str)
 	{
 		if (sign * res > 9223372036854775807)
 			return (-1);
-		else if (sign * res < -9223372036854775808)
+		else if (sign * res < -9223372036854775807)
 			return (0);
 		else
 			res = res * 10 + (*str - '0');

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 11:37:20 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/09/18 13:44:22 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/09/18 13:03:13 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/09/18 13:04:59 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef COLOR_H
+# define COLOR_H
 
-char	*ft_strrchr(const char *s, int c)
-{
-	size_t	idx;
+# define RED	"\x1b[31m"
+# define GREEN	"\x1b[32m"
+# define YELLOW	"\x1b[33m"
+# define BLUE	"\x1b[34m"
+# define RESET	"\x1b[0m"
 
-	idx = ft_strlen(s);
-	while (idx > 0 && s[idx] != (char)c)
-		idx--;
-	if (s[idx] == (char)c)
-		return ((char *)(s + idx));
-	return (0);
-}
+#endif
