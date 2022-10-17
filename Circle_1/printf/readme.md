@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fejaee%2F42Cursus%2Ftree%2Fmain%2FCircle_1%2Fprintf&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # **printf** [![ejachoi's 42 ft_printf Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2702114)](https://github.com/JaeSeoKim/badge42)
 
 _요약: stdio.h의 printf 함수를 구현하는 프로젝트 입니다._
