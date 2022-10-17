@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fejaee%2F42Cursus%2Ftree%2Fmain%2FCircle_1%2FBorn2beRoot&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # **Born2beRoot** [![ejachoi's 42 Born2beroot Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2687534)](https://github.com/JaeSeoKim/badge42)
 
 _요약: VirtualBox를 이용해 운영체제를 설치해보는 프로젝트 입니다._
