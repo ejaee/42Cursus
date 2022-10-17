@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fejaee%2F42Cursus%2Ftree%2Fmain%2FCircle_1%2Fget_next_line&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # **Get Next Line** [![ejachoi's 42 get_next_line Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2658767)](https://github.com/JaeSeoKim/badge42)
 
 _요약: 파일 디스크립터로부터 읽혀진, 개행으로 끝나는 한 줄을 반환하는 함수를 구현하는 프로젝트 입니다._
