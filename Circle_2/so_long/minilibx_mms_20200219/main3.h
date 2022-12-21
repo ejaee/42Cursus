@@ -11,11 +11,20 @@
 # define TRUE 1
 # define FALSE 0
 
+# define MAP_EXTENSION ".ber"
+# define TILE_SIZE 64
+
 typedef struct s_map {
     int rows;
     int cols;
     char **coordinate;
 }   t_map;
+
+typedef struct s_game {
+    void *mlx_ptr;
+    void *win_ptr;
+    t_map   map_info;
+}   t_game;
 
 
 #endif
