@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 18:39:50 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/09/19 21:03:03 by ejachoi          ###   ########.fr       */
+/*   Created: 2022/12/23 19:54:52 by ejachoi           #+#    #+#             */
+/*   Updated: 2022/12/23 22:19:04 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,111 @@
 
 # include "Libft/libft.h"
 # include "gnl/gnl.h"
-# include "mlx.h"
+# include "./mlx/mlx.h"
+# include "key.h"
 # include "color.h"
-# include <fcntl.h>
 
-# include <stdio.h>
+# include "file.h"
+# include "map.h"
+# include "put.h"
 
+# define TRUE 1
+# define FALSE 0
 
-# define TRUE	1
-# define FALSE	0
+# define TILE_SIZE 64
 
-typedef struct s_coord
+# define RIGHT 0
+# define LEFT 1
+
+# define GAME_STARTING 0
+# define GAME_PLAYING 1
+# define GAME_ENDING 2
+
+# define EMPTY '0'
+# define WALL '1'
+# define PLAYER 'P'
+# define COLLECTION 'C'
+# define EXIT 'E'
+# define DEAD_COLLECTION 'c'
+
+# define NORTH 0
+# define WEST 1
+# define SOUTH 2
+# define EAST 3
+
+typedef struct s_flag
 {
-	int	y;
-	int	x;
-}	t_coord;
+	int scene;
+	int kill;
+	int player;
+	int exit;
+	int move;
 
-typedef struct s_cnt
-{
-	int	collect;
-	int	exit;
-	int	player;
-}	t_cnt;
+}	t_flag;
 
 typedef struct s_img
 {
 	void	*ptr;
-	int		height;
-	int		width;
 }	t_img;
 
-typedef struct s_compo
+typedef struct s_collection
 {
-	t_img img_1;
-	t_img img_0;
-	t_img img_c;
-	t_img img_e;
-	t_img img_p;
-}	t_compo;
+	t_img	img[2];
+	int x;
+	int y;
+	int count;
 
-typedef struct s_map
+}	t_collection;
+
+typedef struct s_player
 {
-	int		cols;
-	int		rows;
-	char	**coord;
-	t_cnt	component;
-}	t_map;
+	t_img	img[2][3];
+	int x;
+	int y;
+	int direction;
+	t_step		step;
 
-typedef struct s_game
+}	t_player;
+
+typedef struct s_object
 {
-	void	*mlx;
-	void	*win;
-	t_map	map_info;
-	t_compo	compo_img;
-}	t_game;
+	t_img	opening_scene;
+	t_img	ending_scene;
+	t_img	kill_scene;
+	t_img	tile_0;
+	t_img	tile_1;
+	t_img	exit_0;
+	t_img	exit_1;
+	t_player	player;
+	t_collection collection;
 
+}	t_object;
+
+typedef struct s_game {
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_map		map;
+	t_flag		flag;
+	t_object	object;
+}   t_game;
+
+void	init_tile_img(t_game *game);
+void	init_player_img(t_game *game);
+void	init_collection_img(t_game *game);
+void	init_img(t_game *game);
+
+void	exit_error(char *error_msg);
+int		open_file(char *file);
+void	put_sprite_img(t_game *game, int direction);
+
+void	move_north(t_game *game);
+void	move_west(t_game *game);
+void	move_south(t_game *game);
+void	move_east(t_game *game);
+int		press_key(int key_code, t_game *game);
+
+void	reflect_key(t_game *game);
+void	show_step_count(int count);
 
 
 #endif
