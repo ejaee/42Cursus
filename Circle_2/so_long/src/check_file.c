@@ -6,11 +6,11 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 11:43:25 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/12/23 19:40:53 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/12/26 12:52:11 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	check_file_ractangular(t_game *game, int len)
 {
@@ -36,4 +36,3 @@ void	check_file(char *file)
 {
 	check_extension(file);
 }
-

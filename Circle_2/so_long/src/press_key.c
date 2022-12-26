@@ -6,15 +6,14 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:42:15 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/12/23 21:32:54 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/12/26 16:29:08 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	move_direction(t_game *game, int direction)
 {
-	game->flag.kill = FALSE;
 	if (direction == NORTH)
 		move_north(game);
 	else if (direction == WEST)
@@ -23,15 +22,12 @@ void	move_direction(t_game *game, int direction)
 		move_south(game);
 	else if (direction == EAST)
 		move_east(game);
-
 }
 
 int	press_key(int key_code, t_game *game)
 {
 	if (key_code == KEY_ESC)
 		exit(0);
-	else if (key_code == KEY_R && game->flag.scene == GAME_STARTING)
-		game->flag.scene = GAME_PLAYING;
 	else if (key_code == KEY_W || key_code == KEY_UP)
 		move_direction(game, NORTH);
 	else if (key_code == KEY_S || key_code == KEY_DOWN)

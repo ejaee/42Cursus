@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    reflecte_key.c                                    :+:      :+:    :+:   */
+/*    reflect_key_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:11:26 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/12/23 21:31:04 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/12/26 13:48:57 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include_bonus/so_long_bonus.h"
 
 void	reflect_key(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->object.player.x;
 	y = game->object.player.y;
@@ -35,8 +35,8 @@ void	reflect_key(t_game *game)
 
 void	move_north(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->object.player.x;
 	y = game->object.player.y;
@@ -54,8 +54,8 @@ void	move_north(t_game *game)
 
 void	move_west(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->object.player.x;
 	y = game->object.player.y;
@@ -73,8 +73,8 @@ void	move_west(t_game *game)
 
 void	move_south(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->object.player.x;
 	y = game->object.player.y;
@@ -93,8 +93,8 @@ void	move_south(t_game *game)
 
 void	move_east(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->object.player.x;
 	y = game->object.player.y;

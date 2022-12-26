@@ -6,19 +6,18 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:54:52 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/12/23 22:19:04 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/12/26 17:25:41 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "Libft/libft.h"
-# include "gnl/gnl.h"
-# include "./mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../gnl/gnl.h"
+# include "../mlx/mlx.h"
 # include "key.h"
 # include "color.h"
-
 # include "file.h"
 # include "map.h"
 # include "put.h"
@@ -31,7 +30,6 @@
 # define RIGHT 0
 # define LEFT 1
 
-# define GAME_STARTING 0
 # define GAME_PLAYING 1
 # define GAME_ENDING 2
 
@@ -50,11 +48,9 @@
 typedef struct s_flag
 {
 	int scene;
-	int kill;
 	int player;
 	int exit;
 	int move;
-
 }	t_flag;
 
 typedef struct s_img
@@ -68,7 +64,6 @@ typedef struct s_collection
 	int x;
 	int y;
 	int count;
-
 }	t_collection;
 
 typedef struct s_player
@@ -77,22 +72,17 @@ typedef struct s_player
 	int x;
 	int y;
 	int direction;
-	t_step		step;
-
 }	t_player;
 
 typedef struct s_object
 {
-	t_img	opening_scene;
-	t_img	ending_scene;
-	t_img	kill_scene;
+	t_img	ending;
 	t_img	tile_0;
 	t_img	tile_1;
 	t_img	exit_0;
 	t_img	exit_1;
 	t_player	player;
 	t_collection collection;
-
 }	t_object;
 
 typedef struct s_game {
@@ -101,7 +91,7 @@ typedef struct s_game {
 	t_map		map;
 	t_flag		flag;
 	t_object	object;
-}   t_game;
+}	t_game;
 
 void	init_tile_img(t_game *game);
 void	init_player_img(t_game *game);
@@ -110,16 +100,12 @@ void	init_img(t_game *game);
 
 void	exit_error(char *error_msg);
 int		open_file(char *file);
-void	put_sprite_img(t_game *game, int direction);
 
+void	reflect_key(t_game *game);
 void	move_north(t_game *game);
 void	move_west(t_game *game);
 void	move_south(t_game *game);
 void	move_east(t_game *game);
 int		press_key(int key_code, t_game *game);
-
-void	reflect_key(t_game *game);
-void	show_step_count(int count);
-
 
 #endif

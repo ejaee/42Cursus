@@ -6,11 +6,11 @@
 /*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:35:43 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/12/23 21:31:16 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/12/26 16:54:00 by ejachoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	init_window(t_game *game)
 {
@@ -29,8 +29,8 @@ void	init_window(t_game *game)
 
 void	init_player_location(t_game *game)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	height = -1;
 	while (++height < game->map.rows)
@@ -42,7 +42,7 @@ void	init_player_location(t_game *game)
 			{
 				game->object.player.x = width;
 				game->object.player.y = height;
-				break;
+				break ;
 			}
 		}
 	}
@@ -50,8 +50,8 @@ void	init_player_location(t_game *game)
 
 void	init_collection_count(t_game *game)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	game->object.collection.count = 0;
 	height = -1;
@@ -68,10 +68,8 @@ void	init_collection_count(t_game *game)
 
 void	init_etc(t_game *game)
 {
-	game->flag.scene = GAME_STARTING;
-	game->object.player.step.count = 0;
+	game->flag.scene = GAME_PLAYING;
 	game->flag.move = FALSE;
-	game->flag.kill = FALSE;
 }
 
 void	init_game(t_game *game)
@@ -81,5 +79,4 @@ void	init_game(t_game *game)
 	init_player_location(game);
 	init_collection_count(game);
 	init_etc(game);
-
 }
