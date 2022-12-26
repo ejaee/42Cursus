@@ -6,7 +6,7 @@
 #    By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/01 13:13:46 by chanwjeo          #+#    #+#              #
-#    Updated: 2022/12/26 17:29:59 by ejachoi          ###   ########.fr        #
+#    Updated: 2022/12/26 17:48:05 by ejachoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,12 @@ MLX			=	-L./mlx -lmlx -framework OpenGL -framework AppKit
 INCS_DIR	= ./include/
 SRCS_DIR	= ./src/
 LIB_DIR		= ./libft/
+FUNC_DIR	= ./gnl/
 MLX_DIR		= ./mlx/
 
 INCS_BONUS_DIR	= ./include_bonus/
 SRCS_BONUS_DIR	= ./src_bonus/
 
-LIB_DIR 	=	./libft
 LIB_NAME	=	./libft/libft.a
 INCS		=	-I include
 
@@ -61,8 +61,7 @@ all:			$(NAME)
 clean:
 	make -C $(LIB_DIR) clean
 	make -C $(MLX_DIR) clean
-	$(RM) $(OBJS) $(OBJS_BONUS)
-
+	$(RM) $(OBJS) $(OBJS_F) $(OBJS_BONUS)
 
 fclean: clean
 	make -C $(LIB_DIR) fclean
@@ -70,7 +69,7 @@ fclean: clean
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS) : $(OBJS_BONUS)
+$(NAME_BONUS) : $(OBJS_BONUS) $(OBJS_F)
 	make -C $(LIB_DIR)
 	make -C $(MLX_DIR)
 	$(CC) -o $(NAME_BONUS) $(OBJS_BONUS) $(OBJS_F) -L $(LIB_DIR) -lft -I $(INCS_BONUS_DIR) $(MLX)
