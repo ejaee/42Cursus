@@ -1,6 +1,6 @@
 # **so_long**
 
-![Alt text](./readme_png/main_scene.png)
+<center><img src="kill_scene.png" width="500" height="500"></center>
 
 _요약: MinilibX 라이브러리를 활용해 간단한 2D 게임을 만듭니다._
 
