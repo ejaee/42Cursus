@@ -65,23 +65,23 @@ _Rendering은 3차원 공간에 객체를 2차원 화면인 하나의 장면으�
 
 ### `mlx_loop` - 화면 유지하기
 
-```.c
-#include <mlx.h>
+	```.c
+	#include <mlx.h>
+	
+	int main()
+	
+	{
+		void *mlx_ptr;
+		void *win_ptr; // 생성할 윈도우를 가리키는 포인터
+	
+		mlx_ptr = mlx_init();
+		win_ptr = mlx_new_window(mlx_ptr, 500, 500, "Hellow World!");
+		mlx_loop(mlx_ptr);
+		return (0);
+	}
+	
+	```
 
-int main()
-
-{
-	void *mlx_ptr;
-	void *win_ptr; // 생성할 윈도우를 가리키는 포인터
-
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "Hellow World!");
-	mlx_loop(mlx_ptr);
-	return (0);
-}
-
-```
-
-> cc -L./mlx -lmlx -framework OpenGL -framework AppKit main.c
+	> cc -L./mlx -lmlx -framework OpenGL -framework AppKit main.c
 
 ### `mlx_hook` - 
