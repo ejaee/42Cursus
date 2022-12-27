@@ -16,6 +16,34 @@ _요약: MinilibX 라이브러리를 활용해 간단한 2D 게임을 만듭니�
 
 # **Contents**
 
+## Goals
+This project is a very small 2D game. It is built to make you work with textures, sprites. And some very basic gameplay elements.
+
+### Install
+```bash
+$ make bonus
+```
+
+### Usage
+```bash
+$ ./so_long_bonus [MAP_FILE.ber]
+```
+Only map files with extension `.ber` are available. Map file examples are available in the `map/` directory.
+
+Run the code to use all the features of the game.
+
+### HOW TO PLAY
+The player’s goal is to collect all collectibles present on the map then escape with minimal movement.
+
+|KEYBOARD|ACTION|
+|---|---|
+|`W`, `↑`|Move up|
+|`S`, `↓`|Move down|
+|`A`, `←`|Move left|
+|`D`, `→`|Move right|
+|`R`| Start game|
+|`ESC`|Close the game window|
+
 # **MinilibX**
 
 _스크린에 무언가 렌더링 할 수 있게 해주는 작은 그래픽 라이브러리_
