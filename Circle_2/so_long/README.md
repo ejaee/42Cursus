@@ -84,4 +84,16 @@ _Rendering은 3차원 공간에 객체를 2차원 화면인 하나의 장면으�
 
 	> cc -L./mlx -lmlx -framework OpenGL -framework AppKit main.c
 
-### `mlx_hook` - 
+### `mlx_hook` - 이벤트를 실행시킬 키 값 받기
+
+- x_event에 X11 events라고 mlx에 등록된 이벤트의 번호다
+- 번호에 대응되는 이벤트를 후킹한다.
+	- x11 events:
+	- 02: KeyPress
+	- 03: KeyRelease
+	- 04: ButtonPress
+	- 05: ButtonRelease
+
+### `mlx_loop_hook` - 기
+
+- 번호에 대응되는 이벤트를 후킹
