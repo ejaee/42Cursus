@@ -1,5 +1,7 @@
 # **so_long**
 
+![Alt text](./readme_png/main_scene.png)
+
 _요약: MinilibX 라이브러리를 활용해 간단한 2D 게임을 만듭니다._
 
 [과제pdf](https://github.com/42seoul-translation/subject_ko/blob/master/so_long/so_long_ko.md)
