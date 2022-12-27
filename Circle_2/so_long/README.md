@@ -100,3 +100,25 @@ _Rendering은 3차원 공간에 객체를 2차원 화면인 하나의 장면으�
 
 
 ### `mlx_loop`- 창을 지속적으로 띄우기
+
+	```.c
+	#include <mlx.h>
+	
+	int main()
+	
+	{
+		t_game	game;
+	
+		void *mlx_ptr;
+		void *win_ptr; // 생성할 윈도우를 가리키는 포인터
+	
+		mlx_ptr = mlx_init();
+		win_ptr = mlx_new_window(mlx_ptr, 500, 500, "so_long");
+		mlx_hook(game.win_ptr, X_EVENT_KEY_PRESS, 0, press_key, &game);
+		mlx_hook(game.win_ptr, X_EVENT_KEY_EXIT, 0, close_game, &game);
+		mlx_loop_hook(mlx_ptr, &put_img, &game);
+		mlx_loop(mlx_ptr);
+		return (0);
+	}
+	
+	```
