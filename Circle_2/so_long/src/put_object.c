@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejachoi <ejachoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choiejae <choiejae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:06:38 by ejachoi           #+#    #+#             */
-/*   Updated: 2022/12/26 17:13:33 by ejachoi          ###   ########.fr       */
+/*   Updated: 2022/12/27 17:34:17 by choiejae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ void	put_exit(t_game *game, int x, int y)
 
 void	put_player(t_game *game, int direction)
 {
-	int		i;
 	int		x;
 	int		y;
 	void	*img_ptr;
 
-	i = -1;
 	x = game->object.player.x;
 	y = game->object.player.y;
 	img_ptr = game->object.player.img[direction][0].ptr;
