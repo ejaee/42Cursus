@@ -1,6 +1,6 @@
 # minitalk
 
-[![ejachoi's 42 so_long Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2780715)](https://github.com/JaeSeoKim/badge42)
+[![ejachoi's 42 minitalk Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2923668)](https://github.com/JaeSeoKim/badge42)
 
 _data exchange program using UNIX signals_
 
