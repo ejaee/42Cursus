@@ -1,4 +1,4 @@
-# **so_long**
+# **so_long** [![ejachoi's 42 so_long Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2780715)](https://github.com/JaeSeoKim/badge42)
 
 <center><img src="kill_scene.png" width="500" height="500"></center>
 
