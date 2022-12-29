@@ -1,6 +1,6 @@
 # minitalk
 
-# data exchange program using UNIX signals
+_data exchange program using UNIX signals_
 
 
 ### signal
