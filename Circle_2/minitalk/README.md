@@ -1,9 +1,14 @@
 # minitalk
 
+[![ejachoi's 42 so_long Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2780715)](https://github.com/JaeSeoKim/badge42)
+
 _data exchange program using UNIX signals_
 
+- [source_code](https://github.com/ejaee/minitalk)
 
-### signal
+- [subject_pdf](https://github.com/42seoul-translation/subject_ko/blob/master/minitalk/minitalk.md)
+
+### `signal`
 
 ```.c
 #include <signal.h>
@@ -27,7 +32,7 @@ Signal을 받은 프로세스는 Signal에 따른 미리 지정된 기본 동작
    -  `SIGUSR1`: 사용자 애플리케이션용입니다. (ANSI로 연장)
    -  `SIGUSR2`: 사용자 애플리케이션용입니다. (ANSI로 연장)
 
-### sigaction
+### `sigaction`
 
 _signal 함수와 유사한 sigaction_
 
@@ -137,7 +142,7 @@ int main( void)
 ![picture](./sigaction_ctrl_c.png)
 
 
-### kill
+### `kill`
 
 ```.c
 #include <signal.h>
@@ -150,13 +155,7 @@ int kill(pid_t pid, int sig)
 
 > pid > 0 인 경우 pid로 지정한 프로세스에게 시그널을 보낸다
 
-
-
-
-
-
-
-### pid
+### `pid`
 
 process
 - 실행중인 프로그램
@@ -164,14 +163,14 @@ process
 pid
 - 실행중인 프로그램의 고유 번호
 
-### handshake
+### `handshake`
 _핸드셰이킹(handshaking)_
 
 주고받기는 정보기술과 전기통신 및 관련 분야에서 채널에 대한 정상적인 통신이 시작되기 전에 두 개의 실체 간에 확립된 통신 채널의 변수를 동적으로 설정하는 자동화된 협상 과정
 
 정상적인 정보 전송 이전에 이루어진다
 
-### pause()
+### `pause()`
 
 _시그널을 수신할 때 까지 대기 함수_
 
@@ -183,7 +182,7 @@ int pause(void)
 
 항상 -1을 반환
 
-###  unicode
+###  `unicode`
 
 - 아스키코드
     _American Standard Code for Information Interchange_
