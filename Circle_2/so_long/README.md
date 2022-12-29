@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fejaee%2F42Cursus%2Ftree%2Fmain%2FCircle_2%2Fso_long&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # **so_long** [![ejachoi's 42 so_long Score](https://badge42.vercel.app/api/v2/cl60us3xz001109mpf946886y/project/2780715)](https://github.com/JaeSeoKim/badge42)
 
 <center><img src="kill_scene.png" width="500" height="500"></center>
