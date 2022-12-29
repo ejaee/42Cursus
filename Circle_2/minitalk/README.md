@@ -204,6 +204,8 @@ int pause(void)
 
 # Reference
 
-[signal](https://blockdmask.tistory.com/23)
-[sigaction](https://badayak.com/entry/C언어-시그널-처리-함수-sigaction)
-[unicode](https://code-lab1.tistory.com/233)
+- [signal](https://blockdmask.tistory.com/23)
+
+- [sigaction](https://badayak.com/entry/C언어-시그널-처리-함수-sigaction)
+
+- [unicode](https://code-lab1.tistory.com/233)
